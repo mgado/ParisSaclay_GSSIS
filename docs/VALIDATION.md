@@ -127,3 +127,30 @@ The working route provisions the public coder.hardware('Raspberry Pi') credentia
 IMPORTANT: The actual OS is Raspbian10Buster32. The R2026bRaspberryPiBlockset compatibility matrix does not support that OS. These passed runs are experimental on-target evidence, not a supported classroom-configuration qualification. Migrate/recheck on a supported Bullseye/Bookworm/Trixie OS before declaring the class hardware setup ready.
 
 Compatibility reference: https://www.mathworks.com/help/raspberrypi/gs/validate-release-wise-compatibility-of-mathworks-products-with-raspberry-pi-hardware-and-operating-system.html
+
+## Focused additions: actual current evidence
+
+Exercises23/24 student and solution run inR2026b. The trainedSoftplusSOCnet
+achievedvalidationRMSE0.0030(solution); selecteduncertaintyboxwascertifiedwith
+worstcaseabsoluteerrorbound0.0075805 under0.03. The HBOSOODexampleaccepted95%
+of nominalvalidationinputs andflagged100%of intentionallyshiftedinputs.
+The updatedshort digitCNN(1600images,sixepochs)achievedtestsubsetaccuracy0.652;
+FGSMfoundcounterexamples(student4at0.05budget,solution8at0.1budget). Formal
+classificationverificationreturnedunproven; nosearch/proofresultwasfabricated.
+
+Exercise25 executedactualgeneratedneural SIL onhost:32samplesmaxdifference
+2.98e-8firsttrace,5.96e-8changedtrace,gatewaycall1.659seconds. This is SIL,
+separatefromordinaryhostMEX/PILlevels.
+
+Thorvisualexercise26 source/model/camera-loopfilesexistanddefaultto
+unavailable. HostYOLOXinferenceworkedontheincludedsamplecarframe, andhost
+videoinputcaptureworkedonIntegratedCamera(1280x720RGB). Loaderwasmodernized
+tocoder.loadDeepLearningNetwork. The savedhistoricalThorPILgatewaycannotbe
+acceptedbycopyingMEXalone; sources/weights/runtimepathsmustmatch.
+CurrentThorIP192.168.7.1didnotrespond,andrequiredVaultcredentialsareabsent.
+No currentThor camera/PIL successisclaimed. This partawaitsconnectedtarget
+andcredentialsetup;hostcamera/inferenceisnotasubstitutefortargetexecution.
+
+SpatialPDE/inversePDE/neuralPDEmaterialisacceptedslide-only. Fullplantpipeline,
+HIL,neuralpruning,completeapptraining/exportandother-targetdeploymentare
+deferredbyowner. See the instructor-provided deck additions for the selected demonstration sequence.

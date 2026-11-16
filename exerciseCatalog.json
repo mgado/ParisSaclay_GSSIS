@@ -233,6 +233,50 @@
       "Products": "MATLAB Coder; Embedded Coder; Deep Learning Toolbox; Raspberry Pi Blockset",
       "Mode": "hardware MATLAB PIL: passed/unavailable/failed evidence",
       "Minutes": 35
+    },
+    {
+      "Number": 23,
+      "Id": "w23_advancedVerification",
+      "Name": "R2026b trained-network verification and OOD",
+      "Day": 2,
+      "Source": "workshops/w23_advancedVerification.m",
+      "Solution": "solutions/w23_advancedVerificationSolution.m",
+      "Products": "Deep Learning Toolbox; AI Verification Library",
+      "Mode": "runnable; optional bounded stronger proof",
+      "Minutes": 25
+    },
+    {
+      "Number": 24,
+      "Id": "w24_adversarialWorkshop",
+      "Name": "Adversarial examples and formal robustness",
+      "Day": 2,
+      "Source": "workshops/w24_adversarialWorkshop.m",
+      "Solution": "solutions/w24_adversarialWorkshopSolution.m",
+      "Products": "Deep Learning Toolbox; AI Verification Library",
+      "Mode": "runnable bounded source-workshop adaptation",
+      "Minutes": 25
+    },
+    {
+      "Number": 25,
+      "Id": "w25_silVerification",
+      "Name": "Real neural code verification with SIL",
+      "Day": 3,
+      "Source": "workshops/w25_silVerification.m",
+      "Solution": "solutions/w25_silVerificationSolution.m",
+      "Products": "MATLAB Coder; Embedded Coder; Deep Learning Toolbox",
+      "Mode": "runnable actual SIL gateway",
+      "Minutes": 25
+    },
+    {
+      "Number": 26,
+      "Id": "w26_jetsonCameraPIL",
+      "Name": "Minimal Jetson Thor image and camera PIL",
+      "Day": 3,
+      "Source": "workshops/w26_jetsonCameraPIL.m",
+      "Solution": "solutions/w26_jetsonCameraPILSolution.m",
+      "Products": "GPU Coder; NVIDIA hardware support; camera",
+      "Mode": "hardware PIL: passed/unavailable/failed evidence",
+      "Minutes": 25
     }
   ]
 }
