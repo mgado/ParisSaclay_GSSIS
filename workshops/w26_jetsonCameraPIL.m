@@ -117,6 +117,9 @@ image(imread(fullfile(assetFolder,'expo_gpu_preview.png')));
 axis image off;
 %[text] If target setup fails, check reachability, Vault credentials, camera availability and CUDA/cuDNN compatibility. If inference starts then fails, verify the generated weights and exact loader/runtime path mapping. Preserve original generated sources; rebuild only the matched copied/staged tree. This loop intentionally omits tracking and pose estimation to keep the teaching path small.
 %%
+%[text] ## Documentation and further reading
+%[text] [Main documentation for this area](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
+%%
 %[text] ## Cheat sheet: camera and target APIs
 %[text:table]
 %[text] | API | Minimal syntax | Where it runs |
@@ -125,10 +128,10 @@ axis image off;
 %[text] | [setupCodegenContext](https://www.mathworks.com/help/coder/nvidia/ref/setupcodegencontext.html) | `setupCodegenContext(board)` | Establish supported target build context |
 %[text] | [webcam](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.html) | `webcam(board,1,'640x480')` | Open a target USB camera |
 %[text] | [snapshot](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.snapshot.html) | `snapshot(camera)` | Target acquisition, image transferred to MATLAB |
-%[text] | [imresize](https://www.mathworks.com/help/images/ref/imresize.html) | `imresize(frame,[640 640])` | Host preprocessing |
+%[text] | [imresize](https://www.mathworks.com/help/matlab/ref/imresize.html) | `imresize(frame,[640 640])` | Host preprocessing |
 %[text] | [coder.gpuConfig](https://www.mathworks.com/help/gpucoder/ref/coder.gpuconfig.html) | `coder.gpuConfig('lib','ecoder',true)` | CUDA/PIL build configuration |
 %[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | Generate the fixed image entry point | Produce target code and gateway |
-%[text] | `codebuild` | `codebuild(buildFolder)`; consult installed help | Rebuild matched generated sources |
+%[text] | [`codebuild`](https://www.mathworks.com/help/coder/build-configuration.html) | `codebuild(buildFolder)`; consult installed help | Rebuild matched generated sources |
 %[text] | [detect: YOLOX methods](https://www.mathworks.com/help/vision/ref/yoloxobjectdetector.html) | `detect(detector,image)` inside the entry function | Neural inference on Thor through PIL |
 %[text] | [insertObjectAnnotation](https://www.mathworks.com/help/vision/ref/insertobjectannotation.html) | Draw returned boxes/classes | Host annotations |
 %[text] | [imageshow](https://www.mathworks.com/help/images/ref/imageshow.html) | Create/update the image viewer | Host display |

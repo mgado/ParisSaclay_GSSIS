@@ -77,6 +77,9 @@ demoOutcome
 %[text] If no board is configured, keep the outcome unavailable. A host neural prediction cannot count as PIL. If inference or code generation fails for this compressed network, retain the exact message and use the instructor's verified compatible network path; do not silently substitute the analytic baseline and call it AI deployment. The Simulink exercise independently tests the model-reference route. End-to-end gateway timing includes communication; use profiling for target compute latency.
 %[text] **Hint:** The first build prepares generated code and target communication. After that, vary inputs before regenerating the algorithm. Keep the same output comparison and scaling contract.
 %%
+%[text] ## Documentation and further reading
+%[text] [Main documentation for this area](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
+%%
 %[text] ## Cheat sheet: MATLAB hardware APIs to remember
 %[text:table]
 %[text] | API | Minimal syntax | Purpose |
