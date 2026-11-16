@@ -1,0 +1,77 @@
+%[text] # 02 — Define measurable AI requirements — Solution
+%[text] **Goal:** Turn vague accuracy and safety goals into traceable requirements.
+%[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in MATLAB R2026b. Products: Requirements Toolbox. Estimated time: 25 minutes.
+%[text] **Launch:** Use demoAgenda, then openExercise(2,true). Run one section at a time in the Live Editor.
+%[text] **Workshop mode:** runnable. Numerical sections run on the host; optional desktop, Python and hardware sections require separate prerequisites.
+%[text] **Your task:** Replace a vague goal with a threshold, operating domain, unit and verification method. Add SOC-003 for voltage input validity; link it to the implementation.
+%[text] **Hint 1:** Keep the supplied working defaults for a first run. Change one named parameter, predict the effect, then compare the observation.
+%[text] **Hint 2:** Read the API cheat sheet below. Explain why the observed result satisfies—or violates—the stated requirement.
+%[text] **Worked reasoning:** SOC-001 specifies threshold, independent test data and operating range. SOC-002 applies to the bounded analytic baseline; it does not assert that an unconstrained neural output always lies in range. SOC-003 should name allowed voltage bounds and expected invalid-input behavior.
+project = requireTrainingProject;
+%%
+%[text] ## Create or reopen the requirement set
+%[text] For teaching, SOC error is measured on held-out acquisition runs. RMSE at most 0.03 means three percentage points of SOC, not three percent relative error.
+requirementFolder = fullfile(project.RootFolder,'generated','requirements');
+if ~isfolder(requirementFolder), mkdir(requirementFolder); end
+requirementFile = fullfile(requirementFolder,'BatteryRequirements.slreqx');
+if isfile(requirementFile)
+    requirementSet = slreq.load(requirementFile);
+else
+    requirementSet = slreq.new(requirementFile);
+    accuracyRequirement = add(requirementSet,'Id','SOC-001', ...
+        'Summary','Held-out SOC RMSE at most 0.03', ...
+        'Description','Evaluate independent runs 9 and 10 over SOC 0.05 to 0.95.');
+    rangeRequirement = add(requirementSet,'Id','SOC-002', ...
+        'Summary','Bounded analytic SOC baseline', ...
+        'Description','For finite voltage/current/temperature inputs, output is between 0 and 1.');
+    implementationLink = slreq.createLink(fullfile(project.RootFolder,'src','socEstimate.m'),rangeRequirement);
+    implementationLink.Type = 'Implement';
+    save(requirementSet);
+    save(linkSet(implementationLink));
+end
+disp(requirementSet)
+%%
+%[text] ## Inspect in Requirements Editor
+%[text] Set openEditor true during the taught UI activity. Select SOC-001, inspect its description and links, then add a requirement through the interface. The screenshot pack illustrates the actual editor captured on the validation machine.
+openEditor = false;
+if openEditor, slreq.editor; end
+%%
+%[text] ## Verify the accuracy requirement
+%[text] A requirement is not verified merely by a green model. Execute the metric and retain evidence. Exercise 10 links the Simulink test artifact; MATLAB unit tests assert the accuracy threshold.
+[~,metrics] = trainSOCNetwork;
+accuracyEvidence = metrics.rmse
+assert(accuracyEvidence <= 0.03);
+%%
+%[text] ## UI screenshot guide
+%[text] Screenshots below are from the instructor's original 2025 materials. They explain the interface and links; they are not current R2026b execution results. Use the exercise's own generated artifacts for current evidence.
+%%
+%[text] ## Requirements Editor: measurable requirement and verification links
+%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
+image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_editor_legacy.png')));
+axis image off;
+%%
+%[text] ## Follow a verification link into Test Manager
+%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
+image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_test_link_legacy.png')));
+axis image off;
+%%
+%[text] ## Troubleshooting and next step
+%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require the instructor's target-specific configuration. Reopen the project if file or function resolution fails.
+%%
+%[text] ## Documentation and further reading
+%[text] [Main documentation for this area](https://www.mathworks.com/help/slrequirements/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
+%%
+%[text] ## Cheat sheet: APIs to remember
+%[text:table]
+%[text] | API | Minimal use | Engineering purpose |
+%[text] | --- | --- | --- |
+%[text] | [`slreq.new`](https://www.mathworks.com/help/slrequirements/ref/slreq.new.html) | slreq.new(file) | Create requirement set |
+%[text] | [`add`](https://www.mathworks.com/help/slrequirements/ref/slreq.reqset.add.html) | add(reqSet,'Id','SOC-001',...) | Author measurable requirement |
+%[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(source,requirement) | Trace implementation or verification |
+%[text] | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | Review requirements in UI |
+%[text:table]
+%[appendix]{"version":"1.0"}
+%---
+%[metadata:view]
+%   data: {"layout":"inline"}
+%---

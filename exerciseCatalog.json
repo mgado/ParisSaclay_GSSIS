@@ -1,0 +1,238 @@
+{
+  "SchemaVersion": 1,
+  "Release": "R2026b",
+  "TrainingDates": "17\u201319 November 2026",
+  "Exercises": [
+    {
+      "Number": 1,
+      "Id": "w01_agentSetup",
+      "Name": "Agentic engineering: setup and evidence",
+      "Day": 1,
+      "Source": "workshops/w01_agentSetup.m",
+      "Solution": "solutions/w01_agentSetupSolution.m",
+      "Products": "MATLAB; official MATLAB and Simulink agentic toolkits",
+      "Mode": "runnable plus agent walkthrough",
+      "Minutes": 20
+    },
+    {
+      "Number": 2,
+      "Id": "w02_requirements",
+      "Name": "Define measurable AI requirements",
+      "Day": 1,
+      "Source": "workshops/w02_requirements.m",
+      "Solution": "solutions/w02_requirementsSolution.m",
+      "Products": "Requirements Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 3,
+      "Id": "w03_data",
+      "Name": "Manage data and prevent leakage",
+      "Day": 1,
+      "Source": "workshops/w03_data.m",
+      "Solution": "solutions/w03_dataSolution.m",
+      "Products": "MATLAB",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 4,
+      "Id": "w04_mlBaseline",
+      "Name": "Train a simple virtual sensor",
+      "Day": 2,
+      "Source": "workshops/w04_mlBaseline.m",
+      "Solution": "solutions/w04_mlBaselineSolution.m",
+      "Products": "Statistics and Machine Learning Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 5,
+      "Id": "w05_deepLearning",
+      "Name": "Train and evaluate a compact neural estimator",
+      "Day": 2,
+      "Source": "workshops/w05_deepLearning.m",
+      "Solution": "solutions/w05_deepLearningSolution.m",
+      "Products": "Deep Learning Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 6,
+      "Id": "w06_pythonImport",
+      "Name": "MATLAB\u2013Python interoperability and third-party AI",
+      "Day": 2,
+      "Source": "workshops/w06_pythonImport.m",
+      "Solution": "solutions/w06_pythonImportSolution.m",
+      "Products": "MATLAB; Python; optional PyTorch and converter support",
+      "Mode": "runnable plus optional Python/PyTorch",
+      "Minutes": 25
+    },
+    {
+      "Number": 7,
+      "Id": "w07_modelCompression",
+      "Name": "Compress while preserving requirements",
+      "Day": 2,
+      "Source": "workshops/w07_modelCompression.m",
+      "Solution": "solutions/w07_modelCompressionSolution.m",
+      "Products": "Deep Learning Toolbox; optional Model Compression Library",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 8,
+      "Id": "w08_aiVerification",
+      "Name": "Test and formally bound an AI estimator",
+      "Day": 2,
+      "Source": "workshops/w08_aiVerification.m",
+      "Solution": "solutions/w08_aiVerificationSolution.m",
+      "Products": "Deep Learning Toolbox; AI Verification Library",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 9,
+      "Id": "w09_simulinkIntegration",
+      "Name": "Integrate the neural virtual sensor in Simulink",
+      "Day": 3,
+      "Source": "workshops/w09_simulinkIntegration.m",
+      "Solution": "solutions/w09_simulinkIntegrationSolution.m",
+      "Products": "Simulink; Deep Learning Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 10,
+      "Id": "w10_systemTesting",
+      "Name": "Link requirements, tests and model evidence",
+      "Day": 3,
+      "Source": "workshops/w10_systemTesting.m",
+      "Solution": "solutions/w10_systemTestingSolution.m",
+      "Products": "Simulink Test; Requirements Toolbox; Simulink",
+      "Mode": "runnable plus Test Manager walkthrough",
+      "Minutes": 35
+    },
+    {
+      "Number": 11,
+      "Id": "w11_codegen",
+      "Name": "Generate and verify code before hardware deployment",
+      "Day": 3,
+      "Source": "workshops/w11_codegen.m",
+      "Solution": "solutions/w11_codegenSolution.m",
+      "Products": "MATLAB Coder; selected C compiler; optional target support",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 12,
+      "Id": "w12_modelBasedROM",
+      "Name": "Model-based thermal ROM",
+      "Day": 3,
+      "Source": "workshops/w12_modelBasedROM.m",
+      "Solution": "solutions/w12_modelBasedROMSolution.m",
+      "Products": "MATLAB",
+      "Mode": "runnable",
+      "Minutes": 20
+    },
+    {
+      "Number": 13,
+      "Id": "w13_fullFieldROM",
+      "Name": "Full-field temperature ROM",
+      "Day": 3,
+      "Source": "workshops/w13_fullFieldROM.m",
+      "Solution": "solutions/w13_fullFieldROMSolution.m",
+      "Products": "MATLAB",
+      "Mode": "runnable",
+      "Minutes": 20
+    },
+    {
+      "Number": 14,
+      "Id": "w14_physicsInformed",
+      "Name": "Physics-constrained inverse cooling model",
+      "Day": 3,
+      "Source": "workshops/w14_physicsInformed.m",
+      "Solution": "solutions/w14_physicsInformedSolution.m",
+      "Products": "MATLAB",
+      "Mode": "runnable",
+      "Minutes": 20
+    },
+    {
+      "Number": 15,
+      "Id": "w15_appWorkflows",
+      "Name": "Use modern AI apps without hiding the workflow",
+      "Day": 2,
+      "Source": "workshops/w15_appWorkflows.m",
+      "Solution": "solutions/w15_appWorkflowsSolution.m",
+      "Products": "Tool-specific products; desktop UI",
+      "Mode": "runnable capability check plus app walkthrough",
+      "Minutes": 20
+    },
+    {
+      "Number": 16,
+      "Id": "w16_agentEngineering",
+      "Name": "Engineer with builtin and custom skills",
+      "Day": 3,
+      "Source": "workshops/w16_agentEngineering.m",
+      "Solution": "solutions/w16_agentEngineeringSolution.m",
+      "Products": "MATLAB; connected agent; official toolkits",
+      "Mode": "runnable baseline plus agent exercise",
+      "Minutes": 25
+    },
+    {
+      "Number": 17,
+      "Id": "w17_dataPreparation",
+      "Name": "Clean and resample acquisition data",
+      "Day": 1,
+      "Source": "workshops/w17_dataPreparation.m",
+      "Solution": "solutions/w17_dataPreparationSolution.m",
+      "Products": "MATLAB",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 18,
+      "Id": "w18_pinnCooling",
+      "Name": "Train a cooling PINN",
+      "Day": 3,
+      "Source": "workshops/w18_pinnCooling.m",
+      "Solution": "solutions/w18_pinnCoolingSolution.m",
+      "Products": "Deep Learning Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 19,
+      "Id": "w19_predictiveFieldROM",
+      "Name": "Train a predictive full-field AI ROM",
+      "Day": 3,
+      "Source": "workshops/w19_predictiveFieldROM.m",
+      "Solution": "solutions/w19_predictiveFieldROMSolution.m",
+      "Products": "Deep Learning Toolbox",
+      "Mode": "runnable",
+      "Minutes": 25
+    },
+    {
+      "Number": 20,
+      "Id": "w20_hardwarePIL",
+      "Name": "Rapid real-AI hardware prototyping with PIL",
+      "Day": 3,
+      "Source": "workshops/w20_hardwarePIL.m",
+      "Solution": "solutions/w20_hardwarePILSolution.m",
+      "Products": "Simulink; Embedded Coder; Deep Learning Toolbox; Fixed-Point Designer; Raspberry Pi Blockset",
+      "Mode": "hardware PIL: passed/unavailable/failed evidence",
+      "Minutes": 40
+    },
+    {
+      "Number": 21,
+      "Id": "w21_matlabHardware",
+      "Name": "MATLAB command-line AI deployment and PIL",
+      "Day": 3,
+      "Source": "workshops/w21_matlabHardware.m",
+      "Solution": "solutions/w21_matlabHardwareSolution.m",
+      "Products": "MATLAB Coder; Embedded Coder; Deep Learning Toolbox; Raspberry Pi Blockset",
+      "Mode": "hardware MATLAB PIL: passed/unavailable/failed evidence",
+      "Minutes": 35
+    }
+  ]
+}

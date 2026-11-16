@@ -1,0 +1,55 @@
+# Autosave files
+*.asv
+*.m~
+*.autosave
+*.slx.r*
+*.mdl.r*
+
+# Derived content-obscured files
+*.p
+
+# Compiled MEX files
+*.mex*
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+# Deployable archives
+*.ctf
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Code generation folders
+slprj/
+sccprj/
+codegen/
+
+# Cache files
+*.slxc
+
+# Cloud based storage dotfile
+.MATLABDriveTag
+
+# buildtool cache folder
+.buildtool/
+
+# SimBiology backup files
+*.sbproj.backup
+*.sbproj.bak
+
+# Generated workshop artifacts
+generated/*
+!generated/codegen/
+generated/codegen/*
+!generated/codegen/.gitkeep
+src/*~m.slmx
+
+# Empty Project runtime paths retained in a clean checkout
+!generated/requirements/
+generated/requirements/*
+!generated/requirements/.gitkeep
+!generated/tests/
+generated/tests/*
+!generated/tests/.gitkeep
