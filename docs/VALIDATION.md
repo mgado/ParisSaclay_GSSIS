@@ -154,3 +154,6 @@ andcredentialsetup;hostcamera/inferenceisnotasubstitutefortargetexecution.
 SpatialPDE/inversePDE/neuralPDEmaterialisacceptedslide-only. Fullplantpipeline,
 HIL,neuralpruning,completeapptraining/exportandother-targetdeploymentare
 deferredbyowner. See the instructor-provided deck additions for the selected demonstration sequence.
+
+## Native requirement status: resolved
+The earlier native-cache limitation is resolved forSOC001. Actualnative getVerificationStatus transitions passed→failed→passed were reproduced from executedTestManagercriteria. Failureused a temporaryzeroerrortestlimit;originalSOCrequirementwasunchanged and0.03criterionrestored. Modelresolution, staleinputmapping and missingtool-resulttracking werecorrected. Exercise10nowenforcesnative passed1/failed0/unexecuted0, exportsactualresults and updatesprojectanalysis. Olderunexecutedparagraphsare historicalcheckpointnotes, not currentstatus.

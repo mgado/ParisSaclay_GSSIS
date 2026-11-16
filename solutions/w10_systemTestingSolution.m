@@ -1,6 +1,6 @@
 %[text] # 10 — Link requirements, tests and model evidence — Solution
 %[text] **Goal:** Create a persistent test case and trace its purpose to the requirement set.
-%[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in MATLAB R2026b. Products: Simulink Test; Requirements Toolbox; Simulink. Estimated time: 35 minutes.
+%[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in MATLAB R2026b. Products: Simulink Test; Requirements Toolbox; Simulink; Simulink Check for project result tracking. Estimated time: 35 minutes.
 %[text] **Launch:** Use demoAgenda, then openExercise(10,true). Run one section at a time in the Live Editor.
 %[text] **Workshop mode:** runnable plus Test Manager walkthrough. Numerical sections run on the host; optional desktop, Python and hardware sections require separate prerequisites.
 %[text] **Your task:** Create a model test linked to SOC-001, add a custom error threshold, run it, and inspect verification status in Requirements Editor. Compare MIL, SIL, PIL and HIL evidence categories.
@@ -12,9 +12,13 @@ project = requireTrainingProject;
 %[text] ## Create a persistent model test
 %[text] A linked test artifact establishes traceability. It becomes verification evidence only after it runs with meaningful criteria and the result is assessed.
 modelFile = ensureSOCModel;
+modelFolder = fileparts(modelFile);
+addPath(project,modelFolder);
+addFile(project,modelFile);
 open_system(modelFile);
 testFolder = fullfile(project.RootFolder,'generated','tests');
 if ~isfolder(testFolder), mkdir(testFolder); end
+addPath(project,testFolder);
 testFilePath = fullfile(testFolder,'BatterySystemTests.mldatx');
 testFile = sltest.testmanager.TestFile(testFilePath);
 existingCases = getAllTestCases(testFile);
@@ -33,7 +37,10 @@ saveToFile(testFile);
 %%
 %[text] ## Link verification intent
 %[text] The next section creates a held-out sensor trace, maps it to the model, executes an RMSE criterion and updates verification status. Exercise 2 adds richer requirements; a minimal SOC-001 set is created here when needed for independent replay.
-requirementFile = fullfile(project.RootFolder,'generated','requirements','BatteryRequirements.slreqx');
+requirementFolder = fullfile(project.RootFolder,'generated','requirements');
+if ~isfolder(requirementFolder), mkdir(requirementFolder); end
+addPath(project,requirementFolder);
+requirementFile = fullfile(requirementFolder,'BatteryRequirements.slreqx');
 if ~isfile(requirementFile)
     requirementFolder = fileparts(requirementFile);
     if ~isfolder(requirementFolder), mkdir(requirementFolder); end
@@ -61,28 +68,43 @@ sensorInputs = Simulink.SimulationData.Dataset;
 sensorInputs = sensorInputs.addElement(timeseries([heldOut.voltage,heldOut.current,heldOut.temperature],time),'input');
 inputFile = fullfile(testFolder,'heldOutSensorTrace.mat');
 save(inputFile,'sensorInputs');
-testInput = getInputs(testCase);
-if isempty(testInput), testInput = addInput(testCase,inputFile,1,false); end
-map(testInput(1),'Mode',3);
-testInput(1).Active = true;
+testInputs = getInputs(testCase);
+ownedInputs = testInputs(strcmp({testInputs.FilePath},inputFile));
+for inputIndex = 1:numel(ownedInputs), remove(ownedInputs(inputIndex)); end
+testInput = addInput(testCase,inputFile,1,false);
+map(testInput,'Mode',3);
+assert(contains(testInput.MappingStatus,'Successfully mapped'),'Input mapping must succeed before the test runs.');
+testInput.Active = true;
 criteria = getCustomCriteria(testCase);
 expectedText = mat2str(heldOut.soc,17);
 criteria.Callback = sprintf("values = test.sltest_simout.get('yout').getElement(1).Values; observed = double(squeeze(values.Data)); expected = %s; test.assertEqual(numel(observed),numel(expected)); test.assertEqual(values.Time(:),(0:19)','AbsTol',1e-9); test.assertTrue(all(isfinite(observed))); test.verifyLessThanOrEqual(sqrt(mean((observed-expected).^2)),0.03);",expectedText);
 criteria.Enabled = true;
+% Native result tracking must start before producing test results.
+verificationTag = "ParisSaclaySOC_" + string(getProperty(testCase,'UUID'));
+testCase.Tags = unique([string(testCase.Tags),verificationTag]);
 saveToFile(testFile);
-results = run(testFile);
+addFile(project,testFilePath);
+addFile(project,requirementFile);
+trackingSettings = digitalthread.settings();
+trackingSettings.ToolOutputTracking = true;
+metricEngine = metric.Engine();
+updateArtifacts(metricEngine);
+results = sltest.testmanager.run(Tags=verificationTag);
 assert(results.NumPassed>=1 && results.NumFailed==0 && results.NumIncomplete==0);
-disp(results);
-if isfile(requirementFile)
-    updateVerificationStatus(requirementSet);
-    verificationStatus = getVerificationStatus(requirementSet)
-verificationEvidence = struct('RequirementId','SOC-001','ExecutedTestOutcome',char(string(results.Outcome)),'ToolboxStatus',verificationStatus);
-    evidenceFile = fullfile(testFolder,'requirementVerificationEvidence.json');
-    evidenceHandle = fopen(evidenceFile,'w');
-    fwrite(evidenceHandle,jsonencode(verificationEvidence),'char');
-    fclose(evidenceHandle);
-end
+resultFile = fullfile(testFolder,'BatteryVerificationResults.mldatx');
+sltest.testmanager.exportResults(results,resultFile);
+updateArtifacts(metricEngine);
+updateVerificationStatus(requirementSet);
+accuracyRequirement = find(requirementSet,'Type','Requirement','Id','SOC-001');
+nativeStatus = getVerificationStatus(accuracyRequirement(1),'self')
+assert(nativeStatus.passed==1 && nativeStatus.failed==0 && nativeStatus.unexecuted==0);
+verificationStatus = getVerificationStatus(requirementSet)
+verificationEvidence = struct('RequirementId','SOC-001','ExecutedTestOutcome',char(string(results.Outcome)), ...
+    'NativeRequirementStatus',nativeStatus,'ToolboxSummary',verificationStatus);
+evidenceFile = fullfile(testFolder,'requirementVerificationEvidence.json');
+writelines(string(jsonencode(verificationEvidence,PrettyPrint=true)),evidenceFile);
 %%
+%[text] The native requirement now reflects the tracked executed test. SOC-002 has no verification link yet and remains none, not unexecuted. To demonstrate failure, temporarily tighten the custom test error limit, save/run/export/refresh, inspect native failed, then restore 0.03 and rerun before finishing.
 %[text] ## Run meaningful MATLAB requirement checks
 %[text] The included unit suite checks nominal SOC, bounds, temperature units, reproducibility, and a held-out neural accuracy threshold. This is actual host evidence separate from an unassessed Simulink test smoke run.
 results = runtests(fullfile(project.RootFolder,'tests','TestBatteryWorkflow.m'));
@@ -116,6 +138,9 @@ axis image off;
 %[text:table]
 %[text] | API | Minimal use | Engineering purpose |
 %[text] | --- | --- | --- |
+%[text] | [digitalthread.settings](https://www.mathworks.com/help/slcheck/ref/digitalthread.settings.html) | ToolOutputTracking=true | Enable native tool-result tracking before the run |
+%[text] | [updateArtifacts](https://www.mathworks.com/help/slcheck/ref/metric.engine.updateartifacts.html) | updateArtifacts(engine) | Analyze current project inputs/results |
+%[text] | [exportResults](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.exportresults.html) | exportResults(results,file) | Persist actual tracked Test Manager results |
 %[text] | [`TestFile`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testfile-class.html) | sltest.testmanager.TestFile(file) | Persistent test artifact |
 %[text] | [`createTestCase`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testsuite.createtestcase.html) | createTestCase(suite,'simulation',name) | Model test case |
 %[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(testCase,requirement) | Verification trace |

@@ -7,6 +7,7 @@ modelFolder = fullfile(project.RootFolder,'generated','models');
 if ~isfolder(modelFolder)
     mkdir(modelFolder);
 end
+addPath(project,modelFolder);
 modelFile = fullfile(modelFolder,'BatterySOCEstimator.slx');
 if ~isfile(modelFile)
     net = trainSOCNetwork;

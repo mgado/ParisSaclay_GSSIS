@@ -11,7 +11,7 @@ rootFiles = ["README.md","ParisSaclay_GSSIS.prj","buildfile.m", ...
 folders = ["src","tests","workshops","solutions","docs", ...
     "assets","python","resources"];
 relativeFiles = rootFiles;
-for folder = ["codegen","requirements","tests"]
+for folder = ["codegen","requirements","tests","models"]
     seedFolder = fullfile(root,'generated',folder);
     if ~isfolder(seedFolder)
         mkdir(seedFolder);

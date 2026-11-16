@@ -53,3 +53,8 @@ generated/requirements/*
 !generated/tests/
 generated/tests/*
 !generated/tests/.gitkeep
+
+# Project-managed generated model path
+!generated/models/
+generated/models/*
+!generated/models/.gitkeep
