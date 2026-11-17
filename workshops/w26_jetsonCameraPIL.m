@@ -1,7 +1,7 @@
 %[text] # 26 — Jetson Thor camera AI with a short MATLAB PIL loop
 %[text] **Goal:** Connect to Thor, acquire a frame from its USB camera, run the real YOLOX detector on the processor and display detections from MATLAB. The main path contains direct camera, resize, PIL and annotation commands; it does not use tracking, pose-estimation or application helpers.
 %[text] **Prerequisites:** MATLAB R2026b, GPU Coder/Embedded Coder, Deep Learning Toolbox, Computer Vision Toolbox, Image Processing Toolbox and NVIDIA target support; a reachable configured Thor with compatible CUDA/cuDNN and USB camera. Use the included model and entry function. All hardware/build actions are opt-in; an unavailable target is not a passed PIL result.
-%[text] **Launch:** openExercise(26), then Run Section. Read [NVIDIA target PIL](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html) and [Jetson connection](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html). The instructor first rehearses the build/runtime asset mapping; students then use the short loop.
+%[text] **Launch:** openExercise(26), then Run Section. Read [NVIDIA target PIL](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html) and [Jetson connection](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html). Check the target connection, build and required runtime weights before using the loop.
 %[text] **Your task:** Point the target camera at a person or car, run ten PIL frames, and explain where acquisition, resizing, neural inference and display execute. Compare a repeated run without regenerating the model.
 project = requireTrainingProject;
 runHardware = false;
@@ -19,7 +19,7 @@ buildFolder = fullfile(project.RootFolder,'generated','codegen','jetson_visual')
 addPath(project,assetFolder);
 %%
 %[text] ## Step 1: Inspect the model and tiny compiler entry point
-%[text] cocoSmallYOLO.m is the small Expo compiler entry function, modernized to coder.loadDeepLearningNetwork: load the local YOLOX detector, call detect, return boxes/scores/classes and an inference-only smoothed FPS. A compiler requires a function entry point; this file is visible and contains no hidden camera, tracking or deployment layers. Model and license are included. The source is preserved so matched generated code can be reused when appropriate.
+%[text] cocoSmallYOLO.m is the visible compiler entry function using coder.loadDeepLearningNetwork: load the local YOLOX detector, call detect, return boxes/scores/classes and an inference-only smoothed FPS. A compiler requires a function entry point; this file is visible and contains no hidden camera, tracking or deployment layers. Model and license are included. Reuse a generated build only when its model and configuration are unchanged.
 entryFile = fullfile(project.RootFolder,'src','cocoSmallYOLO.m');
 assert(isfile(entryFile) && isfile(fullfile(assetFolder,'cocoSmallYOLO.mat')));
 %%
@@ -45,7 +45,7 @@ if runHardware
 end
 %%
 %[text] ## Step 3: Build once or reuse matched generated code
-%[text] Use a new local build only when the model/entry point/path or target configuration changes. The recorded Expo build has generated sources, weights and a gateway; copying only its MEX is insufficient. For a matched staged build, codebuild reuses generated sources. The original full detector needed a generated weight-path repair before relinking; the instructor must qualify that runtime mapping before enabling the camera loop.
+%[text] Build when the model, entry point or target configuration changes. Reuse only a matching generated build, and keep its required network weights alongside the target runtime. A gateway file alone is insufficient.
 if runHardware && runBuildPIL
     if ~isfolder(buildFolder), mkdir(buildFolder); end
     configuration = coder.gpuConfig('lib','ecoder',true);
@@ -63,7 +63,7 @@ if runHardware && runBuildPIL
 end
 if runHardware
     gatewayFolder = fullfile(buildFolder,'pil');
-    assert(isfile(fullfile(gatewayFolder,['cocoSmallYOLO_pil.' mexext])),'Stage/rehearse the matched PIL gateway, generated source and runtime assets first.');
+    assert(isfile(fullfile(gatewayFolder,['cocoSmallYOLO_pil.' mexext])),'Build the matching PIL gateway and provide its required runtime weights first.');
     addPath(project,gatewayFolder);
 end
 %%
@@ -111,9 +111,9 @@ if runHardware
 end
 demoOutcome
 %%
-%[text] ## Historical illustration and troubleshooting
-%[text] The screenshot below comes from the supplied Expo detector validation. It is not a current result from this exercise. If the gateway or camera is unavailable, keep the unavailable/failed status; do not display this image as a successful new PIL run. A PC-only camera/host inference branch is also not PIL.
-image(imread(fullfile(assetFolder,'expo_gpu_preview.png')));
+%[text] ## Example detector output and troubleshooting
+%[text] The image shows example detector output. Run the current frame through the PIL gateway to obtain your own result; a host-only prediction is not processor-in-the-loop execution.
+image(imread(fullfile(assetFolder,'detector_example.png')));
 axis image off;
 %[text] If target setup fails, check reachability, Vault credentials, camera availability and CUDA/cuDNN compatibility. If inference starts then fails, verify the generated weights and exact loader/runtime path mapping. Preserve original generated sources; rebuild only the matched copied/staged tree. This loop intentionally omits tracking and pose estimation to keep the teaching path small.
 %%

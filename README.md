@@ -1,91 +1,78 @@
-# ParisSaclay GSSIS — AI for engineered systems
+# ParisSaclay GSSIS - AI for engineered systems
 
-Three-day hands-on training, **17–19 November 2026**, MATLAB and Simulink R2026b.
-Written materials are in English; French instructor prompts accompany each block.
+**17-19 November 2026 - MATLAB and Simulink R2026b**
+
+Learn how to define, train, verify and implement AI components for engineered
+systems. A battery state-of-charge (SOC) virtual sensor connects the exercises;
+thermal models introduce reduced-order modeling (ROM) and physics-informed AI.
 
 ## Start here
 
-1. Complete MATLAB Onramp and Simulink Onramp beforehand.
-2. Open `ParisSaclay_GSSIS.prj` in this folder.
-3. At the MATLAB Command Window, run `setup_check`, then `demoAgenda`.
-4. Run `openExercise(1)` and use **Run Section** in the Live Editor.
-5. Run `openExercise(1,true)` to compare the worked solution.
+1. Open `ParisSaclay_GSSIS.prj` in MATLAB R2026b.
+2. Run the commands below in the MATLAB Command Window.
+3. Use **Run Section** in the Live Editor and complete the task before viewing
+   its worked solution.
 
-Each exercise is a **native plain-text Live Script `.m`**, with rich text,
-visible APIs, working starter values, an experiment to perform, progressive hints,
-expected observations, troubleshooting and an API cheat sheet. Change the working
-values deliberately and record the result before reading the solution.
+```matlab
+setup_check
+demoAgenda
+openExercise(1)
+```
 
-## Engineering story
+To compare your reasoning with a solution:
 
-Can a battery state-of-charge virtual sensor meet its requirements across its
-operating domain and implementation constraints? Follow the chain:
+```matlab
+openExercise(1,true)
+```
 
-**requirements → data → ML/DL → import → compression → verification → Simulink
-integration → tests → generated code → hardware evidence**.
+The project contains **25 exercise/solution pairs**. Each is a native plain-text
+Live Script `.m` with an objective, prerequisites, launch instructions, an
+experiment, hints, expected observations and an API cheat sheet.
 
-Thermal models extend that story into model-based ROM, full-field reconstruction,
-and physics-informed learning. Agentic engineering supports the same steps;
-actual execution, tests and traceability assess its output.
+## Three-day learning path
 
-## How the three days fit together
+| Day | Topics | Exercises |
+|---|---|---|
+| 1 | Agentic tools, measurable requirements, independent data and preprocessing | 1-3, 17 |
+| 2 | ML/DL, Python, compression, AI verification and modern apps | 4-8, 15, 23-24 |
+| 3 | Simulink, tests, code generation, SIL/PIL, ROMs, physics and agentic practice | 9-14, 16, 18-21, 25-26 |
 
-| Day | Main work | Exercises |
-| --- | --- | --- |
-| 1 | Agent toolkit readiness, engineering requirements, data and operating domain | 1–3; data cleaning extension |
-| 2 | ML/DL, Python, compression, formal bounds, modern apps | 4–8, 15 |
-| 3 | Simulink, tests, code generation, ROM and agent engineering | 9–14, 16; PINN/full-field extensions |
+Work through the basic path first. Exercises initialize the inputs they need
+and can be revisited independently with the project open. Hardware and optional
+app/Python activities require their stated prerequisites.
 
-The stable catalog supports reordering: agentic work can start the training or
-return after the technical fundamentals. The programme contains five themes;
-they run across these three days rather than one theme per day.
+## What you will practice
 
-## Products and optional paths
+**Requirements - representative data - model - compression and verification ?
+integration and tests - generated code and target comparison.**
 
-The numerical baseline uses MATLAB, Statistics and Machine Learning Toolbox,
-Deep Learning Toolbox, Requirements Toolbox, Simulink, Simulink Test and
-MATLAB Coder. Specific exercises state their own prerequisites.
+You will also compare model-based reduction, spatial-field reconstruction,
+predictive full-field AI and a cooling PINN. In the agentic exercises, you ask
+an engineering agent for a concrete change and check its result with MATLAB or
+Simulink.
 
-Python/PyTorch, formal AI verification, quantization, modern apps and physical
-targets require their corresponding interpreter/library/support package/product.
-Nothing installs automatically. `setup_check` reports installed products;
-successful installation does not prove a hardware connection or license checkout.
+## Requirements
 
-The synthetic sensor and thermal datasets are explicitly teaching models. They
-are not measured battery data, certified plant models or industrial performance
-claims. Test results establish behavior on the documented teaching inputs only.
+Complete [MATLAB Onramp](https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted)
+and [Simulink Onramp](https://matlabacademy.mathworks.com/details/simulink-onramp/simulink)
+beforehand. `setup_check` lists installed products; each exercise identifies
+its required toolboxes, libraries, interpreter, compiler or target support.
 
-## Checks
+The short sensor/thermal examples use explicitly synthetic data. Selected
+hardware exercises use provided battery measurements and a pretrained network.
+Treat each result within its stated data, operating-domain and target scope.
+A missing hardware connection is unavailable, not a passed target test.
 
-With this project open, run `buildtool` from the project root. It checks runtime
-source and runs the nonempty unit test suite. Workshop execution, UI rendering,
-optional Python, formal verification and code generation are recorded separately
-in `docs/VALIDATION.md`; a walkthrough is never reported as an executed pass.
+## Guides
 
-## Further reading
+- [User guide](docs/USER_GUIDE.md): navigation, checks and troubleshooting.
+- [Agenda](docs/AGENDA.md): three-day schedule and exercise map.
+- [Daily takeaways](docs/DAILY_TAKEAWAYS.md): concepts to retain.
+- [Agentic engineering](docs/AGENTIC_GUIDE.md): tools, skills and concrete tasks.
+- [ROM guide](docs/ROM_GUIDE.md): model-based, full-field and physics-informed methods.
+- [Python and deployment](docs/PYTHON_AND_DEPLOYMENT.md): import and implementation routes.
+- [System testing](docs/SYSTEM_TESTING.md): requirements, test criteria and execution levels.
+- [R2026b features](docs/R2026B_REFRESH.md): relevant release updates and official help.
 
-- `docs/USER_GUIDE.md`: detailed student workflow and recovery.
-- `docs/AGENTIC_GUIDE.md`: toolkit round trip, builtin/custom skill exercise.
-- `docs/ROM_GUIDE.md`: unified ROM choice and thermal examples.
-- `docs/PYTHON_AND_DEPLOYMENT.md`: editable import versus direct code generation.
-- `docs/SYSTEM_TESTING.md`: requirements/model/test traceability and test levels.
-- `docs/R2026B_REFRESH.md`: release-specific updates with official references.
-
-## Distribution
-
-This folder is the student-facing source tree. The separate development materials
-and internal reference slides are not part of the student distribution. Repository
-publication is deferred; the intended visibility is private initially.
-
-## Two hardware prototype paths
-The catalog also includes Simulink PIL (20) and MATLAB command-line AI deployment/PIL (21), prioritized for Day3. Both use the real Expo SOC assets and preserve actual passed/unavailable/failed hardware evidence. A Raspberry Pi4 plugged only into USB-Cpower has no configured network path by default; connect/configure Ethernet, Wi-Fi or USB gadget networking before live PIL. No hardware run is inferred from host validation.
-
-
-## Private GitHub repository
-
-The student repository is now published privately at
-https://github.com/mgado/ParisSaclay_GSSIS . GitHub access requires permission.
-The local `student_delivery/` repository tracks its `main` branch through `origin`.
-The instructor Project, audience word cloud, development workflow files and
-original private references are excluded. Earlier local-only notes describe
-pre-publication preparation.
+Course repository: [ParisSaclay_GSSIS](https://github.com/mgado/ParisSaclay_GSSIS).
+Access to the private repository requires permission.

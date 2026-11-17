@@ -1,91 +1,82 @@
-# Simple Jetson Thor camera AI
+# Jetson Thor image and camera PIL
 
-Exercise 26 keeps the main Live Script small: connect to Thor, open its USB
-camera, take a snapshot, resize, call the generated detector PIL gateway, and
-display the returned boxes/classes. It uses the actual supplied YOLOX detector,
-not an untrained substitute. No tracking, keypoint, application or overlay
-helper layer is used.
+Open the camera PIL Live Script from the Project browser and use Run Section.
+It exposes a short path: capture a frame, resize it, execute YOLOX through the
+processor-in-the-loop gateway, and display the returned detections.
 
-## Runtime assets
+## Prerequisites
 
-- `assets/jetson_visual/cocoSmallYOLO.mat`: supplied trained YOLOX model.
-- `src/cocoSmallYOLO.m`: original short compiler entry point, visible to students.
-- `assets/jetson_visual/LICENSE_MATHWORKS.txt`: retained source license.
-- `assets/jetson_visual/expo_gpu_preview.png`: historical illustration only.
-- The generated PIL gateway, sources and weights belong under a separately
-  rehearsed local `generated/codegen/jetson_visual` tree and are not shared source.
+Use the products listed in the lesson: GPU Coder/Embedded Coder, Deep Learning
+Toolbox, Computer Vision Toolbox, Image Processing Toolbox and NVIDIA target
+support. Use a reachable configured Thor with compatible CUDA/cuDNN. Enter its
+current address and private Vault login, or reuse an existing board object.
 
-A compiler requires a function entry point. The supplied function loads the
-model, calls `detect`, and returns detections/classes and an inference-only FPS
-estimate. Camera, preprocessing, target execution and display remain visible
-in the Live Script. The model filename resolves through the Project-owned
-asset path; no external source folder is hardcoded in the student script.
+The Project includes the detector MAT-file and a small visible compiler entry
+function. A generated gateway must match the model, input shape, target
+configuration, generated sources and runtime weight files. Build the selected
+configuration when it is absent or has changed.
 
-## Where the work executes
+## Choose the camera location
 
-`webcam(board,...)` and `snapshot(camera)` acquire on the target and return the
-frame to MATLAB. MATLAB resizes it; the generated `cocoSmallYOLO_pil` transfers
-the fixed image for neural inference on Thor. MATLAB draws the result.
+- **Host camera:** `videoinput` and `getsnapshot` acquire on the computer.
+- **Target USB camera:** `webcam(board,...)` and `snapshot` acquire on Thor and
+  return the frame to MATLAB. Inspect `board.WebcamList` and use an available
+  camera/resolution.
 
-This provides convenient interactive prototyping from MATLAB. The image makes
-two trips through the host, so this is not a standalone low-latency camera app.
-A later native camera application moves acquisition/preprocessing/display into
-the target executable; do not conflate those execution models.
+In both prototype paths MATLAB resizes the image to **640-by-640 RGB uint8**,
+the PIL gateway executes detector code on Thor, and MATLAB displays annotations.
+The target-camera path transfers the image through MATLAB before sending it
+back for inference. This is interactive PIL prototyping, not a standalone
+low-latency camera application.
 
-## First build versus reuse
+## Follow the direct API loop
 
-The instructor may reuse a **matched** generated source/gateway/weight tree
-when algorithm and target configuration are unchanged. A gateway alone is not
-self-contained. The prior Expo build required a Windows-to-Linux generated
-weight-loader repair followed by `codebuild` and PIL executable relinking.
-That existing runtime mapping must be qualified before a current run.
+The selected lesson includes the complete camera setup and a finite loop.
+The central operations are:
 
-Changing the model/entry point or its path/configuration can require a fresh
-build. The student source exposes the direct `coder.gpuConfig`, `coder.hardware`
-and `codegen` APIs. The runtime still must be tested; do not treat files or old
-validation results as a new passing deployment. Preserve original reference
-trees and perform any rebuild/path repair on the owned staged copy.
+```matlab
+networkFrame = imresize(frame,[640 640]);
+[boxes,scores,labelIds,classNames,inferenceFPS] = ...
+    cocoSmallYOLO_pil(networkFrame);
+textLabels = compose('%s %.2f',string(classNames(labelIds)),scores);
+annotatedFrame = insertObjectAnnotation(networkFrame,'rectangle', ...
+    boxes,textLabels);
+```
 
-## Connection and camera
+Keep box coordinates in the resized image's coordinate system. Change the
+scene, inspect detections, and repeat with the same generated code. The included
+`sample_car_frame.jpg` supports an image-only check before camera acquisition.
 
-The source Thor address is `192.168.7.1`. Verify the current reachable address;
-power alone does not establish a network connection. Existing secure source
-configuration names the Vault keys `RTMPoseThorUserName` and
-`RTMPoseThorPassword`. Their presence and actual connection need checking on
-the presentation machine. Never copy legacy hardcoded credential values.
+## Expected result
 
-Inspect `board.WebcamList`, choose the intended USB camera, and use a reported
-resolution. The default example uses camera index 1 at 640x480 and resizes to
-the detector's 640x640 input. A PC camera branch can use Image Acquisition
-Toolbox `videoinput`/`getsnapshot`, but PC inference or image acquisition alone
-cannot be labeled Thor PIL.
+A current PIL run returns finite boxes/scores with consistent lengths and
+updates the displayed frame. The outcome becomes `passed` only when the
+requested frames actually execute through the target gateway. A static image,
+host detector or available source file does not prove current Thor execution.
 
-## Evidence and limits
+Detection accuracy requires independent labels; numerical host/target agreement
+is a different check. PIL round-trip time includes transfer and processing.
+The detector's inference-FPS output is a separate measure.
 
-The historical Expo R2026b validation matched 55/55 host car/person detections
-at IoU>=0.5, with about 0.881-second median PIL round trip and 19.9-second first
-PIL initialization. Those are previous source measurements, not current
-exercise timing or hardware readiness. Current `demoOutcome` becomes passed
-only after the requested camera frames are processed through the actual PIL
-gateway and finite/shape checks pass. Validate recognition against independent
-labels separately from host/target equivalence.
+## Troubleshooting
 
-## Official documentation
+- **No connection:** check power, network/address, SSH and private login.
+- **No camera:** inspect the camera list and supported formats; verify which
+  device is attached to the host versus Thor.
+- **Image mismatch:** use the fixed RGB uint8 input size and matching box scale.
+- **Missing gateway/weights:** generate the selected build and keep required
+  runtime files with its executable. Do not copy a gateway by itself.
+- **Target runtime error:** keep the actual message and check compatible
+  CUDA/cuDNN, runtime paths and model operators before continuing.
 
-- [NVIDIA processor-in-the-loop](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html)
-- [Jetson connection](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html)
+## Official references
+
+- [NVIDIA PIL workflow](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html)
+- [jetson](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html)
 - [Target webcam](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.html)
-- [Snapshot](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.snapshot.html)
-- [Code-generation context](https://www.mathworks.com/help/coder/nvidia/ref/setupcodegencontext.html)
-- [GPU configuration](https://www.mathworks.com/help/gpucoder/ref/coder.gpuconfig.html)
+- [Target snapshot](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.snapshot.html)
+- [videoinput](https://www.mathworks.com/help/imaq/videoinput.html)
+- [getsnapshot](https://www.mathworks.com/help/imaq/imaqdevice.getsnapshot.html)
+- [coder.gpuConfig](https://www.mathworks.com/help/gpucoder/ref/coder.gpuconfig.html)
 - [YOLOX detector](https://www.mathworks.com/help/vision/ref/yoloxobjectdetector.html)
-
-## French explanation
-
-« La caméra appartient à la carte, mais MATLAB pilote l'expérience. La même
-image entre dans le réseau exécuté sur Thor, puis les résultats reviennent pour
-l'affichage. C'est un prototype PIL simple. Une application autonome évite ces
-allers-retours; ce n'est pas encore ce que nous mesurons ici. »
-
-## Local sample and connection configuration
-The included sample_car_frame.jpg is the unannotated first frame from the supplied driving video, for host/PIL testing. The old GPU preview is already annotated and is only historical guidance. The script target address starts empty: set the actual current address, or supply an existingBoard object explicitly. Source IP192.168.7.1 is not a promised current connection. No target IDs or credential values are hardcoded in the runnable script.
+- [insertObjectAnnotation](https://www.mathworks.com/help/vision/ref/insertobjectannotation.html)

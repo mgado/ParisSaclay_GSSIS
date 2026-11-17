@@ -1,34 +1,43 @@
-# Expected observations and representative rehearsal outputs
+# Expected exercise observations
 
-These values come from the R2026b classroom-scale synthetic examples. They are
-engineering checks on the declared teaching inputs, not industrial battery or
-hardware performance claims. Student parameter changes can change the values.
+Use this checklist while running each Live Script. Values apply to the declared
+teaching inputs and units. A parameter change can change the result; compare it
+with the requirement, not with an assumed universal performance value.
 
-| Exercise | Expected observation |
+| Exercise | What to check |
 | --- | --- |
-| 1 | MATLAB round-trip target SOC = 0.5; agent connection separately demonstrated |
-| 2 | Measurable SOC-001 requirement, implementation link and held-out RMSE below 0.03 |
-| 3 | 420 training, 60 validation and 120 test rows, disjoint acquisition groups |
-| 4 | Tree and analytic baseline error comparison; representative RMSE 0.0347 and 0.0016 |
-| 5 | Compact neural held-out RMSE approximately 0.0035, max error approximately 0.0123 |
-| 6 | Python scalar, imported network and direct PyTorch inference agree at 0.5 when enabled |
-| 7 | Weight-rounding RMSE approximately 0.0046; largest reference prediction change approximately 0.0072 |
-| 8 | Formal affine-network output interval approximately [0.496667, 0.503333] |
-| 9 | Twenty time-aligned Simulink SOC samples and model RMSE below 0.03 |
-| 10 | Persistent Test Manager input mapping and custom RMSE assessment; linked SOC-001 status reflects the executed result |
-| 11 | Generated host MEX agrees with MATLAB at nominal SOC 0.5 and saturation output 1 |
-| 12 | Held-out thermal-model projection error approximately 1.06e-6 |
-| 13 | Rank-three field reconstruction error near machine precision; per-field coefficient ratio 3/1000 |
-| 14 | Fitted cooling rate approximately 0.04; interior physics residual approximately 2.05e-4 |
-| 15 | Actual app-capability inventory and attributed UI screenshots; app metrics shown are documentation examples |
-| 16 | Boundary behavior checked; agent must supply its own executed edit/test evidence |
-| 17 | Nine missing values and one spike per acquisition repaired; solution resampling yields 121 rows per split |
-| 18 | Trained PINN trajectory RMSE approximately 0.0050, residual RMSE approximately 0.0334, initial error approximately 0.0012 |
-| 19 | Predicted field relative error approximately 0.0149; POD-only error near machine precision |
+| 1 | The MATLAB sensor round trip returns SOC 0.5; inspect actual tool output |
+| 2 | Requirements name a metric, threshold/domain and verification method; links identify implementation/tests |
+| 3 | Disjoint groups: 420 training, 60 validation and 120 test observations |
+| 4 | Compare validation errors before freezing the ML choice for final testing |
+| 5 | The final held-out neural SOC RMSE meets the 0.03 fraction threshold |
+| 6 | The same 3.55 V, 1 A, 25 C input gives SOC 0.5 across enabled Python/MATLAB paths |
+| 7 | Measure error after rounding/quantization; verify the input scaling contract and the same accuracy threshold |
+| 8 | The affine model's declared input box gives bounds near [0.496667, 0.503333] |
+| 9 | Twenty time-aligned model outputs, finite values and SOC RMSE below 0.03 |
+| 10 | The executed Test Manager criteria pass; inspect linked requirement status separately and refresh it if needed |
+| 11 | Host generated code agrees at nominal SOC 0.5 and upper saturation output 1 |
+| 12 | A held-out thermal input meets the declared reduced-model error criterion |
+| 13 | Three retained modes reconstruct the rank-three field family near floating-point precision |
+| 14 | The fitted cooling rate is near 0.04 for the supplied synthetic law; check residual and temperature behavior |
+| 15 | Inspect input partitions, selected app/model and exported result; screenshot metrics are not your own result |
+| 16 | Require the agent's actual edit/check result and compare it with the requirement |
+| 17 | Repair nine missing values and one spike per acquisition; 1-second spacing gives 61 rows/run, 0.5-second spacing gives 121 |
+| 18 | Assess unseen trajectory, physics residual and initial condition; the worked solution's stated error criteria must pass |
+| 19 | Separate POD-only error from parameter-to-field prediction error; the worked solution requires prediction error below 10% |
+| 20 | Actual Simulink PIL returns 32 finite samples and maximum MIL/PIL difference at most 1e-4 |
+| 21 | Actual MATLAB neural PIL returns 32 finite samples and maximum host/PIL difference at most 1e-4 in matching network units |
 
-The simulation and generated-code checks use actual execution. PIL/HIL and
-physical-board resource/timing measurements require the configured target.
-No public full-field ROM app is assumed.
+SOC thresholds use fractions: 0.03 is three percentage points, not 3% relative
+error. Thermal and field examples are illustrative models, not calibrated plant
+certificates. A linked requirement or generated file alone does not establish
+successful execution.
 
-## Optional real quantization
-The measured raw-input INT8 quantization RMSE was about 0.0330, failing the 0.03 requirement. Moving learned z-score normalization outside the quantized network preserved floating-point outputs exactly in this rehearsal and reduced quantized RMSE to about 0.0045. Deployment must include that preprocessing; this is an accuracy result, not a measured board-memory or speed claim.
+For optional hardware sections, `passed` requires actual processor execution.
+Keep `unavailable` when the target action did not run, and retain `failed` for an
+attempted run that violates a check. On-target timing includes transport/setup
+unless a separate execution-profiling measurement explicitly isolates compute.
+
+For the image/camera PIL lesson, check frame/detection shapes and actual target
+execution. Host camera acquisition, a static picture or a PC model result is not
+processor-in-the-loop success.

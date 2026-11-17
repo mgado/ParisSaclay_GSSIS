@@ -34,7 +34,7 @@ xlabel("Time (s)"); ylabel("Temperature (deg C)"); legend("Sparse observations",
 %%
 %[text] ## Step 4: PINN loss specification
 %[text] **Answer:** A PINN would take time as input, predict temperature, compute its derivative through `dlgradient` within `dlfeval`, and minimize a weighted sum of measurement MSE, initial-condition MSE and ODE-residual MSE at collocation times. Use automatic differentiation with higher derivatives enabled when differentiating the derivative term with respect to network parameters. This script fits an analytic physics model; it does not train a PINN.
-%[text] A neural PDE version adds spatial inputs and derivatives, boundary conditions and a sampling strategy. The instructor's original PINN/PDE material provides the advanced implementation. Check unseen time ranges and coefficient uncertainty independently of the training loss.
+%[text] A neural PDE version adds spatial inputs and derivatives, boundary conditions and a sampling strategy. Use the linked physics-informed documentation for spatial PDE extensions. Check unseen time ranges and coefficient uncertainty independently of the training loss.
 %%
 %[text] ## Troubleshooting
 %[text] If modified/noisy observations fail the parameter assertion, distinguish sensor uncertainty from optimizer failure. Lower the time step when evaluating the numerical residual. Retain the physical-bound and monotonicity checks even if the data-fit criterion is changed.

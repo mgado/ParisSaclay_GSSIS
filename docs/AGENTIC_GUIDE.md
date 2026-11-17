@@ -1,73 +1,62 @@
-# Agentic engineering exercise
+# Agentic engineering with MATLAB and Simulink
 
-## Toolkit readiness
+Use an agent to inspect an engineering problem, select the relevant skills, make a small change and obtain actual MATLAB or Simulink evidence. Work in a personal exercise copy when changing files.
 
-1. In MATLAB R2026b, verify the needed products with `setup_check`.
-2. Install/configure the official MathWorks MATLAB and Simulink agentic toolkits
-   using their documented Agentic Toolkit Installer if they are not available.
-3. In your coding agent, ask for an actual MATLAB tool call:
-   `socEstimate(3.55,1,25)` with the training Project open.
-4. Require the executed output and compare it with **0.5**.
-5. Ask the agent to inspect a model with the Simulink toolkit; opening a skill
-   document alone does not prove a successful model tool connection.
+## Check the toolkit connection
 
-Official sources:
-https://github.com/matlab/matlab-agentic-toolkit and
-https://github.com/matlab/simulink-agentic-toolkit.
+1. Open the training MATLAB Project in R2026b and run [setup_check](../setup_check.m).
+2. Configure the official [MATLAB toolkit](https://github.com/matlab/matlab-agentic-toolkit) and [Simulink toolkit](https://github.com/matlab/simulink-agentic-toolkit) for your agent and operating system.
+3. If setup is needed, follow the official Agentic Toolkit Installer instructions. After installing it in MATLAB, run `setupAgenticToolkit("install")` and select the relevant skills and agent connection.
+4. Restart or reconnect your agent as required by that setup.
+5. Ask the agent to call a MATLAB tool that evaluates `socEstimate(3.55,1,25)` with the Project open. The expected output is **0.5**.
+6. Ask it to inspect the generated SOC model using a Simulink tool. Check the returned model information rather than treat opening a skill document as connection evidence.
 
-## Builtin skill versus tool
+A MATLAB-side product check and an agent-to-tool round trip test different prerequisites. Resolve the missing connection or product before using that path.
 
-A **tool** executes a bounded action: evaluate MATLAB, inspect a model, run a
-test. A **skill** supplies reusable workflow instructions. An **agent** chooses
-actions, reads results and revises its work. Their roles are different.
+## Understand tools, skills and agents
 
-Read the official MATLAB testing, requirements and embedded-AI deployment
-skills. Ask the agent which skill applies before it edits the isolated exercise
-copy. The exact skill name can differ between installed catalogs.
+A **tool** executes a bounded action, such as evaluating MATLAB, inspecting a model or running tests. A **skill** supplies reusable instructions for a workflow. An **agent** chooses actions, reads their results and revises its work.
 
-## A small engineering task
+Read the installed MATLAB testing, requirements and embedded-AI skills. Ask the agent to explain which one applies to the task. Skill names can vary between installed catalogs; use those actually available in your connection.
 
-Requirement: the SOC estimator must preserve the intended temperature units
-and saturation behavior. Request an additional test at a temperature boundary.
-Use a personal copy so classmates and the reference solutions are unaffected.
+## Make and verify one engineering improvement
+
+Use [socEstimate](../src/socEstimate.m) and [TestBatteryWorkflow](../tests/TestBatteryWorkflow.m) as the starting point. Add a meaningful temperature-domain test while preserving volts, amperes, Celsius and SOC-fraction units.
 
 Suggested prompt:
 
-> Inspect socEstimate and TestBatteryWorkflow. Explain volts, amperes, Celsius
-> and SOC fraction. Add one meaningful boundary test in my isolated copy. Run
-> it with the MATLAB toolkit. Report the requirement, exact edit, executed result
-> and any remaining limitation. Do not claim board timing or deployment.
+> Inspect socEstimate and TestBatteryWorkflow in my exercise copy. Explain the input units and expected saturation behaviour. Add one meaningful temperature-domain test. Derive its expected result, run it with the MATLAB toolkit, and report the changed file, test input, observed output and test result.
 
-Compare the proposal with `openExercise(16,true)`. A good answer contains a
-meaningful test and actual result, not merely a statement that it should pass.
+For a concrete check, the synthetic sensor law gives SOC **0.5** for voltage **3.59 V**, current **1 A** and temperature **45 degrees Celsius**. Explain the chosen tolerance and which property the test covers.
+
+Review the edit before accepting it. Ask for the exact test output, not a statement that the test should pass. Compare your result with the solution and explain whether the new test covers a boundary, a nominal value or an invalid-input condition.
 
 ## Create a personal custom skill
 
-Use your agent's supported skill-creation workflow and personal skill location.
-The distribution deliberately does not ship agent configuration folders.
-Copy this body into your own `SKILL.md` through that workflow:
+Use your agent's supported skill-creation workflow and personal skill location. Give it the following body for `SKILL.md`:
 
 ```markdown
 ---
 name: engineering-teaching-check
 description: Explain and verify a small MATLAB engineered-system change.
 ---
-Read the requirement and current implementation before changing code.
-State physical units, operating bounds, and the expected observation.
-Keep learner instructions in English and presenter explanations in French.
-Prefer a few visible MATLAB APIs over hidden helper layers.
-Run a focused meaningful check and retain actual output.
-Separate passed execution, unavailable prerequisites and UI walkthroughs.
-Never infer hardware deployment from a host prediction or compilation.
+Read the requirement and implementation before changing code.
+State physical units, operating bounds and the expected observation.
+Use clear English explanations and a few visible MATLAB APIs.
+Make a focused change and run a meaningful check.
+Retain actual output and explain what it establishes.
+Distinguish passed execution, missing prerequisites and guided UI actions.
+Do not infer target execution from a host prediction or compilation.
 ```
 
-Repeat the same task with and without the skill. Compare unit explanations,
-reproducibility, test evidence and recovery instructions. A custom skill improves
-repeatable behavior; it does not provide missing products or device access.
+Repeat the same engineering task with and without the skill. Compare the unit explanation, edit size, test relevance, execution evidence and recovery instructions. The skill changes repeatable behaviour; it does not provide missing products or hardware access.
 
-## Embedded-AI skill challenge
+## Apply an embedded-AI skill
 
-Ask the official embedded-AI deployment skill to plan the same estimator for
-Jetson Thor, STM32F7 and the instructor's Qualcomm board. Require it to identify
-board/OS/toolchain/operator/memory prerequisites and actual validation steps.
-The Qualcomm model must be identified before claiming support.
+Choose a deployment target and ask the installed embedded-AI skill to plan the SOC estimator's route. Require the board/OS/compiler, supported operators, memory limits and test strategy. Identify unknown prerequisites before attempting deployment.
+
+Ask it to separate host code generation and equivalence checks from actual processor execution. A successful host prediction is useful evidence, but it does not measure the target's execution time or demonstrate PIL.
+
+## Record the engineering result
+
+Keep the requirement, changed file, exact command, observed output and interpretation with your exercise notes. Use [MATLAB tests](https://www.mathworks.com/help/matlab/matlab-unit-test-framework.html), [Simulink Test](https://www.mathworks.com/help/sltest/) and [requirements verification](https://www.mathworks.com/help/slrequirements/verify-requirements.html) when they fit the task.

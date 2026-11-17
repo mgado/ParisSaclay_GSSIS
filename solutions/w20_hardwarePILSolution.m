@@ -1,7 +1,7 @@
 %[text] # Solution 20 — Run the battery AI on a Raspberry Pi with PIL
 %[text] **Goal:** Prototype from MATLAB/Simulink, execute the same projected SOC network on a supported board, and compare its output with the host model. PIL is a primary learning outcome: the support package handles the target build and communication so you can focus on engineering behavior.
-%[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in R2026b; Simulink, Embedded Coder, Deep Learning Toolbox, Fixed-Point Designer and Raspberry Pi Blockset. The instructor must complete Hardware Setup for a powered Raspberry Pi running a supported 64-bit OS. No board connection or deployment runs until you enable the flags below.
-%[text] **Launch:** openExercise(20,true), then use Run Section. This lesson uses copied pretrained Expo assets and measured battery data; it does not retrain the network or depend on an external folder.
+%[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in R2026b; Simulink, Embedded Coder, Deep Learning Toolbox, Fixed-Point Designer and Raspberry Pi Blockset. Complete Hardware Setup for a powered Raspberry Pi with a supported OS matching the model's 32/64-bit target. No board connection or deployment runs until you enable the flags below.
+%[text] **Launch:** openExercise(20,true), then use Run Section. This lesson uses the included pretrained network and measured battery data. No training run or external folder is needed.
 %[text] **Main documentation:** [SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html), [configure a SIL/PIL simulation](https://www.mathworks.com/help/ecoder/ug/configuring-a-sil-or-pil-simulation.html), [Raspberry Pi support](https://www.mathworks.com/hardware-support/raspberry-pi-simulink.html).
 %[text] **Worked reasoning:** Use the same finite measured trace and reset model state for MIL and PIL. A passing target comparison demonstrates code-port correctness for these inputs, not all physical operating conditions. The first build deploys code; a cached repeat shows the prototyping benefit. Keep the declared tolerance and label unavailable hardware honestly.
 %[text] **Hint:** The matched network expects Temperature, Voltage, Current in that order. The measured XTest columns have that same order. A connected board object is not proof of PIL; only the actual PIL simulation and numerical comparison count.
@@ -17,7 +17,7 @@ equivalenceTolerance = 1e-4;
 demoOutcome = struct('Status','unavailable','Summary','PIL unavailable until a network-connected Raspberry Pi is configured.','Evidence',struct('PILExecuted',false));
 %%
 %[text] ## Step 1: Open the real pretrained SOC model
-%[text] The supplied wrapper contains three sensor inputs and a root SOC output. The reused model variant was matched to the projected-network layers, and the wrapper input wiring was corrected to Temperature, Voltage, Current. The copied candidate is configured for Raspberry Pi (64bit), ERT and generic C inference. Original Expo sources are preserved.
+%[text] The wrapper supplies Temperature, Voltage and Current to the projected neural estimator and captures its SOC output. The model uses ERT and generic C; its hardware architecture must match your board's OS.
 modelFolder = fullfile(project.RootFolder,'assets','pil_pi_soc','models');
 dataFolder = fullfile(project.RootFolder,'assets','pil_pi_soc','data');
 addPath(project,modelFolder);
@@ -31,7 +31,7 @@ modelName = 'SoC_Target';
 referenceBlock = Simulink.ID.getFullName('SoC_Target:1');
 %%
 %[text] ## Step 2: Supply a short measured sensor trace
-%[text] This data belongs to the supplied Expo SOC reference. We keep the trace finite to make a classroom run short. The independent PIL question is whether generated target code reproduces MIL; accuracy against physical SOC is a separate requirement and must consider network state/warm-up.
+%[text] The included measured trace is shortened for a finite classroom test. The independent PIL question is whether generated target code reproduces MIL; accuracy against physical SOC is a separate requirement and must consider network state/warm-up.
 data = load(fullfile(dataFolder,'test_data_scaled.mat'),'XTest','YTest');
 networkData = load(fullfile(dataFolder,'projected_net.mat'),'socNetProjected');
 scalers = load(fullfile(dataFolder,'scalers.mat'));
@@ -104,7 +104,7 @@ demoOutcome
 %%
 %[text] ## UI guide and troubleshooting
 %[text] Open the Model block's Simulation Mode setting and compare Normal, SIL and PIL. In Configuration Parameters, inspect the Raspberry Pi hardware target. The legacy screenshot below is interface guidance, not proof that this Raspberry Pi run executed.
-image(imread(fullfile(project.RootFolder,'assets','screenshots','pil_workflow_legacy.png')));
+image(imread(fullfile(project.RootFolder,'assets','screenshots','pil_workflow.png')));
 axis image off;
 %[text] If no board is ready, retain demoOutcome as unavailable. If MIL fails, inspect the copied dictionaries, input order and numeric types first. If target compilation fails, check the guided Hardware Setup, supported 64-bit OS, compiler/libraries and board connection; keep the actual error. Do not replace a failed PIL run with a host result.
 %%

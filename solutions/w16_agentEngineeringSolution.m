@@ -25,7 +25,7 @@ disp(request)
 disp("Compare the generic answer with the custom skill: did it explain units, expected observation, and real verification evidence?");
 %%
 %[text] ## Troubleshooting and next step
-%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require the instructor's target-specific configuration. Reopen the project if file or function resolution fails.
+%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require a configured compatible target. Reopen the project if file or function resolution fails.
 %%
 %[text] ## Documentation and further reading
 %[text] [Main documentation for this area](https://github.com/matlab/simulink-agentic-toolkit). Use the linked API names in the cheat sheet below to check syntax, examples and release history.

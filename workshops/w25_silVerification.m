@@ -11,7 +11,7 @@ traceOffset = 1;
 tolerance = 1e-4;
 %%
 %[text] ## Step1: Load the same model and test input
-%[text] This is the real pretrained projected Expo SOC network, not the small analytic baseline. Use the same input contract for MATLAB, SIL and later PIL.
+%[text] Use the included pretrained projected SOC network for this neural-code comparison. Use the same input contract for MATLAB, SIL and later PIL.
 dataFolder = fullfile(project.RootFolder,'assets','pil_pi_soc','data');
 modelFile = char(fullfile(dataFolder,'projected_net.mat'));
 data = load(fullfile(dataFolder,'test_data_scaled.mat'),'XTest_scaled');

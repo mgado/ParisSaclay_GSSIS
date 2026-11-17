@@ -1,62 +1,78 @@
-# Requirements, integration and test evidence
+# Requirements, integration and system tests
 
-## Traceability chain
+A traceability link records what an implementation or test addresses. A verification result requires executed criteria, the correct input/model revision, and result tracking.
 
-Exercise 2 creates a `.slreqx` requirement set and an implementation link.
-Exercise 9 exports an actual layer-block Simulink network.
-Exercise 10 creates a persistent `.mldatx` test, maps a held-out sensor trace, runs a custom RMSE criterion, and updates the linked requirement verification status.
+## Follow the requirement-to-test chain
 
-The link records **what a test is intended to verify**. Verification status
-requires executed criteria and result propagation; a smoke simulation or link
-alone does not verify accuracy.
+1. Define a measurable requirement in a `.slreqx` requirement set.
+2. Link the implementation model or MATLAB function with an **Implement** link.
+3. Create a persistent `.mldatx` test case and link it to the requirement with **Verify**.
+4. Map a held-out sensor trace to the model inputs.
+5. Run meaningful criteria and inspect both the test result and native requirement status.
 
-## Taught Test Manager activity
+The SOC example uses RMSE **at most 0.03** on independent acquisitions: three percentage points of SOC fraction, not 3% relative error. Its custom criterion also checks sample count, timestamps and finite predictions before scoring accuracy.
 
-1. Open the model with `open_system(ensureSOCModel)`.
-2. Open Test Manager with `sltest.testmanager.view`.
-3. Inspect the test file created in exercise 10.
-4. Import the sensor trace using `addInput(testCase,inputFile)` after saving a
-   supported Dataset input MAT file. Inspect the input mapping and dimensions.
-5. Add meaningful criteria through `getCustomCriteria(testCase)` or the UI:
-   compare output SOC against the retained reference with RMSE <= 0.03.
-6. Run the test and inspect the result; introduce a deliberately inaccurate
-   model or wrong sensor units to observe a failed requirement.
-7. Inspect the verification link and resulting requirement status in Requirements
-   Editor. Keep the result artifact, input mapping and threshold in your evidence.
+Use [Requirements Editor](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) to inspect the requirement and links. Open [Test Manager](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.view.html) to inspect the same persistent test created by the exercise.
 
-The included MATLAB unit suite independently executes nominal, range,
-temperature-compensation and held-out neural-accuracy checks. Those are
-meaningful host checks; they do not replace a system test against the plant.
+## Input mapping and custom criteria
 
-## Test levels
+Save the sensor inputs as a supported `Simulink.SimulationData.Dataset` MAT file. Add it with `addInput`, map by the appropriate model-port rule, enable the input, and inspect mapping status before running.
 
-| Level | Execution | Evidence needed |
-| --- | --- | --- |
-| MIL | Simulated model | Scenario, reference, solver/sample time, error metrics |
-| SIL | Generated code on host | Same scenarios and equivalence tolerance, compiler |
-| PIL | Target processor | Actual transfer/execution, numerical results, timing |
-| HIL | Real-time plant simulation and hardware I/O | Closed-loop behavior, IO calibration, deadline/fault evidence |
+`getCustomCriteria(testCase)` provides the post-simulation criterion. Its callback uses the actual simulation output through `test.sltest_simout` and MATLAB test qualifications. For example, `test.verifyLessThanOrEqual(rmse,0.03)` produces an assessed criterion; displaying RMSE alone does not.
 
-Exercise 11 generates a host MEX and compares numerics for the analytic baseline.
-It is generated-code host equivalence, not a Simulink SIL mode run. Physical
-PIL/HIL require the instructor's configured hardware and are optional runbooks.
+If you rewrite an input MAT file, refresh the case's corresponding TestInput, remap it and save the test before execution. Retain unrelated inputs and tests.
 
-## What requirements need
+## Native requirement status in R2026b
 
-- Accuracy: threshold, metric, independent dataset, operating domain.
-- Latency: deadline, hardware, workload, measurement method.
-- Memory: target budget and measured artifact/runtime footprint.
-- Robustness: uncertainty set, failure policy, tests or formal property.
-- Traceability: links among requirement, dataset/model, implementation and test.
+Put the model, requirement and test artifacts in the opened MATLAB Project. Enable digital-thread output tracking **before** producing results, update artifact information, run the tagged test, and export its real result to the final Project location.
 
-Avoid assigning a safety verdict from average accuracy. The network's formal
-output bounds and the plant's closed-loop stability are different properties.
+The following continuation uses the variables prepared by the system-testing exercise:
 
-## Executed exercise path
-The supplied exercise authors and executes these Test Manager steps automatically. Its custom criterion checks sample count, timestamps, finite predictions and held-out RMSE at most 0.03. The UI activity lets students inspect that same artifact and deliberately change the threshold or sensor units. Current execution results are recorded in VALIDATION.md; the legacy MIL/SIL screenshots remain historical UI guidance.
+```matlab
+trackingSettings = digitalthread.settings();
+trackingSettings.ToolOutputTracking = true;
+metricEngine = metric.Engine();
+updateArtifacts(metricEngine);
+results = sltest.testmanager.run(Tags=verificationTag);
+sltest.testmanager.exportResults(results,resultFile);
+updateArtifacts(metricEngine);
+updateVerificationStatus(requirementSet);
+nativeStatus = getVerificationStatus(accuracyRequirement(1),'self');
+assert(nativeStatus.passed==1 && nativeStatus.failed==0 && ...
+    nativeStatus.unexecuted==0);
+```
 
-## R2026b native status tracking
-In the rehearsal, Test Manager's custom RMSE test passed, but Requirements Toolbox's native verification cache remained unexecuted. The exercise records actual test outcome separately in requirementVerificationEvidence.json. Do not call an unexecuted native status passed. For exported-result discovery, use Project Digital Thread Settings > Track tool outputs before exporting results, allow artifact tracing to complete, then refresh verification status. Export/import alone does not preserve the original testcase connection. The passed test and native cache state are distinct evidence.
+Complete input mapping and save test/link edits before this sequence. Saving a changed test after execution can make its result stale. Exporting and re-importing a result file alone does not preserve its original test-case connection.
 
-## Resolved native Requirements Toolbox status
-Exercise10 now registers its generatedmodel/requirements/testfolders with the MATLABProject, refreshes the ownedTestInput when its MATfileisrewritten, asserts successfulmapping, enables digitalthread.settings.ToolOutputTracking before execution, updates artifacts before/after the taggedglobalTestManagerrun, and exports the real result to its finalprojectlocation. It then calls updateVerificationStatus and asserts nativeSOC001 passedwithzero failed/unexecuted. The livepass→intentionalfail→restoredpass transitionwasverified; nojustification/manualstatussetterused. SOC002 hasno verificationlinkandremains none, whichis distinctfrom unexecuted.
+| Native status | Meaning |
+|---|---|
+| Passed | All linked verification items passed |
+| Failed | At least one linked verification item failed |
+| Unexecuted | A linked item has no current valid execution result |
+| None | The requirement has no Verify link |
+
+Change the error threshold or sensor units in your own exercise copy, run again, and observe a Failed status. Restore the intended criterion and rerun to obtain Passed. A requirement with no verification link remains None; it is not Unexecuted.
+
+## Understand the test levels
+
+| Level | Execution | Evidence to inspect |
+|---|---|---|
+| MIL | Simulated model | Scenario, reference, solver/sample time and errors |
+| SIL | Generated code on the host | Same inputs, compiler and equivalence tolerance |
+| PIL | Generated code on a target processor | Target execution, numerical agreement and timing |
+| HIL | Real-time plant simulation with hardware I/O | Closed-loop behaviour, I/O calibration and timing/fault tests |
+
+A host MEX comparison checks generated-code numerics but is not automatically a SIL simulation. The SIL and PIL exercises execute their corresponding generated interfaces. Enable a target section only with a compatible board, OS and toolchain. HIL requires a separate real-time plant and I/O setup; a processor gateway does not provide it.
+
+Average accuracy, a network output bound, and closed-loop stability are different properties. Requirements should state the relevant metric, operating domain, hardware and measurement method.
+
+## APIs and documentation
+
+- [Requirements verification](https://www.mathworks.com/help/slrequirements/verify-requirements.html)
+- [Test Manager](https://www.mathworks.com/help/sltest/)
+- [Custom criteria](https://www.mathworks.com/help/sltest/ug/process-test-results-with-custom-scripts.html)
+- [Input mapping](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testinput.map.html)
+- [Digital-thread settings](https://www.mathworks.com/help/slcheck/ref/digitalthread.settings.html)
+- [Artifact updates](https://www.mathworks.com/help/slcheck/ref/metric.engine.updateartifacts.html)
+- [Native verification-status query](https://www.mathworks.com/help/slrequirements/ref/slreq.requirement.getverificationstatus.html)
+- [SIL and PIL](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html)

@@ -1,7 +1,7 @@
 %[text] # 24 ? Adversarial search and formal robustness from the existing workshop
 %[text] **Goal:** Train a small digit CNN, search for bounded counterexamples, then ask a formal verifier whether one prediction holds throughout its input box.
 %[text] **Prerequisites:** Open the training Project in MATLAB R2026b. Deep Learning Toolbox and AI Verification Library for Deep Learning Toolbox. Uses shipped digit data; CPU only. Estimated time: 25 minutes.
-%[text] **Source:** Adapted from MathWorks AI Verification Workshop Part1, with modern trainnet, bounded attempts, explicit proof/search distinctions and safe handling when no example is found. The unchanged upstream material remains in initial_material; its retained BSD license is assets/verification/LICENSE.txt.
+%[text] **Notice:** Relevant third-party terms are retained in [the MathWorks verification license](../licenses/MathWorks-ai-verification.txt).
 %[text] **Your task:** Compare perturbation sizes 0.05 and 0.1. Record whether search found an example and whether the formal result is verified, unproven or violated. Never describe unsuccessful search as a proof of robustness.
 %[text] **Hint 1:** Train a quick classifier first and attack only test inputs it classifies correctly. Small pixel changes are a numerical constraint; do not promise that every changed image is imperceptible.
 %[text] **Hint 2:** FGSM takes one gradient step; BIM repeats bounded steps. Limit both the attempt count and BIM iterations. The solution uses a second bounded attempt, not an unbounded search-until-success loop.
@@ -128,7 +128,7 @@ save(fullfile(outputFolder,"digitVerification.mat"),"net","searchEvidence", ...
     "proofEvidence","overallVerdict","testAccuracy","selectedIndices");
 %%
 %[text] ## Troubleshooting and next activity
-%[text] If no counterexample is found, record noneFound and compare a second bounded attempt or a larger declared uncertainty budget. If no validated counterexample exists and formal verification is unproven, narrow the box or try the separately taught stronger bound solver. Do not silently change the network or data to manufacture a passed proof. The upstream ACAS local/global material is an optional follow-up that needs separately prepared networks.
+%[text] If no counterexample is found, record noneFound and compare a second bounded attempt or a larger declared uncertainty budget. If no validated counterexample exists and formal verification is unproven, narrow the box or try the separately taught stronger bound solver. Do not silently change the network or data to manufacture a passed proof. Broader operating-domain verification requires additional networks and domain-specific properties.
 %[text] ## Documentation and further reading
 %[text] [Main AI verification documentation](https://www.mathworks.com/help/deeplearning/verification.html), [original MathWorks workshop](https://github.com/mathworks/ai-verification-workshop), and [formal robustness reference](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html).
 %[text] ## Cheat sheet: APIs to remember

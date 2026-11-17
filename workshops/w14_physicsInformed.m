@@ -31,7 +31,7 @@ xlabel("Time (s)"); ylabel("Temperature (deg C)"); legend("Sparse observations",
 %%
 %[text] ## Step 4: Extend the same idea to PINNs and neural PDE solvers
 %[text] This worked path is a physics-constrained parameter fit, **not a trained PINN**. For a PINN, replace the analytic trajectory with a `dlnetwork` taking time as input, use `dlfeval` and `dlgradient` to calculate its time derivative, and minimize data error, ODE residual and initial-condition error together. A neural PDE solver also requires spatial derivatives, boundary conditions and mesh/domain sampling.
-%[text] **Optional exercise:** Write a PINN loss specification before training: identify the network input/output, collocation times, measured-data term, initial-condition term and ODE residual. Explain how a low training loss can still hide errors outside the sampled time range. Follow the instructor's original PINN/PDE examples for the full training implementation.
+%[text] **Optional exercise:** Write a PINN loss specification before training: identify the network input/output, collocation times, measured-data term, initial-condition term and ODE residual. Explain how a low training loss can still hide errors outside the sampled time range. Use the cooling PINN exercise for a complete neural physics-loss training example.
 %%
 %[text] ## Troubleshooting
 %[text] Open the training Project if `currentProject` fails. Noise or a misspecified model may change the inferred coefficient. A finite-difference residual is a numerical check, not proof of the differential equation everywhere. Reduce the time step to separate discretization error from model error.

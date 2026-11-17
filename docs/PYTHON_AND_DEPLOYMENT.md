@@ -1,29 +1,35 @@
-# Python interoperability and deployment
+# MATLAB, Python and AI deployment
 
-## Three routes with different goals
+Open `openExercise("w06_pythonImport")` and run one section at a time.
+Use `pyenv` to inspect the Python interpreter. A supported interpreter and the
+packages required by the selected path must be available before enabling it.
 
-| Goal | API route | Result and layout |
+## Choose the route by your goal
+
+| Goal | APIs | Result |
 | --- | --- | --- |
-| Execute a PyTorch model in Python from MATLAB | `pyTorchModel`, `forward` | Python wrapper; configure dimension transfer |
-| Edit, train, compress or export layers in MATLAB | `importNetworkFromPyTorch` | Editable `dlnetwork`; validate conversion and input formats |
-| Generate C/C++/CUDA directly from exported PyTorch | `loadPyTorchExportedProgram`, `invoke` | ExportedProgram; preserve PyTorch layout |
+| Execute a PyTorch model in Python from MATLAB | `pyTorchModel`, `forward` | Python-backed model with explicit dimension transfer |
+| Edit, train or compress the network in MATLAB | `importNetworkFromPyTorch` | Editable `dlnetwork` |
+| Generate C/C++/CUDA from an exported model | `loadPyTorchExportedProgram`, `invoke` | Exported-program inference and code generation |
 
-`pyTorchModel` is an R2026b addition. Direct exported-program loading/code
-generation is available since R2026a; it is not newly introduced in R2026b.
+These object types and input layouts differ. Verify numerical agreement before
+switching routes. For direct image inference preserve PyTorch's **NCHW** layout;
+do not pass MATLAB HWC data without the documented permutation.
 
-## Execute the provided small example
+## Start with one sensor observation
 
-Exercise 6 first transfers a scalar sensor observation with `pyrun` and checks
-SOC = 0.5. Python must be configured; the script neither changes the interpreter
-nor installs packages. Inspect `pyenv`; configure through the official workflow
-if needed. Do not terminate an existing Python session without understanding
-which user state would be lost.
+Exercise 6 transfers voltage, current and temperature through `pyrun`.
+The supplied example uses **3.55 V, 1 A, 25 C** and expects **SOC = 0.5**.
+This checks data exchange; it is not hardware deployment.
 
-When PyTorch is available, enable `runPyTorch` in exercise 6. The provided
-`python/export_soc.py` exports a 1-by-3 input affine SOC model to `.pt2`.
-It uses the known synthetic voltage law; it does not claim to train a network.
+When PyTorch is available, enable the export/import section. The included
+`python/export_soc.py` produces a `.pt2` affine sensor model with one 1-by-3
+input. Its values implement the teaching voltage relation rather than a trained
+battery model.
 
-For direct deployment, with the training Project open:
+## Verify direct inference and generated code
+
+After creating `generated/batterySOC.pt2`, use the same input on both paths:
 
 ```matlab
 project = requireTrainingProject;
@@ -32,32 +38,48 @@ input = single([3.55,1,25]);
 model = loadPyTorchExportedProgram(modelFile);
 output = invoke(model,input);
 assert(abs(double(output)-0.5)<1e-5);
-cfg = coder.config('mex');
-codegen('-config',cfg,'invokeSOCModel', ...
+configuration = coder.config('mex');
+codegen('-config',configuration,'invokeSOCModel', ...
     '-args',{coder.Constant(modelFile),input}, ...
     '-d',fullfile(project.RootFolder,'generated','codegen'));
 generated = invokeSOCModel_mex(modelFile,input);
 assert(max(abs(double(generated)-double(output)),[],'all')<1e-5);
 ```
 
-Requires MATLAB Coder, the PyTorch/LiteRT model support package, a supported
-compiler and the actual `.pt2` artifact. For images, the direct route retains
-NCHW; do not silently feed MATLAB HWC data. `coder.Constant` fixes the model
-path at compile time. Verify host MEX before making a production library.
+Requires MATLAB Coder, the PyTorch/LiteRT model support package and a supported
+compiler. `coder.Constant` fixes the model path during compilation. A successful
+host MEX establishes generated-code agreement for these inputs; PIL executes on
+an actual processor and needs its supported target configuration.
 
-## Hardware preflight
+## Choose deployment tools
 
-| Target | Required decisions and measurements |
+| Target/use | Main considerations |
 | --- | --- |
-| NVIDIA Jetson Thor | Exact OS/JetPack, CUDA/compiler/support compatibility, model operators, runtime assets, measured accuracy and latency |
-| STM32F7 with LCD | Exact MCU/board, memory budget, operator support, cross compiler, sensor/LCD interfaces, PIL and timing measurements |
-| Qualcomm board | Exact board/model/OS/architecture/toolchain first; use vendor-supported route after compatibility is established |
+| Raspberry Pi | Supported OS/architecture, connection, input scaling and actual PIL comparison |
+| NVIDIA Jetson Thor | Compatible CUDA/cuDNN/toolchain, operator support and runtime assets |
+| STM32F7 | Exact MCU, RAM/flash budget, supported operators and sensor/display interfaces |
+| Qualcomm | Exact board/OS/architecture and supported vendor toolchain |
 
-MATLAB Coder targets C/C++; GPU Coder targets CUDA; Embedded Coder supplies
-embedded interfaces and optimization; Simulink Coder/Embedded Coder target
-models; HDL Coder/Deep Learning HDL Toolbox address FPGA/ASIC workflows.
-The algorithm, hardware and interface determine the route.
+MATLAB Coder generates C/C++; GPU Coder generates CUDA; Embedded Coder supports
+embedded interfaces and optimization. Simulink Coder/Embedded Coder generate
+model code. HDL Coder/Deep Learning HDL Toolbox address FPGA/ASIC workflows.
+Select the tool from the algorithm, hardware and interface requirements.
 
-The supplied baseline MEX is host evidence. A successful build or prediction
-does not prove physical deployment, real-time deadlines, PIL or HIL. Keep a
-hardware run log with transfer, on-target execution, accuracy, timing and memory.
+## Troubleshooting
+
+- **Python unavailable:** configure a supported interpreter using `pyenv`.
+- **Package/import unavailable:** check the required package or converter before
+  running that optional section.
+- **Wrong inference value:** compare identical inputs, data types and dimensions.
+- **Compiler error:** check the selected compiler and support-package requirements.
+- **Target absent:** retain host results and an unavailable target outcome.
+
+## Official references
+
+- [pyenv](https://www.mathworks.com/help/matlab/ref/pyenv.html)
+- [pyrun](https://www.mathworks.com/help/matlab/ref/pyrun.html)
+- [PyTorch import](https://www.mathworks.com/help/deeplearning/ref/importnetworkfrompytorch.html)
+- [loadPyTorchExportedProgram](https://www.mathworks.com/help/coder/ref/loadpytorchexportedprogram.html)
+- [coder.Constant](https://www.mathworks.com/help/coder/ref/coder.constant-class.html)
+- [codegen](https://www.mathworks.com/help/coder/ref/codegen.html)
+- [SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html)

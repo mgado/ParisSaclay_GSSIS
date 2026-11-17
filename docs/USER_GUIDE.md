@@ -1,8 +1,8 @@
-# Student user guide
+# Using the workshops
 
-## Quick Start
+## Quick start
 
-Open `ParisSaclay_GSSIS.prj`, then run:
+Open `ParisSaclay_GSSIS.prj` in MATLAB R2026b, then run:
 
 ```matlab
 setup_check
@@ -10,77 +10,98 @@ demoAgenda
 openExercise(1)
 ```
 
-Use the Live Editor's **Run Section** to work through a lesson. Its starter has
-working values; perform the named experiment before opening the solution with
-`openExercise(1,true)`. Exercises initialize their own data and can run independently
-after the Project is open. They do not rely on a previous exercise's workspace.
+Use **Run Section** to follow the visible steps. Predict the effect of the
+requested parameter change, run it, and record your observation before opening
+`openExercise(1,true)` for the worked solution.
 
-Use `runExercise(3,true)` for an isolated solution rehearsal. Its returned status
-distinguishes an execution failure from success; its declared mode still identifies
-optional agent/app/hardware walkthroughs. Executing a capability-check section
-does not mean the optional target action ran.
+## Choose an exercise
 
-## Navigation and lesson roles
+The catalog contains 25 pairs with stable numbers and IDs: 1-21 and 23-26.
+Select by number or exact ID:
 
-The catalog has stable numbers and IDs. It records the source, solution, day,
-products, mode and estimated classroom time. Unknown IDs raise an error instead
-of silently selecting a different exercise.
+```matlab
+openExercise(3)
+openExercise("w19_predictiveFieldROM")
+openExercise(19,true)
+```
 
-- `workshops/`: student experiments with runnable starting values and hints.
-- `solutions/`: matching worked reasoning and complete comparison paths.
-- `src/`: small reusable functions, each explained where used.
-- `tests/`: meaningful unit verification, separate from demonstrations.
-- `assets/screenshots/`: original UI screenshot guidance with provenance.
-- `docs/`: agenda, deployment, test, ROM, agentic and recovery guides.
+`workshops/` contains tasks and hints; `solutions/` contains worked comparisons.
+`src/` contains the reusable functions explained in the lessons. `tests/`
+contains automated checks. `docs/` provides topic help and further reading.
 
-## The coherent story
+Each exercise initializes its required inputs. With the project open, it does
+not depend on variables left by a previous exercise. When an exercise asks you
+to modify code or a model, use your own copy and keep the supplied solution for
+comparison.
 
-Begin with battery SOC requirements and data, then train a virtual sensor,
-evaluate/verify/compress it, export it into Simulink and compare generated code.
-Thermal exercises introduce ROMs and physics-informed neural learning using
-the same engineered-system mindset: define outputs and domains, keep independent
-test cases, and retain evidence.
+## Follow the engineering story
 
-## Running checks
+Start with an SOC estimator's requirements and sensor-input contract. Prepare
+independent data groups, compare ML/DL candidates, evaluate compression and
+verification, integrate the network in Simulink, then compare implementation
+results. The thermal exercises ask which dynamics or spatial quantities a
+smaller model must retain.
 
-`buildtool` runs runtime Code Analyzer checks and the actual unit tests.
-The checked functions include sensor bounds/units and held-out neural accuracy.
-Exercise execution, Live Editor rendering, formal output bounds, code generation,
-Python import and app activities have separate evidence in `VALIDATION.md`.
+The agentic activities connect an agent to engineering tools, use builtin and
+custom skills, and require actual checks of proposed changes. A convincing
+explanation alone does not establish that the change works.
 
-Run MATLAB from the Project root for `buildtool`; resource paths inside lessons
-come from `project.RootFolder`, so the lesson logic is independent of Current Folder.
+## Run checks
 
-## Configuration
+From the project root, run:
 
-- Target teaching release: R2026b. Native plain-text Live Scripts require R2025a+;
-  only R2026b is validated for this delivery.
-- Dataset seeds and model widths are visible in each exercise.
-- Optional Python/PyTorch, quantization and desktop launches are opt-in flags.
-- Runtime outputs go under `generated/`; original source data/slides stay separate.
-- Hardware steps require the identified board, supported toolchain and actual
-  target connection. No hardware deployment runs automatically.
+```matlab
+buildtool
+```
+
+This performs Code Analyzer checks and automated tests. You can run the unit
+suite directly with:
+
+```matlab
+results = runtests("tests");
+assertSuccess(results);
+```
+
+For an isolated worked execution, `runExercise(3,true)` runs the selected
+solution and returns its status. Read the declared mode: completing an app
+availability check or host prediction does not mean a connected-agent, app
+training or physical-target activity was executed.
+
+## Prerequisites and outputs
+
+- Use MATLAB and Simulink R2026b and the products listed in the exercise.
+- Inspect visible seeds, widths, thresholds and operating bounds before changing them.
+- Python/PyTorch, quantization and desktop app activities need their corresponding dependencies.
+- Hardware activities need the named board, supported OS/toolchain, a working connection and the required support package.
+- Generated models, data, reports and implementation outputs are placed in `generated/` as indicated by each lesson.
+
+For hardware, check the [PIL hardware guide](PIL_HARDWARE_GUIDE.md) first. A host
+MEX, SIL execution and processor-in-the-loop run are different checks. Preserve
+numerical equivalence, target timing and configuration information separately.
+
+## Interpret results carefully
+
+A low held-out error concerns the specified data and operating conditions.
+Formal output bounds concern the chosen network and bounded input region.
+Neither alone certifies the whole battery system.
+
+The short sensor/thermal datasets are synthetic. Selected target exercises use
+provided measured battery signals. Field reconstruction of an already known
+snapshot is different from predicting an unseen field from input parameters.
+A one-dimensional cooling PINN is not a trained spatial PDE solver.
 
 ## Troubleshooting
 
-- **Unknown function/project:** open the supplied `.prj`; do not patch paths.
-- **Missing product/library:** record unavailable and follow the independent core
-  route or documented walkthrough.
-- **Simulink data mismatch:** match the exported port's type, dimensions and
-  sampling with the input Dataset; the supplied example uses double sensor data.
-- **Training metric changed:** verify seed, split and architecture before tuning.
-- **Python failed:** inspect `pyenv` and module availability; do not reset another
-  person's Python session without permission.
-- **UI differs from screenshot:** the supplied UI images are from the original
-  training deck. Read the screenshot provenance and current app documentation.
+| Problem | What to check |
+|---|---|
+| Function or project not found | Open the supplied `.prj` and verify that its project path is active |
+| Missing toolbox/library | Read the exercise prerequisites and use a topic that your installation supports |
+| Unexpected training result | Check seed, data partitions, architecture, units and normalization before tuning |
+| Simulink input mismatch | Match port data type, dimensions and sample times to the supplied input Dataset |
+| Python error | Inspect `pyenv`, compatible Python version and module availability |
+| Screenshot differs from your app | Follow the current app help and menu labels; screenshots illustrate the relevant UI activity |
+| Hardware unavailable | Check power, networking, authentication, supported OS and target setup; do not report the target test as passed |
 
-## Teaching limits
-
-Synthetic measurements and fields make the workflow short and reproducible.
-They establish no battery chemistry validity, industrial accuracy, hardware
-latency or safety certificate. The original public hands-on references provide
-the longer domain-specific extensions. PIL/HIL and the external full-field ROM
-app remain target/add-on dependent; their unexecuted status is explicit.
-
-## Build a local archive
-With the Project root selected, run buildtool package. It depends on the actual check/test tasks, creates a clean archive under generated/packages, extracts it for structural inspection, and writes a file manifest. It excludes Git history and agent/development folders. No remote publication occurs.
+Useful help: [MATLAB Projects](https://www.mathworks.com/help/matlab/projects.html),
+[Live Scripts](https://www.mathworks.com/help/matlab/live-scripts-and-functions.html),
+and the API links at the end of each exercise.

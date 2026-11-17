@@ -1,7 +1,7 @@
 %[text] # 21 — MATLAB command-line AI deployment and PIL
 %[text] **Goal:** Use MATLAB APIs to generate and execute the supplied projected battery AI on a Raspberry Pi, then compare real target results with MATLAB. This is the command-line counterpart of the Simulink Model-reference PIL lesson.
 %[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj; MATLAB Coder, Embedded Coder, Deep Learning Toolbox, the model-compression library, Fixed-Point Designer, Raspberry Pi Blockset and a configured supported Pi. All target operations are opt-in. The real measured data and pretrained network are included locally.
-%[text] **Launch:** openExercise(21), then Run Section. First inspect the input/network and host prediction. Enable PIL only after the instructor verifies the board connection, target architecture/toolchain and private credentials.
+%[text] **Launch:** openExercise(21), then Run Section. First inspect the input/network and host prediction. Enable PIL only after checking the board connection, target architecture, toolchain and credentials.
 %[text] **Documentation:** [MATLAB hardware configuration](https://www.mathworks.com/help/coder/ref/coder.hardware.html), [code-generation configuration](https://www.mathworks.com/help/coder/ref/coder.config.html), [main SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html).
 %[text] **Your task:** Compare the same normalized measured trace in MATLAB and the generated PIL gateway. Then change the trace offset and repeat without changing the algorithm. Explain which steps the support package performs for you and which evidence establishes actual processor execution.
 project = requireTrainingProject;
@@ -11,10 +11,10 @@ piAddress = ''; % Enter this board's current IPv4 address before enabling PIL.
 sampleCount = 32;
 traceOffset = 1;
 equivalenceTolerance = 1e-4;
-demoOutcome = struct('Status','unavailable','Summary','MATLAB AI PIL has not executed; board and code-generation path require rehearsal.','Evidence',struct('PILExecuted',false));
+demoOutcome = struct('Status','unavailable','Summary','MATLAB AI PIL has not executed; board configuration is required.','Evidence',struct('PILExecuted',false));
 %%
 %[text] ## Step 1: Inspect the same real AI artifact and input contract
-%[text] The Expo MATLAB entry point uses time-by-feature input arrays. Here the features are scaled Temperature, Voltage and Current, in that order. Scaling belongs to the deployed input contract; do not substitute raw sensor values. This is a neural model path, not the analytic socEstimate baseline.
+%[text] The neural entry point accepts time-by-feature input arrays. Here the features are scaled Temperature, Voltage and Current, in that order. Scaling belongs to the deployed input contract; do not substitute raw sensor values. This is a neural model path, not the analytic socEstimate baseline.
 dataFolder = fullfile(project.RootFolder,'assets','pil_pi_soc','data');
 networkFile = char(fullfile(dataFolder,'projected_net.mat'));
 data = load(fullfile(dataFolder,'test_data_scaled.mat'),'XTest_scaled','YTest_scaled');
@@ -24,7 +24,7 @@ input = single(data.XTest_scaled(rows,:));
 inputSize = size(input)
 %%
 %[text] ## Step 2: Establish the MATLAB neural reference
-%[text] Enable runHostAI after the instructor checks the current network's inference/codegen support. The helper is short and code-generation-ready: it loads the network with coder.loadDeepLearningNetwork and calls predict. Open its source to see both APIs. Record output shape and finite values before comparing a target.
+%[text] Use runHostAI to establish the MATLAB reference before target execution. The helper is short and code-generation-ready: it loads the network with coder.loadDeepLearningNetwork and calls predict. Open its source to see both APIs. Record output shape and finite values before comparing a target.
 if runHostAI || runPIL
     hostOutput = predictPiSOC(networkFile,input);
     hostValues = reshape(double(hostOutput),[],1);
@@ -33,7 +33,7 @@ if runHostAI || runPIL
 end
 %%
 %[text] ## Step 3: Reuse the configured Pi connection securely
-%[text] The instructor verifies the supported OS and target toolchain. This direct SSH PIL path uses coder.hardware credentials; it does not construct the separate raspi I/O-server object. Store the private Pi login once using the interactive commands setSecret("TrainingPiUserName") and setSecret("TrainingPiPassword") at your own MATLAB prompt. Never put credential values in shared files or display/save the hardware configuration object.
+%[text] Verify the supported OS and target toolchain. This direct SSH PIL path uses coder.hardware credentials; it does not construct the separate raspi I/O-server object. Store the private Pi login once using the interactive commands setSecret("TrainingPiUserName") and setSecret("TrainingPiPassword") at your own MATLAB prompt. Never put credential values in shared files or display/save the hardware configuration object.
 if runPIL
     assert(~isempty(piAddress),'Enter the current Pi IPv4 address in piAddress.');
     assert(isSecret('TrainingPiUserName') && isSecret('TrainingPiPassword'),'Store the private Pi credentials before enabling PIL.');
@@ -74,7 +74,7 @@ end
 demoOutcome
 %%
 %[text] ## Troubleshooting and engineering conclusion
-%[text] If no board is configured, keep the outcome unavailable. A host neural prediction cannot count as PIL. If inference or code generation fails for this compressed network, retain the exact message and use the instructor's verified compatible network path; do not silently substitute the analytic baseline and call it AI deployment. The Simulink exercise independently tests the model-reference route. End-to-end gateway timing includes communication; use profiling for target compute latency.
+%[text] If no board is configured, keep the outcome unavailable. A host neural prediction cannot count as PIL. If inference or code generation fails for this compressed network, retain the exact message and use a compatible network with the same input contract; do not silently substitute the analytic baseline and call it AI deployment. The Simulink exercise independently tests the model-reference route. End-to-end gateway timing includes communication; use profiling for target compute latency.
 %[text] **Hint:** The first build prepares generated code and target communication. After that, vary inputs before regenerating the algorithm. Keep the same output comparison and scaling contract.
 %%
 %[text] ## Documentation and further reading

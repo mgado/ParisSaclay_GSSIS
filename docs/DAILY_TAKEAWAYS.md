@@ -1,51 +1,42 @@
 # Daily takeaways
 
-## Day 1 closing slide
+## Day 1 - Make the problem testable
 
-**Before training an AI model, define its engineering contract**
+- Turn system needs into measurable accuracy, operating-domain and resource requirements.
+- Keep requirements, interfaces and tests connected.
+- Split independent experiments rather than correlated rows.
+- Preserve units, raw data and reproducible cleaning decisions.
+- Use engineering agents for actions you can inspect and check.
 
-- Turn system needs into measurable requirements: accuracy, operating domain, latency and memory.
-- Keep requirements, model interfaces and tests connected.
-- Generate representative scenarios; split by experiment, not correlated rows.
-- Preserve units, raw data and reproducible cleaning steps.
-- Agents can assist the work; executed checks make their output reviewable.
+**Remember:** The dataset and the requirement are part of the AI model.
 
-**Remember:** A good dataset and a testable requirement are part of the model.
+## Day 2 - Choose an acceptable model
 
-## Day 2 closing slide
-
-**Choose and verify an AI model for the system it must serve**
-
-- Start with a transparent baseline; add complexity only when it earns its cost.
-- Train or import models using a clear, reproducible workflow.
-- Use validation to choose the model; reserve the final test for evaluation.
+- Start with a baseline you can explain.
+- Train or import through a clear, reproducible workflow.
+- Use validation to select settings and final test data to evaluate them.
 - Compress, then recheck accuracy, units and operating limits.
-- Tests, adversarial search and formal bounds answer different questions.
+- Distinguish evaluated cases, adversarial counterexamples and formal bounds.
 
-**Remember:** The smallest acceptable model is a system-design choice.
+**Remember:** Smaller is useful only when the relevant requirements still hold.
 
-## Day 3 closing slide
+## Day 3 - Compare implementations and modeling methods
 
-**An AI component becomes useful when the whole system can be tested**
+- Integrate in Simulink and run requirement-driven tests.
+- Keep model, generated-host-code, SIL and target-PIL comparisons distinct.
+- Separate numerical accuracy, timing, memory and target configuration.
+- Choose a ROM from the output required and the physics/data available.
+- Check a PINN or predictive field model on independent conditions.
+- Ask an agent for a focused engineering change and verify its result.
 
-- Integrate the estimator in Simulink and replay requirement-driven scenarios.
-- Use PIL to run the same algorithm on the processor while MATLAB/Simulink supplies inputs and compares outputs.
-- Keep accuracy, execution time and memory evidence separate.
-- Choose a ROM from the required output and the available physics or data.
-- Use physics and agentic tools to improve the workflow, then verify the change.
+**Remember:** A model result, a host result and a hardware result establish different evidence.
 
-**Remember:** A model result, a host test and a hardware result are different evidence.
+## Take the workflow into your research
 
-## Common final slide — What you can now do
+1. Choose a concrete task and define one measurable requirement.
+2. Prepare independent data and a baseline you can explain.
+3. Train or import, evaluate and improve against that requirement.
+4. Integrate or implement the candidate and run a meaningful check.
+5. Record the operating conditions, result and remaining limitation.
 
-**Take this workflow back to your research**
-
-- Give an AI component a measurable engineering contract.
-- Prepare independent data and build a baseline you can explain.
-- Train or import, compress, and evaluate against that contract.
-- Integrate in Simulink, link tests, and compare generated code.
-- Build a small ROM or PINN and assess it on independent conditions.
-- Ask an engineering agent for a concrete change—and verify the result.
-
-**Your next step:** Choose one research task, one requirement and one check you can run.
-
+**Your next step:** Select one research task, one requirement and one check you can run.

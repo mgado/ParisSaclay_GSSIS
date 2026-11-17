@@ -43,20 +43,20 @@ accuracyEvidence = metrics.rmse
 assert(accuracyEvidence <= 0.03);
 %%
 %[text] ## UI screenshot guide
-%[text] Screenshots below are from the instructor's original 2025 materials. They explain the interface and links; they are not current R2026b execution results. Use the exercise's own generated artifacts for current evidence.
+%[text] The images illustrate the interface and links. Values shown are examples; use your generated artifacts to assess this exercise.
 %%
 %[text] ## Requirements Editor: measurable requirement and verification links
-%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
-image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_editor_legacy.png')));
+%[text] Example interface view. Menu names and displayed values can differ from your session.
+image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_editor.png')));
 axis image off;
 %%
 %[text] ## Follow a verification link into Test Manager
-%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
-image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_test_link_legacy.png')));
+%[text] Example interface view. Menu names and displayed values can differ from your session.
+image(imread(fullfile(project.RootFolder,'assets','screenshots','requirements_test_link.png')));
 axis image off;
 %%
 %[text] ## Troubleshooting and next step
-%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require the instructor's target-specific configuration. Reopen the project if file or function resolution fails.
+%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require a configured compatible target. Reopen the project if file or function resolution fails.
 %%
 %[text] ## Documentation and further reading
 %[text] [Main documentation for this area](https://www.mathworks.com/help/slrequirements/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.

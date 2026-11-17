@@ -40,20 +40,20 @@ disp("App activity: import data, split groups, fit, assess, export, and compare 
 disp("Keep app version, input dataset, exported artifact and measured result with your exercise notes.");
 %%
 %[text] ## UI screenshot guide
-%[text] The following app screenshots come from official MathWorks documentation; their exact URLs and attribution are in assets/screenshots/PROVENANCE.md. They illustrate the interface, not a local run on the workshop dataset. Metrics shown belong to the documentation examples.
+%[text] These application images illustrate the interface. Metrics shown are documentation examples; assess your model using your own held-out data. Image credits are listed in licenses/IMAGE_CREDITS.md.
 %%
 %[text] ## Time Series Modeler: official documentation interface
-%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
+%[text] Example interface view. Menu names and displayed values can differ from your session.
 image(imread(fullfile(project.RootFolder,'assets','screenshots','timeseries_modeler_official.png')));
 axis image off;
 %%
 %[text] ## Visual Anomaly Detector: official documentation interface
-%[text] Static screenshot displayed inline for this teaching document; consult the provenance note above.
+%[text] Example interface view. Menu names and displayed values can differ from your session.
 image(imread(fullfile(project.RootFolder,'assets','screenshots','visual_anomaly_detector_official.png')));
 axis image off;
 %%
 %[text] ## Troubleshooting and next step
-%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require the instructor's target-specific configuration. Reopen the project if file or function resolution fails.
+%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require a configured compatible target. Reopen the project if file or function resolution fails.
 %%
 %[text] ## Documentation and further reading
 %[text] [Main documentation for this area](https://www.mathworks.com/help/visual-inspection/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.

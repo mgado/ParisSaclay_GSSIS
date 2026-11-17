@@ -54,7 +54,7 @@ if runQuantization
 end
 %%
 %[text] ## Troubleshooting and next step
-%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require the instructor's target-specific configuration. Reopen the project if file or function resolution fails.
+%[text] If a prerequisite is missing, keep the numerical baseline and read the optional workflow; record it as unavailable, not passed. Hardware runs require a configured compatible target. Reopen the project if file or function resolution fails.
 %%
 %[text] ## Documentation and further reading
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/compression.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.

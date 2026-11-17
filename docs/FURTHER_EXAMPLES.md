@@ -1,8 +1,8 @@
 # Reference exercises and further practice
 
-These public resources were used in the previous training and remain useful for deeper practice. The short workshops delivered with this project form the basic path. Choose a reference exercise only after checking its release, products, downloads, runtime and hardware requirements.
+Use these public resources for deeper practice. The short workshops delivered with this project form the basic path. Choose a reference exercise only after checking its release, products, downloads, runtime and hardware requirements.
 
-Some original links below are pinned to **R2025a**. They are preserved so previous participants can find the same material. For R2026b work, prefer the matching page in installed MATLAB Help or switch the documentation release selector to R2026b before copying commands.
+Check each example's products, data downloads and target requirements before running it.
 
 ## Prepare before the training
 
@@ -29,8 +29,8 @@ The battery state-of-charge virtual sensor is the main story of this training. T
 | Training | [Train Network for Battery State of Charge Estimation](https://www.mathworks.com/help/deeplearning/ug/train-network-for-battery-state-of-charge-estimation.html) | Extend exercises 4–5 with the reference sequence-estimation model |
 | Compression | [Compress Network for Battery State of Charge Estimation](https://www.mathworks.com/help/deeplearning/ug/compress-network-for-battery-state-of-charge-estimation.html) | Extend exercise 7 and re-evaluate compressed-model accuracy |
 | Robustness | [Test Network for Battery State of Charge Estimation](https://www.mathworks.com/help/deeplearning/ug/test-network-for-battery-state-of-charge-estimation.html) | Extend exercise 8 with reference operating conditions and failure investigation |
-| Integration | [Integrate AI Network into Simulink for Battery State of Charge Estimation — original R2025a link](https://www.mathworks.com/help/releases/R2025a/deeplearning/ug/integrate-ai-network-into-simulink-for-battery-state-of-charge-estimation.html) | Extend exercises 9–10 using the larger system model |
-| Deployment | [Deploy Model for Battery State of Charge Estimation — original R2025a link](https://www.mathworks.com/help/releases/R2025a/deeplearning/ug/deploy-model-for-battery-state-of-charge-estimation.html) | Extend exercise 11 after checking the selected target and build products |
+| Integration | [Integrate AI Network into Simulink for Battery State of Charge Estimation](https://www.mathworks.com/help/deeplearning/ug/integrate-ai-network-into-simulink-for-battery-state-of-charge-estimation.html) | Extend exercises 9–10 using the larger system model |
+| Deployment | [Deploy Model for Battery State of Charge Estimation](https://www.mathworks.com/help/deeplearning/ug/deploy-model-for-battery-state-of-charge-estimation.html) | Extend exercise 11 after checking the selected target and build products |
 
 ## Data preparation and annotation
 
@@ -71,7 +71,7 @@ Maintain the distinction between tested cases, a found adversarial counterexampl
 - [Generate Code for a Quantized Deep Learning Network on Raspberry Pi](https://www.mathworks.com/help/coder/ug/code-generation-for-quantized-deep-learning-network-on-raspberry-pi.html)
 - [Highway Lane Following](https://www.mathworks.com/help/driving/ug/highway-lane-following.html)
 
-These were additional examples shared previously. Raspberry Pi deployment is an alternative target-specific exercise, not evidence that the same configuration works on Jetson Thor, STM32F7 or a Qualcomm board. Highway lane following is a separate perception/control application and should follow completion of the battery workflow.
+These additional examples use different application and target requirements. Raspberry Pi deployment is an alternative target-specific exercise, not evidence that the same configuration works on Jetson Thor, STM32F7 or a Qualcomm board. Highway lane following is a separate perception/control application and should follow completion of the battery workflow.
 
 ## Suggested advanced selection
 
@@ -82,4 +82,4 @@ For a focused continuation, choose **one** of these paths:
 3. **Verification:** adversarial examples → ACAS Xu local robustness → optional global verification.
 4. **Perception data:** Image/Video/Ground Truth Labeler → application-specific model → integration and target constraints.
 
-Preserve the original public links when sharing notes. External repositories and example assets retain their own licenses; verify those terms before redistributing their code or datasets.
+External repositories and example assets retain their own licenses; verify those terms before redistributing their code or datasets.

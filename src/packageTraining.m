@@ -2,14 +2,14 @@ function archive = packageTraining
 %PACKAGETRAINING Create a clean project-owned local training archive.
 %   ARCHIVE = packageTraining packages declared student files and verifies
 %   that the Project, catalog and sources can be extracted. Generated
-%   outputs, Git history and agent/development folders are excluded.
+%   outputs and files outside the declared training folders are excluded.
 project = requireTrainingProject;
 root = char(project.RootFolder);
 rootFiles = ["README.md","ParisSaclay_GSSIS.prj","buildfile.m", ...
     "demoAgenda.m","openExercise.m","runExercise.m","setup_check.m", ...
-    "exerciseCatalog.json",".gitignore",".gitattributes"];
+    "exerciseCatalog.json",".gitignore",".gitattributes","THIRD_PARTY_NOTICES.md"];
 folders = ["src","tests","workshops","solutions","docs", ...
-    "assets","python","resources"];
+    "assets","python","resources","licenses"];
 relativeFiles = rootFiles;
 for folder = ["codegen","requirements","tests","models"]
     seedFolder = fullfile(root,'generated',folder);
@@ -28,6 +28,10 @@ for folder = folders
     listing = dir(fullfile(root,folder,"**","*"));
     for item = listing'
         if item.isdir || endsWith(item.name,[".slmx",".asv",".slxc",".mexw64"])
+            continue
+        end
+        if strcmpi(item.name,'PROVENANCE.md') || ...
+                ismember(string(item.name),["VALIDATION.md","fallback_plan.md"])
             continue
         end
         if contains(lower(item.name),["w22","audiencewordcloud","wordcloud"]) || ...
