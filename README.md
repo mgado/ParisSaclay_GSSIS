@@ -80,3 +80,12 @@ publication is deferred; the intended visibility is private initially.
 ## Two hardware prototype paths
 The catalog also includes Simulink PIL (20) and MATLAB command-line AI deployment/PIL (21), prioritized for Day3. Both use the real Expo SOC assets and preserve actual passed/unavailable/failed hardware evidence. A Raspberry Pi4 plugged only into USB-Cpower has no configured network path by default; connect/configure Ethernet, Wi-Fi or USB gadget networking before live PIL. No hardware run is inferred from host validation.
 
+
+## Private GitHub repository
+
+The student repository is now published privately at
+https://github.com/mgado/ParisSaclay_GSSIS . GitHub access requires permission.
+The local `student_delivery/` repository tracks its `main` branch through `origin`.
+The instructor Project, audience word cloud, development workflow files and
+original private references are excluded. Earlier local-only notes describe
+pre-publication preparation.
