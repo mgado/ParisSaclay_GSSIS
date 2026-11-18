@@ -1,25 +1,20 @@
 function openExercise(selector,solution)
-%OPENEXERCISE Open a workshop or matching solution by ID or number.
-%   openExercise(3) opens exercise 3. openExercise("w03_data",true)
-%   opens its solution. Each exercise can be replayed independently.
+%OPENEXERCISE Open a workshop or solution by number, name or legacy ID.
+%   openExercise(2) and openExercise("02-Requirements") open exercise 2.
+%   openExercise("Requirements",true) opens its worked solution.
+%   Existing IDs such as "w02_requirements" remain supported.
+%   Type openExercise(" and press Tab to browse the available names.
+%   See also demoAgenda, resolveExerciseSelector.
 arguments
     selector
     solution (1,1) logical = false
 end
 project = requireTrainingProject;
-catalog = jsondecode(fileread(fullfile(project.RootFolder,'exerciseCatalog.json')));
-items = catalog.Exercises;
-if isnumeric(selector)
-    match = find([items.Number] == selector);
-else
-    match = find(strcmpi(string({items.Id}),string(selector)));
-end
-assert(numel(match)==1,'ParisSaclay:UnknownExercise', ...
-    'Use an exact exercise ID or listed number.');
+item = resolveExerciseSelector(selector);
 if solution
-    source = items(match).Solution;
+    source = item.Solution;
 else
-    source = items(match).Source;
+    source = item.Source;
 end
 open(fullfile(project.RootFolder,source));
 end

@@ -39,6 +39,7 @@ MATLAB is implicit in every dependency list.
 | [invokeSOCModel](../src/invokeSOCModel.m) | Provide the exported-program compiler entry point | MATLAB Coder; PyTorch/LiteRT support package |
 | [packageTraining](../src/packageTraining.m) | Package the provided project files | MATLAB |
 | [openExercise](../openExercise.m) | Open a workshop or solution from the catalog | MATLAB |
+| [resolveExerciseSelector](../src/resolveExerciseSelector.m) | Resolve a number, completion key, keyword or legacy ID to a catalog entry | MATLAB |
 | [runExercise](../runExercise.m) | Execute a selected exercise in its own workspace | MATLAB, plus the selected exercise's products |
 | [demoAgenda](../demoAgenda.m) | Display the exercise catalog | MATLAB |
 

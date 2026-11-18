@@ -33,6 +33,23 @@ requested parameter change, run it, and record your observation before opening
 The catalog contains 26 pairs with stable numbers and IDs: 1-21 and 23-27.
 Select by number or exact ID:
 
+For discoverable names, type `openExercise("` and press **Tab**. Completion
+offers numbered topic labels and their short keywords. `demoAgenda` lists
+the keys and descriptions together. These calls select the same exercise:
+
+```matlab
+openExercise(2)
+openExercise("02-Requirements")
+openExercise("Requirements")
+openExercise("w02_requirements")
+openExercise("Requirements",true)
+```
+
+The last call opens the solution. Text matching is case insensitive; a key
+without a leading zero, such as `"2-Requirements"`, is also accepted. The
+full catalog description can be used as a text selector. If a session was
+already open when the files were updated, run `rehash` to refresh file discovery.
+
 ```matlab
 openExercise(3)
 openExercise("w19_predictiveFieldROM")

@@ -25,6 +25,19 @@ To compare your reasoning with a solution:
 openExercise(1,true)
 ```
 
+You can also select a readable name. Type `openExercise("` and press **Tab**
+to browse the topic names, or start typing a keyword to narrow the suggestions:
+
+```matlab
+openExercise("02-Requirements")
+openExercise("Requirements",true)
+openExercise("27-ClosedLoopSystem")
+```
+
+Numbers and existing IDs such as `"w02_requirements"` remain supported.
+`demoAgenda` displays the selectable **Key** beside each exercise description.
+Use the optional second argument `true` to open the matching solution.
+
 The project contains **26 exercise/solution pairs**. Each is a native plain-text
 Live Script `.m` with an objective, prerequisites, launch instructions, an
 experiment, hints, expected observations and an API cheat sheet.

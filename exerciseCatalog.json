@@ -12,7 +12,9 @@
       "Solution": "solutions/w01_agentSetupSolution.m",
       "Products": "MATLAB; official MATLAB and Simulink agentic toolkits",
       "Mode": "runnable plus agent walkthrough",
-      "Minutes": 20
+      "Minutes": 20,
+      "Keyword": "AgentSetup",
+      "Key": "01-AgentSetup"
     },
     {
       "Number": 2,
@@ -23,7 +25,9 @@
       "Solution": "solutions/w02_requirementsSolution.m",
       "Products": "Requirements Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "Requirements",
+      "Key": "02-Requirements"
     },
     {
       "Number": 3,
@@ -34,7 +38,9 @@
       "Solution": "solutions/w03_dataSolution.m",
       "Products": "MATLAB",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "DataManagement",
+      "Key": "03-DataManagement"
     },
     {
       "Number": 4,
@@ -45,7 +51,9 @@
       "Solution": "solutions/w04_mlBaselineSolution.m",
       "Products": "Statistics and Machine Learning Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "MLBaseline",
+      "Key": "04-MLBaseline"
     },
     {
       "Number": 5,
@@ -56,7 +64,9 @@
       "Solution": "solutions/w05_deepLearningSolution.m",
       "Products": "Deep Learning Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "DeepLearning",
+      "Key": "05-DeepLearning"
     },
     {
       "Number": 6,
@@ -67,7 +77,9 @@
       "Solution": "solutions/w06_pythonImportSolution.m",
       "Products": "MATLAB; Python; optional PyTorch and converter support",
       "Mode": "runnable plus optional Python/PyTorch",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "PythonImport",
+      "Key": "06-PythonImport"
     },
     {
       "Number": 7,
@@ -78,7 +90,9 @@
       "Solution": "solutions/w07_modelCompressionSolution.m",
       "Products": "Deep Learning Toolbox; optional Model Compression Library",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "Compression",
+      "Key": "07-Compression"
     },
     {
       "Number": 8,
@@ -89,7 +103,9 @@
       "Solution": "solutions/w08_aiVerificationSolution.m",
       "Products": "Deep Learning Toolbox; AI Verification Library",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "AIVerification",
+      "Key": "08-AIVerification"
     },
     {
       "Number": 9,
@@ -100,7 +116,9 @@
       "Solution": "solutions/w09_simulinkIntegrationSolution.m",
       "Products": "Simulink; Deep Learning Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "SimulinkIntegration",
+      "Key": "09-SimulinkIntegration"
     },
     {
       "Number": 10,
@@ -111,7 +129,9 @@
       "Solution": "solutions/w10_systemTestingSolution.m",
       "Products": "Simulink Test; Requirements Toolbox; Simulink",
       "Mode": "runnable plus Test Manager walkthrough",
-      "Minutes": 35
+      "Minutes": 35,
+      "Keyword": "RequirementsTesting",
+      "Key": "10-RequirementsTesting"
     },
     {
       "Number": 11,
@@ -122,7 +142,9 @@
       "Solution": "solutions/w11_codegenSolution.m",
       "Products": "MATLAB Coder; selected C compiler; optional target support",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "CodeGeneration",
+      "Key": "11-CodeGeneration"
     },
     {
       "Number": 12,
@@ -133,7 +155,9 @@
       "Solution": "solutions/w12_modelBasedROMSolution.m",
       "Products": "MATLAB",
       "Mode": "runnable",
-      "Minutes": 20
+      "Minutes": 20,
+      "Keyword": "ThermalROM",
+      "Key": "12-ThermalROM"
     },
     {
       "Number": 13,
@@ -144,7 +168,9 @@
       "Solution": "solutions/w13_fullFieldROMSolution.m",
       "Products": "MATLAB",
       "Mode": "runnable",
-      "Minutes": 20
+      "Minutes": 20,
+      "Keyword": "FullFieldROM",
+      "Key": "13-FullFieldROM"
     },
     {
       "Number": 14,
@@ -155,7 +181,9 @@
       "Solution": "solutions/w14_physicsInformedSolution.m",
       "Products": "MATLAB",
       "Mode": "runnable",
-      "Minutes": 20
+      "Minutes": 20,
+      "Keyword": "PhysicsInformedModel",
+      "Key": "14-PhysicsInformedModel"
     },
     {
       "Number": 15,
@@ -166,7 +194,9 @@
       "Solution": "solutions/w15_appWorkflowsSolution.m",
       "Products": "Tool-specific products; desktop UI",
       "Mode": "runnable capability check plus app walkthrough",
-      "Minutes": 20
+      "Minutes": 20,
+      "Keyword": "AIApps",
+      "Key": "15-AIApps"
     },
     {
       "Number": 16,
@@ -177,7 +207,9 @@
       "Solution": "solutions/w16_agentEngineeringSolution.m",
       "Products": "MATLAB; connected agent; official toolkits",
       "Mode": "runnable baseline plus agent exercise",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "AgentSkills",
+      "Key": "16-AgentSkills"
     },
     {
       "Number": 17,
@@ -188,7 +220,9 @@
       "Solution": "solutions/w17_dataPreparationSolution.m",
       "Products": "MATLAB",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "DataCleaning",
+      "Key": "17-DataCleaning"
     },
     {
       "Number": 18,
@@ -199,7 +233,9 @@
       "Solution": "solutions/w18_pinnCoolingSolution.m",
       "Products": "Deep Learning Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "CoolingPINN",
+      "Key": "18-CoolingPINN"
     },
     {
       "Number": 19,
@@ -210,7 +246,9 @@
       "Solution": "solutions/w19_predictiveFieldROMSolution.m",
       "Products": "Deep Learning Toolbox",
       "Mode": "runnable",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "PredictiveFieldROM",
+      "Key": "19-PredictiveFieldROM"
     },
     {
       "Number": 20,
@@ -221,7 +259,9 @@
       "Solution": "solutions/w20_hardwarePILSolution.m",
       "Products": "Simulink; Embedded Coder; Deep Learning Toolbox; Fixed-Point Designer; Raspberry Pi Blockset",
       "Mode": "hardware PIL: passed/unavailable/failed evidence",
-      "Minutes": 40
+      "Minutes": 40,
+      "Keyword": "SimulinkPIL",
+      "Key": "20-SimulinkPIL"
     },
     {
       "Number": 21,
@@ -232,7 +272,9 @@
       "Solution": "solutions/w21_matlabHardwareSolution.m",
       "Products": "MATLAB Coder; Embedded Coder; Deep Learning Toolbox; Raspberry Pi Blockset",
       "Mode": "hardware MATLAB PIL: passed/unavailable/failed evidence",
-      "Minutes": 35
+      "Minutes": 35,
+      "Keyword": "MATLABPIL",
+      "Key": "21-MATLABPIL"
     },
     {
       "Number": 23,
@@ -243,7 +285,9 @@
       "Solution": "solutions/w23_advancedVerificationSolution.m",
       "Products": "Deep Learning Toolbox; AI Verification Library",
       "Mode": "runnable; optional bounded stronger proof",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "AdvancedVerification",
+      "Key": "23-AdvancedVerification"
     },
     {
       "Number": 24,
@@ -254,7 +298,9 @@
       "Solution": "solutions/w24_adversarialWorkshopSolution.m",
       "Products": "Deep Learning Toolbox; AI Verification Library",
       "Mode": "runnable bounded source-workshop adaptation",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "AdversarialExamples",
+      "Key": "24-AdversarialExamples"
     },
     {
       "Number": 25,
@@ -265,7 +311,9 @@
       "Solution": "solutions/w25_silVerificationSolution.m",
       "Products": "MATLAB Coder; Embedded Coder; Deep Learning Toolbox",
       "Mode": "runnable actual SIL gateway",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "NeuralSIL",
+      "Key": "25-NeuralSIL"
     },
     {
       "Number": 26,
@@ -276,7 +324,9 @@
       "Solution": "solutions/w26_jetsonCameraPILSolution.m",
       "Products": "GPU Coder; NVIDIA hardware support; camera",
       "Mode": "hardware PIL: passed/unavailable/failed evidence",
-      "Minutes": 25
+      "Minutes": 25,
+      "Keyword": "JetsonCameraPIL",
+      "Key": "26-JetsonCameraPIL"
     },
     {
       "Number": 27,
@@ -287,7 +337,9 @@
       "Solution": "solutions/w27_closedLoopSystemSolution.m",
       "Products": "MATLAB; Simulink; Deep Learning Toolbox; supported host C/C++ compiler",
       "Mode": "runnable coupled-system scenarios and regression tests",
-      "Minutes": 35
+      "Minutes": 35,
+      "Keyword": "ClosedLoopSystem",
+      "Key": "27-ClosedLoopSystem"
     }
   ]
 }

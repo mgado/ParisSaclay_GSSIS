@@ -1,0 +1,31 @@
+{
+  "_schemaVersion": "1.0.0",
+  "openExercise": {
+    "inputs": [
+      {
+        "name": "selector",
+        "kind": "required",
+        "type": [
+          [
+            "numeric",
+            "scalar"
+          ],
+          [
+            "char",
+            "choices={'01-AgentSetup','02-Requirements','03-DataManagement','04-MLBaseline','05-DeepLearning','06-PythonImport','07-Compression','08-AIVerification','09-SimulinkIntegration','10-RequirementsTesting','11-CodeGeneration','12-ThermalROM','13-FullFieldROM','14-PhysicsInformedModel','15-AIApps','16-AgentSkills','17-DataCleaning','18-CoolingPINN','19-PredictiveFieldROM','20-SimulinkPIL','21-MATLABPIL','23-AdvancedVerification','24-AdversarialExamples','25-NeuralSIL','26-JetsonCameraPIL','27-ClosedLoopSystem','AgentSetup','Requirements','DataManagement','MLBaseline','DeepLearning','PythonImport','Compression','AIVerification','SimulinkIntegration','RequirementsTesting','CodeGeneration','ThermalROM','FullFieldROM','PhysicsInformedModel','AIApps','AgentSkills','DataCleaning','CoolingPINN','PredictiveFieldROM','SimulinkPIL','MATLABPIL','AdvancedVerification','AdversarialExamples','NeuralSIL','JetsonCameraPIL','ClosedLoopSystem'}"
+          ],
+          [
+            "string",
+            "scalar",
+            "choices={'01-AgentSetup','02-Requirements','03-DataManagement','04-MLBaseline','05-DeepLearning','06-PythonImport','07-Compression','08-AIVerification','09-SimulinkIntegration','10-RequirementsTesting','11-CodeGeneration','12-ThermalROM','13-FullFieldROM','14-PhysicsInformedModel','15-AIApps','16-AgentSkills','17-DataCleaning','18-CoolingPINN','19-PredictiveFieldROM','20-SimulinkPIL','21-MATLABPIL','23-AdvancedVerification','24-AdversarialExamples','25-NeuralSIL','26-JetsonCameraPIL','27-ClosedLoopSystem','AgentSetup','Requirements','DataManagement','MLBaseline','DeepLearning','PythonImport','Compression','AIVerification','SimulinkIntegration','RequirementsTesting','CodeGeneration','ThermalROM','FullFieldROM','PhysicsInformedModel','AIApps','AgentSkills','DataCleaning','CoolingPINN','PredictiveFieldROM','SimulinkPIL','MATLABPIL','AdvancedVerification','AdversarialExamples','NeuralSIL','JetsonCameraPIL','ClosedLoopSystem'}"
+          ]
+        ]
+      },
+      {
+        "name": "solution",
+        "kind": "ordered",
+        "type": "logical"
+      }
+    ]
+  }
+}

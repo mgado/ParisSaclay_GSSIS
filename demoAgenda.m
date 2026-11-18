@@ -2,5 +2,6 @@ function catalog = demoAgenda
 %DEMOAGENDA List the three-day training exercises and prerequisites.
 project = requireTrainingProject;
 catalog = jsondecode(fileread(fullfile(project.RootFolder,'exerciseCatalog.json')));
-disp(struct2table(catalog.Exercises));
+agenda = struct2table(catalog.Exercises);
+disp(agenda(:,{'Number','Key','Name','Day','Minutes','Products'}));
 end
