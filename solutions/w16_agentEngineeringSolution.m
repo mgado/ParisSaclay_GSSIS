@@ -31,14 +31,17 @@ disp("Compare the generic answer with the custom skill: did it explain units, ex
 %[text] [Main documentation for this area](https://github.com/matlab/simulink-agentic-toolkit). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`runtests`](https://www.mathworks.com/help/matlab/ref/runtests.html) | runtests(testFile) | Execute proposed changes |
-%[text] | [`assertSuccess`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | assertSuccess(results) | Require measured test success |
-%[text] | [`checkcode`](https://www.mathworks.com/help/matlab/ref/checkcode.html) | checkcode(source) | Inspect code issues |
-%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Small engineering target |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`runtests`](https://www.mathworks.com/help/matlab/ref/runtests.html) | runtests(testFile) | Execute proposed changes | MATLAB |
+%[text] | [`assertSuccess`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | assertSuccess(results) | Require measured test success | MATLAB |
+%[text] | [`checkcode`](https://www.mathworks.com/help/matlab/ref/checkcode.html) | checkcode(source) | Inspect code issues | MATLAB |
+%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Small engineering target | Training helper (MATLAB) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

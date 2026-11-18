@@ -87,15 +87,17 @@ end
 %[text] [Main documentation for this area](https://www.mathworks.com/help/matlab/data-import-and-analysis.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`timetable`](https://www.mathworks.com/help/matlab/ref/timetable.html) | timetable(time,temperature,id) | Retain timestamp and provenance |
-%[text] | ismissing / isoutlier | isoutlier(x,"movmedian",9) | Separate dropout and spike evidence |
-%[text] | [`fillmissing`](https://www.mathworks.com/help/matlab/ref/fillmissing.html) | fillmissing(x,"linear",SamplePoints=t) | Repair short physical gaps |
-%[text] | [`retime`](https://www.mathworks.com/help/matlab/ref/timetable.retime.html) | retime(log,newTimes,"linear") | Resample inside one acquisition |
-%[text] | [`labeledSignalSet`](https://www.mathworks.com/help/signal/ref/labeledsignalset.html) | labeledSignalSet(x,definition,SampleRate=Fs) | Prepare reviewable labels |
-%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Import, review and export labels |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`timetable`](https://www.mathworks.com/help/matlab/ref/timetable.html) | timetable(time,temperature,id) | Retain timestamp and provenance | MATLAB |
+%[text] | [ismissing](https://www.mathworks.com/help/matlab/ref/ismissing.html) / [isoutlier](https://www.mathworks.com/help/matlab/ref/isoutlier.html) | isoutlier(x,"movmedian",9) | Separate dropout and spike evidence | MATLAB |
+%[text] | [`fillmissing`](https://www.mathworks.com/help/matlab/ref/fillmissing.html) | fillmissing(x,"linear",SamplePoints=t) | Repair short physical gaps | MATLAB |
+%[text] | [`retime`](https://www.mathworks.com/help/matlab/ref/timetable.retime.html) | retime(log,newTimes,"linear") | Resample inside one acquisition | MATLAB |
+%[text] | [`labeledSignalSet`](https://www.mathworks.com/help/signal/ref/labeledsignalset.html) | labeledSignalSet(x,definition,SampleRate=Fs) | Prepare reviewable labels | Signal Processing Toolbox |
+%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Import, review and export labels | Signal Processing Toolbox |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

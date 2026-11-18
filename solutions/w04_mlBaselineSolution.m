@@ -43,13 +43,17 @@ title('Validation virtual-sensor prediction');
 %[text] [Main documentation for this area](https://www.mathworks.com/help/stats/regression-and-anova.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`fitrtree`](https://www.mathworks.com/help/stats/fitrtree.html) | fitrtree(X,Y,MinLeafSize=8) | Train simple regression baseline |
-%[text] | [`predict`](https://www.mathworks.com/help/stats/regressiontree.predict.html) | predict(model,XTest) | Evaluate held-out data |
-%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Compare physical baseline |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`fitrtree`](https://www.mathworks.com/help/stats/fitrtree.html) | fitrtree(X,Y,MinLeafSize=8) | Train simple regression baseline | Statistics and Machine Learning Toolbox |
+%[text] | [`predict`](https://www.mathworks.com/help/stats/regressiontree.predict.html) | predict(model,XTest) | Evaluate held-out data | Statistics and Machine Learning Toolbox |
+%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Compare physical baseline | Training helper (MATLAB) |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

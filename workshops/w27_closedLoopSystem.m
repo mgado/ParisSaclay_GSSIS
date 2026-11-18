@@ -115,18 +115,21 @@ assertSuccess(testResults);
 %[text] [Main Simulink simulation documentation](https://www.mathworks.com/help/simulink/run-simulations.html), [Deep Learning Toolbox documentation](https://www.mathworks.com/help/deeplearning/), and [MATLAB unit testing](https://www.mathworks.com/help/matlab/matlab-unit-test-framework.html).
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [open_system](https://www.mathworks.com/help/simulink/slref/open_system.html) | `open_system(modelFile)` | Inspect the connected model and its subsystems |
-%[text] | [Simulink.SimulationInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | `simulation = Simulink.SimulationInput(modelName)` | Configure one scenario |
-%[text] | [setExternalInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setexternalinput.html) | `simulation.setExternalInput(inputs)` | Apply mission demand, ambient and sensor bias |
-%[text] | [setVariable](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setvariable.html) | `simulation.setVariable('reserveStop',value,Workspace=modelName)` | Change a control margin for one run |
-%[text] | [sim](https://www.mathworks.com/help/simulink/slref/sim.html) | `output = sim(simulation)` | Execute the whole coupled system |
-%[text] | [Dataset](https://www.mathworks.com/help/simulink/slref/simulink.simulationdata.dataset.html) | `inputs = Simulink.SimulationData.Dataset` | Keep input signals and order explicit |
-%[text] | [simulateBatterySystem](../src/simulateBatterySystem.m) | `result = simulateBatterySystem("voltageBias",0.28)` | Visible scenario setup and measured requirement table |
-%[text] | [trapz](https://www.mathworks.com/help/matlab/ref/trapz.html) | `trapz(time,voltage.*current)/3600` | Integrate delivered energy in Wh |
-%[text] | [runtests](https://www.mathworks.com/help/matlab/ref/runtests.html), [assertSuccess](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | Run the TestClosedLoopSystem suite and require success | Preserve system-level regression evidence |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [open_system](https://www.mathworks.com/help/simulink/slref/open_system.html) | `open_system(modelFile)` | Inspect the connected model and its subsystems | Simulink |
+%[text] | [Simulink.SimulationInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | `simulation = Simulink.SimulationInput(modelName)` | Configure one scenario | Simulink |
+%[text] | [setExternalInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setexternalinput.html) | `simulation.setExternalInput(inputs)` | Apply mission demand, ambient and sensor bias | Simulink |
+%[text] | [setVariable](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setvariable.html) | `simulation.setVariable('reserveStop',value,Workspace=modelName)` | Change a control margin for one run | Simulink |
+%[text] | [sim](https://www.mathworks.com/help/simulink/slref/sim.html) | `output = sim(simulation)` | Execute the whole coupled system | Simulink |
+%[text] | [Dataset](https://www.mathworks.com/help/simulink/slref/simulink.simulationdata.dataset.html) | `inputs = Simulink.SimulationData.Dataset` | Keep input signals and order explicit | Simulink |
+%[text] | [simulateBatterySystem](../src/simulateBatterySystem.m) | `result = simulateBatterySystem("voltageBias",0.28)` | Visible scenario setup and measured requirement table | Training helper (Simulink + Deep Learning Toolbox) |
+%[text] | [trapz](https://www.mathworks.com/help/matlab/ref/trapz.html) | `trapz(time,voltage.*current)/3600` | Integrate delivered energy in Wh | MATLAB |
+%[text] | [runtests](https://www.mathworks.com/help/matlab/ref/runtests.html), [assertSuccess](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | Run the TestClosedLoopSystem suite and require success | Preserve system-level regression evidence | MATLAB |
+%[text] | [`trainSOCNetwork`](../src/trainSOCNetwork.m) | `[net,metrics] = trainSOCNetwork` | Train the provided compact SOC reference | Training helper (Deep Learning Toolbox) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

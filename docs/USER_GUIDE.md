@@ -1,5 +1,10 @@
 # Using the workshops
 
+API cheat sheets include an **Origin** column naming the MathWorks product or
+add-on. **Training helper** identifies a provided function, not a toolbox API;
+generated interfaces and shipped example data have separate labels. Read the
+[helper reference](TRAINING_HELPERS.md) when an exercise calls a provided wrapper.
+
 Exercise 27 includes a [full-resolution system diagram](../assets/system_integration/system_closed_loop.png),
 a [vector SVG view](../assets/system_integration/system_closed_loop.svg) and a
 [PDF view](../assets/system_integration/system_closed_loop.pdf). Use the vector

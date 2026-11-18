@@ -43,14 +43,15 @@ xlabel("x"); ylabel("y"); zlabel("z")
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/reduced-order-modeling.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
 %[text:table]
-%[text] | Step | API or expression | Minimal syntax | Meaning |
+%[text] | API | Minimal syntax | Purpose | Origin |
 %[text] | --- | --- | --- | --- |
-%[text] | Grid | [`ndgrid`](https://www.mathworks.com/help/matlab/ref/ndgrid.html) | `[x,y,z] = ndgrid(grid)` | Keep spatial coordinates with fields |
-%[text] | Basis | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Extract spatial POD modes |
-%[text] | Encoding | [`Matrix projection`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `a = basis'*(field-meanField)` | Encode a known field |
-%[text] | Decoding | [`Matrix reconstruction`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `field = meanField+basis*a` | Reconstruct the full field |
-%[text] | Inspection | [`scatter3`](https://www.mathworks.com/help/matlab/ref/scatter3.html) | `scatter3(x,y,z,18,T,"filled")` | Display spatial temperature |
+%[text] | [`ndgrid`](https://www.mathworks.com/help/matlab/ref/ndgrid.html) | `[x,y,z] = ndgrid(grid)` | Grid: Keep spatial coordinates with fields | MATLAB |
+%[text] | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Basis: Extract spatial POD modes | MATLAB |
+%[text] | [`Matrix projection`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `a = basis'*(field-meanField)` | Encoding: Encode a known field | MATLAB |
+%[text] | [`Matrix reconstruction`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `field = meanField+basis*a` | Decoding: Reconstruct the full field | MATLAB |
+%[text] | [`scatter3`](https://www.mathworks.com/help/matlab/ref/scatter3.html) | `scatter3(x,y,z,18,T,"filled")` | Inspection: Display spatial temperature | MATLAB |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

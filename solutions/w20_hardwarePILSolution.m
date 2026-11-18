@@ -112,19 +112,21 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | coder.hardware(targetHardwareName) | Shared direct SSH PIL credential context |
-%[text] | [open_system](https://www.mathworks.com/help/simulink/slref/open_system.html) | `open_system(modelFile)` | Inspect the copied model |
-%[text] | [load](https://www.mathworks.com/help/matlab/ref/load.html) | `load(file,'XTest','YTest')` | Load measured sensor data |
-%[text] | [timeseries](https://www.mathworks.com/help/matlab/ref/timeseries.html) | `timeseries(sensor,time)` | Time-align sensor inputs |
-%[text] | [SimulationInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | `Simulink.SimulationInput(model)` | Own the simulation overrides |
-%[text] | [setVariable](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setvariable.html) | `simulation.setVariable(name,value)` | Supply model inputs |
-%[text] | [setBlockParameter](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setblockparameter.html) | `simulation.setBlockParameter(block,'SimulationMode',mode)` | Switch the same model among MIL/SIL/PIL |
-%[text] | [sim](https://www.mathworks.com/help/simulink/slref/sim.html) | `sim(pilInput)` | Execute the actual target simulation |
-%[text] | [assert](https://www.mathworks.com/help/matlab/ref/assert.html) | `assert(error<=tolerance)` | Require actual numerical agreement |
-%[text] | [SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html) | Read before configuring the target | Distinguish host and processor evidence |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | coder.hardware(targetHardwareName) | Shared direct SSH PIL credential context | MATLAB Coder + Raspberry Pi Blockset |
+%[text] | [open_system](https://www.mathworks.com/help/simulink/slref/open_system.html) | `open_system(modelFile)` | Inspect the copied model | Simulink |
+%[text] | [load](https://www.mathworks.com/help/matlab/ref/load.html) | `load(file,'XTest','YTest')` | Load measured sensor data | MATLAB |
+%[text] | [timeseries](https://www.mathworks.com/help/matlab/ref/timeseries.html) | `timeseries(sensor,time)` | Time-align sensor inputs | MATLAB |
+%[text] | [SimulationInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | `Simulink.SimulationInput(model)` | Own the simulation overrides | Simulink |
+%[text] | [setVariable](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setvariable.html) | `simulation.setVariable(name,value)` | Supply model inputs | Simulink |
+%[text] | [setBlockParameter](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setblockparameter.html) | `simulation.setBlockParameter(block,'SimulationMode',mode)` | Switch the same model among MIL/SIL/PIL | Simulink |
+%[text] | [sim](https://www.mathworks.com/help/simulink/slref/sim.html) | `sim(pilInput)` | Execute the actual target simulation | Simulink |
+%[text] | [assert](https://www.mathworks.com/help/matlab/ref/assert.html) | `assert(error<=tolerance)` | Require actual numerical agreement | MATLAB |
+%[text] | [SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html) | Read before configuring the target | Distinguish host and processor evidence | Workflow reference (Embedded Coder) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

@@ -111,15 +111,18 @@ save(fullfile(outputFolder,"trainedSOCVerification.mat"),"net","discriminator", 
 %[text] ## Documentation and further reading
 %[text] [Main AI verification documentation](https://www.mathworks.com/help/deeplearning/verification.html), [R2026b bounds support and release history](https://www.mathworks.com/help/deeplearning/ref/estimatenetworkoutputbounds.html), and [regression OOD discriminator example](https://www.mathworks.com/help/deeplearning/ref/networkdistributiondiscriminator.html).
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [trainnet](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,T,layers,"mse",options) | Fit actual SOC model weights |
-%[text] | [softplusLayer](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.softpluslayer.html) | softplusLayer(Name="smoothFeatures") | Smooth activation; new R2026b formal support |
-%[text] | [estimateNetworkOutputBounds](https://www.mathworks.com/help/deeplearning/ref/estimatenetworkoutputbounds.html) | estimateNetworkOutputBounds(net,lower,upper) | Conservative output interval |
-%[text] | [alphaCROWNOptions](https://www.mathworks.com/help/deeplearning/ref/alphacrownoptions.html) | alphaCROWNOptions(MaxEpochs=5) | Bounded stronger-solver configuration |
-%[text] | [networkDistributionDiscriminator](https://www.mathworks.com/help/deeplearning/ref/networkdistributiondiscriminator.html) | networkDistributionDiscriminator(net,ID,OOD,"hbos") | Calibrate regression OOD detection |
-%[text] | [isInNetworkDistribution](https://www.mathworks.com/help/deeplearning/ref/isinnetworkdistribution.html) | isInNetworkDistribution(detector,X) | Flag input distribution shifts |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [trainnet](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,T,layers,"mse",options) | Fit actual SOC model weights | Deep Learning Toolbox |
+%[text] | [softplusLayer](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.softpluslayer.html) | softplusLayer(Name="smoothFeatures") | Smooth activation; new R2026b formal support | Deep Learning Toolbox |
+%[text] | [estimateNetworkOutputBounds](https://www.mathworks.com/help/deeplearning/ref/estimatenetworkoutputbounds.html) | estimateNetworkOutputBounds(net,lower,upper) | Conservative output interval | AI Verification Library for Deep Learning Toolbox |
+%[text] | [alphaCROWNOptions](https://www.mathworks.com/help/deeplearning/ref/alphacrownoptions.html) | alphaCROWNOptions(MaxEpochs=5) | Bounded stronger-solver configuration | AI Verification Library for Deep Learning Toolbox |
+%[text] | [networkDistributionDiscriminator](https://www.mathworks.com/help/deeplearning/ref/networkdistributiondiscriminator.html) | networkDistributionDiscriminator(net,ID,OOD,"hbos") | Calibrate regression OOD detection | AI Verification Library for Deep Learning Toolbox |
+%[text] | [isInNetworkDistribution](https://www.mathworks.com/help/deeplearning/ref/isinnetworkdistribution.html) | isInNetworkDistribution(detector,X) | Flag input distribution shifts | AI Verification Library for Deep Learning Toolbox |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

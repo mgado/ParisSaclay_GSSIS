@@ -59,14 +59,18 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/visual-inspection/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`timeSeriesModeler`](https://www.mathworks.com/help/deeplearning/ref/timeseriesmodeler-app.html) | [`timeSeriesModeler`](https://www.mathworks.com/help/deeplearning/ref/timeseriesmodeler-app.html) | Model sensor sequences |
-%[text] | [`visualAnomalyDetector`](https://www.mathworks.com/help/visual-inspection/ref/visualanomalydetector-app.html) | [`visualAnomalyDetector`](https://www.mathworks.com/help/visual-inspection/ref/visualanomalydetector-app.html) | Train/calibrate/test visual anomaly detection |
-%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Label sensor signals |
-%[text] | [`which`](https://www.mathworks.com/help/matlab/ref/which.html) | which(appName) | Check app availability |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`timeSeriesModeler`](https://www.mathworks.com/help/deeplearning/ref/timeseriesmodeler-app.html) | [`timeSeriesModeler`](https://www.mathworks.com/help/deeplearning/ref/timeseriesmodeler-app.html) | Model sensor sequences | Deep Learning Toolbox |
+%[text] | [`visualAnomalyDetector`](https://www.mathworks.com/help/visual-inspection/ref/visualanomalydetector-app.html) | [`visualAnomalyDetector`](https://www.mathworks.com/help/visual-inspection/ref/visualanomalydetector-app.html) | Train/calibrate/test visual anomaly detection | Visual Inspection Toolbox |
+%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Label sensor signals | Signal Processing Toolbox |
+%[text] | [`which`](https://www.mathworks.com/help/matlab/ref/which.html) | which(appName) | Check app availability | MATLAB |
+%[text] | [`makeInspectionImages`](../src/makeInspectionImages.m) | `sets = makeInspectionImages` | Create the illustrative inspection datasets | Training helper (MATLAB) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

@@ -135,17 +135,22 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/sltest/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [digitalthread.settings](https://www.mathworks.com/help/slcheck/ref/digitalthread.settings.html) | ToolOutputTracking=true | Enable native tool-result tracking before the run |
-%[text] | [updateArtifacts](https://www.mathworks.com/help/slcheck/ref/metric.engine.updateartifacts.html) | updateArtifacts(engine) | Analyze current project inputs/results |
-%[text] | [exportResults](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.exportresults.html) | exportResults(results,file) | Persist actual tracked Test Manager results |
-%[text] | [`TestFile`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testfile-class.html) | sltest.testmanager.TestFile(file) | Persistent test artifact |
-%[text] | [`createTestCase`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testsuite.createtestcase.html) | createTestCase(suite,'simulation',name) | Model test case |
-%[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(testCase,requirement) | Verification trace |
-%[text] | [`assertSuccess`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | assertSuccess(results) | Fail on actual unsuccessful tests |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [digitalthread.settings](https://www.mathworks.com/help/slcheck/ref/digitalthread.settings.html) | ToolOutputTracking=true | Enable native tool-result tracking before the run | Simulink Check |
+%[text] | [updateArtifacts](https://www.mathworks.com/help/slcheck/ref/metric.engine.updateartifacts.html) | updateArtifacts(engine) | Analyze current project inputs/results | Simulink Check |
+%[text] | [exportResults](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.exportresults.html) | exportResults(results,file) | Persist actual tracked Test Manager results | Simulink Test |
+%[text] | [`TestFile`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testfile-class.html) | sltest.testmanager.TestFile(file) | Persistent test artifact | Simulink Test |
+%[text] | [`createTestCase`](https://www.mathworks.com/help/sltest/ref/sltest.testmanager.testsuite.createtestcase.html) | createTestCase(suite,'simulation',name) | Model test case | Simulink Test |
+%[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(testCase,requirement) | Verification trace | Requirements Toolbox |
+%[text] | [`assertSuccess`](https://www.mathworks.com/help/matlab/ref/matlab.unittest.testresult.assertsuccess.html) | assertSuccess(results) | Fail on actual unsuccessful tests | MATLAB |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
+%[text] | [`ensureSOCModel`](../src/ensureSOCModel.m) | `modelFile = ensureSOCModel` | Export or reuse the provided neural model | Training helper (Simulink + Deep Learning Toolbox) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

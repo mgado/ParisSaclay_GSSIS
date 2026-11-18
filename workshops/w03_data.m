@@ -42,14 +42,18 @@ writetable(data,fullfile(outputFolder,'batteryMeasurements.csv'));
 %[text] [Main documentation for this area](https://www.mathworks.com/help/matlab/data-import-and-analysis.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`table`](https://www.mathworks.com/help/matlab/ref/table.html) | table(V,I,T,SOC) | Named columns with known units |
-%[text] | [`summary`](https://www.mathworks.com/help/matlab/ref/double.summary.html) | summary(data) | Inspect coverage and values |
-%[text] | [`writetable`](https://www.mathworks.com/help/matlab/ref/writetable.html) | writetable(data,file) | Exchange data |
-%[text] | [`logical indexing`](https://www.mathworks.com/help/matlab/math/array-indexing.html) | data(trainRows,:) | Group-aware partition |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`table`](https://www.mathworks.com/help/matlab/ref/table.html) | table(V,I,T,SOC) | Named columns with known units | MATLAB |
+%[text] | [`summary`](https://www.mathworks.com/help/matlab/ref/double.summary.html) | summary(data) | Inspect coverage and values | MATLAB |
+%[text] | [`writetable`](https://www.mathworks.com/help/matlab/ref/writetable.html) | writetable(data,file) | Exchange data | MATLAB |
+%[text] | [`logical indexing`](https://www.mathworks.com/help/matlab/math/array-indexing.html) | data(trainRows,:) | Group-aware partition | MATLAB |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

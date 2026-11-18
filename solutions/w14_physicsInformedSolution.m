@@ -43,13 +43,14 @@ xlabel("Time (s)"); ylabel("Temperature (deg C)"); legend("Sparse observations",
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/physics-informed-machine-learning.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
 %[text:table]
-%[text] | Step | API | Minimal syntax | Meaning |
+%[text] | API | Minimal syntax | Purpose | Origin |
 %[text] | --- | --- | --- | --- |
-%[text] | Physics | [`exp`](https://www.mathworks.com/help/matlab/ref/double.exp.html) | `T = Ta+(T0-Ta)*exp(-alpha*t)` | Analytic cooling trajectory |
-%[text] | Infer | [`fminsearch`](https://www.mathworks.com/help/matlab/ref/fminsearch.html) | `p = fminsearch(loss,p0)` | Estimate unknown physics parameters |
-%[text] | Check | [`gradient`](https://www.mathworks.com/help/matlab/ref/gradient.html) | `dT = gradient(T,t)` | Numerical ODE residual |
-%[text] | PINN extension | [`dlfeval`](https://www.mathworks.com/help/deeplearning/ref/dlfeval.html), [`dlgradient`](https://www.mathworks.com/help/deeplearning/ref/dlarray.dlgradient.html) | Evaluate a traced loss and its derivatives | Network derivatives and training gradients |
+%[text] | [`exp`](https://www.mathworks.com/help/matlab/ref/double.exp.html) | `T = Ta+(T0-Ta)*exp(-alpha*t)` | Physics: Analytic cooling trajectory | MATLAB |
+%[text] | [`fminsearch`](https://www.mathworks.com/help/matlab/ref/fminsearch.html) | `p = fminsearch(loss,p0)` | Infer: Estimate unknown physics parameters | MATLAB |
+%[text] | [`gradient`](https://www.mathworks.com/help/matlab/ref/gradient.html) | `dT = gradient(T,t)` | Check: Numerical ODE residual | MATLAB |
+%[text] | [`dlfeval`](https://www.mathworks.com/help/deeplearning/ref/dlfeval.html), [`dlgradient`](https://www.mathworks.com/help/deeplearning/ref/dlarray.dlgradient.html) | Evaluate a traced loss and its derivatives | PINN extension: Network derivatives and training gradients | Deep Learning Toolbox |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

@@ -49,14 +49,18 @@ xlabel('Validation reference SOC'); ylabel('Neural SOC'); grid on;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`featureInputLayer`](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.featureinputlayer.html) | featureInputLayer(3,Normalization="zscore") | Normalize predictors |
-%[text] | [`trainnet`](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,Y,layers,"mse",options) | Train modern network |
-%[text] | [`minibatchpredict`](https://www.mathworks.com/help/deeplearning/ref/minibatchpredict.html) | minibatchpredict(net,X) | Batch inference |
-%[text] | [`testnet`](https://www.mathworks.com/help/deeplearning/ref/testnet.html) | testnet(net,X,Y,"rmse") | Standard evaluation metric |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`featureInputLayer`](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.featureinputlayer.html) | featureInputLayer(3,Normalization="zscore") | Normalize predictors | Deep Learning Toolbox |
+%[text] | [`trainnet`](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,Y,layers,"mse",options) | Train modern network | Deep Learning Toolbox |
+%[text] | [`minibatchpredict`](https://www.mathworks.com/help/deeplearning/ref/minibatchpredict.html) | minibatchpredict(net,X) | Batch inference | Deep Learning Toolbox |
+%[text] | [`testnet`](https://www.mathworks.com/help/deeplearning/ref/testnet.html) | testnet(net,X,Y,"rmse") | Standard evaluation metric | Deep Learning Toolbox |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

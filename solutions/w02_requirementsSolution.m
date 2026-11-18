@@ -62,14 +62,19 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/slrequirements/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`slreq.new`](https://www.mathworks.com/help/slrequirements/ref/slreq.new.html) | slreq.new(file) | Create requirement set |
-%[text] | [`add`](https://www.mathworks.com/help/slrequirements/ref/slreq.reqset.add.html) | add(reqSet,'Id','SOC-001',...) | Author measurable requirement |
-%[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(source,requirement) | Trace implementation or verification |
-%[text] | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | Review requirements in UI |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`slreq.new`](https://www.mathworks.com/help/slrequirements/ref/slreq.new.html) | slreq.new(file) | Create requirement set | Requirements Toolbox |
+%[text] | [`add`](https://www.mathworks.com/help/slrequirements/ref/slreq.reqset.add.html) | add(reqSet,'Id','SOC-001',...) | Author measurable requirement | Requirements Toolbox |
+%[text] | [`slreq.createLink`](https://www.mathworks.com/help/slrequirements/ref/slreq.createlink.html) | slreq.createLink(source,requirement) | Trace implementation or verification | Requirements Toolbox |
+%[text] | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | [`slreq.editor`](https://www.mathworks.com/help/slrequirements/ref/slreq.editor.html) | Review requirements in UI | Requirements Toolbox |
+%[text] | [`socEstimate`](../src/socEstimate.m) | `socEstimate(V,I,T)` | Evaluate the provided analytic SOC baseline | Training helper (MATLAB) |
+%[text] | [`trainSOCNetwork`](../src/trainSOCNetwork.m) | `[net,metrics] = trainSOCNetwork` | Train the provided compact SOC reference | Training helper (Deep Learning Toolbox) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

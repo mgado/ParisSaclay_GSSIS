@@ -81,19 +81,23 @@ demoOutcome
 %[text] [Main documentation for this area](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: MATLAB hardware APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | coder.hardware('Raspberry Pi') | Configure direct SSH PIL without the I/O-server object |
-%[text] | [coder.config](https://www.mathworks.com/help/coder/ref/coder.config.html) | `coder.config('lib','ecoder',true)` | Embedded library configuration |
-%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | `coder.hardware('Raspberry Pi')` | Supported target integration |
-%[text] | [coder.DeepLearningConfig](https://www.mathworks.com/help/coder/ref/coder.deeplearningconfig.html) | `coder.DeepLearningConfig('none')` | Generic neural inference code |
-%[text] | [coder.loadDeepLearningNetwork](https://www.mathworks.com/help/coder/ref/coder.loaddeeplearningnetwork.html) | Load the constant network MAT-file | Codegen-ready pretrained network |
-%[text] | [coder.Constant](https://www.mathworks.com/help/coder/ref/coder.type-class.html) | `coder.Constant(networkFile)` | Fix the model path at compile time |
-%[text] | [predict](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.predict.html) | `predict(network,input)` | Compute the neural output |
-%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | `codegen(...,'-args',{constantPath,input})` | Generate target code and PIL gateway |
-%[text] | [getSecret](https://www.mathworks.com/help/matlab/ref/getsecret.html) | `getSecret(secretName)` | Resolve private credentials at use |
-%[text] | [PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html) | Read before target build | Interpret processor evidence correctly |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | coder.hardware('Raspberry Pi') | Configure direct SSH PIL without the I/O-server object | MATLAB Coder + Raspberry Pi Blockset |
+%[text] | [coder.config](https://www.mathworks.com/help/coder/ref/coder.config.html) | `coder.config('lib','ecoder',true)` | Embedded library configuration | MATLAB Coder + Embedded Coder |
+%[text] | [coder.hardware](https://www.mathworks.com/help/coder/ref/coder.hardware.html) | `coder.hardware('Raspberry Pi')` | Supported target integration | MATLAB Coder + Raspberry Pi Blockset |
+%[text] | [coder.DeepLearningConfig](https://www.mathworks.com/help/coder/ref/coder.deeplearningconfig.html) | `coder.DeepLearningConfig('none')` | Generic neural inference code | MATLAB Coder |
+%[text] | [coder.loadDeepLearningNetwork](https://www.mathworks.com/help/coder/ref/coder.loaddeeplearningnetwork.html) | Load the constant network MAT-file | Codegen-ready pretrained network | MATLAB Coder |
+%[text] | [coder.Constant](https://www.mathworks.com/help/coder/ref/coder.type-class.html) | `coder.Constant(networkFile)` | Fix the model path at compile time | MATLAB Coder |
+%[text] | [predict](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.predict.html) | `predict(network,input)` | Compute the neural output | Deep Learning Toolbox |
+%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | `codegen(...,'-args',{constantPath,input})` | Generate target code and PIL gateway | MATLAB Coder + Embedded Coder |
+%[text] | [getSecret](https://www.mathworks.com/help/matlab/ref/getsecret.html) | `getSecret(secretName)` | Resolve private credentials at use | MATLAB |
+%[text] | [PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html) | Read before target build | Interpret processor evidence correctly | Workflow reference (Embedded Coder) |
+%[text] | [`predictPiSOC`](../src/predictPiSOC.m) | `predictPiSOC(networkFile,input)` | Load and run the provided neural code-generation entry point | Training helper (MATLAB Coder + Deep Learning Toolbox) |
+%[text] | [`predictPiSOC_pil`](https://www.mathworks.com/help/coder/ref/codegen.html) | `predictPiSOC_pil(modelFile,input)` | Execute the generated target neural PIL interface | Generated PIL interface (MATLAB Coder + Embedded Coder + Raspberry Pi Blockset) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

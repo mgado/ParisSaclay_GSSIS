@@ -33,13 +33,16 @@ disp(prompt)
 %[text] [Main documentation for this area](https://github.com/matlab/matlab-agentic-toolkit). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`setup_check`](../setup_check.m) | [`setup_check`](../setup_check.m) | Installed product evidence |
-%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Tool round-trip target |
-%[text] | [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) | assert(condition) | Check actual evidence |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`setup_check`](../setup_check.m) | [`setup_check`](../setup_check.m) | Installed product evidence | Training helper (MATLAB) |
+%[text] | [`socEstimate`](../src/socEstimate.m) | socEstimate(V,I,T) | Tool round-trip target | Training helper (MATLAB) |
+%[text] | [`assert`](https://www.mathworks.com/help/matlab/ref/assert.html) | assert(condition) | Check actual evidence | MATLAB |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

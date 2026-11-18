@@ -132,16 +132,18 @@ save(fullfile(outputFolder,"digitVerification.mat"),"net","searchEvidence", ...
 %[text] ## Documentation and further reading
 %[text] [Main AI verification documentation](https://www.mathworks.com/help/deeplearning/verification.html), [original MathWorks workshop](https://github.com/mathworks/ai-verification-workshop), and [formal robustness reference](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html).
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [digitTrain4DArrayData / digitTest4DArrayData](https://www.mathworks.com/help/deeplearning/ref/findadversarialexamples.html) | [X,T] = digitTest4DArrayData | Shipped example data used by the official verification example |
-%[text] | [trainnet](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,T,layers,"crossentropy",options) | Train a modern classifier |
-%[text] | [convolution2dLayer](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.convolution2dlayer.html) | convolution2dLayer(3,8,Padding="same") | Small image feature extractor |
-%[text] | [scores2label](https://www.mathworks.com/help/deeplearning/ref/scores2label.html) | scores2label(scores,classNames) | Convert output scores to actual labels |
-%[text] | [adversarialOptions](https://www.mathworks.com/help/deeplearning/ref/adversarialoptions.html) | adversarialOptions("bim",NumIterations=10) | Explicit finite search budget |
-%[text] | [findAdversarialExamples](https://www.mathworks.com/help/deeplearning/ref/findadversarialexamples.html) | [examples,mislabels,iX] = findAdversarialExamples(net,lower,upper,labels) | Find actual bounded counterexamples |
-%[text] | [verifyNetworkRobustness](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html) | verifyNetworkRobustness(net,lower,upper,label) | Check the whole input region |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [digitTrain4DArrayData / digitTest4DArrayData](https://www.mathworks.com/help/deeplearning/ref/findadversarialexamples.html) | [X,T] = digitTest4DArrayData | Shipped example data used by the official verification example | MathWorks example data (Deep Learning Toolbox) |
+%[text] | [trainnet](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | trainnet(X,T,layers,"crossentropy",options) | Train a modern classifier | Deep Learning Toolbox |
+%[text] | [convolution2dLayer](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.convolution2dlayer.html) | convolution2dLayer(3,8,Padding="same") | Small image feature extractor | Deep Learning Toolbox |
+%[text] | [scores2label](https://www.mathworks.com/help/deeplearning/ref/scores2label.html) | scores2label(scores,classNames) | Convert output scores to actual labels | Deep Learning Toolbox |
+%[text] | [adversarialOptions](https://www.mathworks.com/help/deeplearning/ref/adversarialoptions.html) | adversarialOptions("bim",NumIterations=10) | Explicit finite search budget | AI Verification Library for Deep Learning Toolbox |
+%[text] | [findAdversarialExamples](https://www.mathworks.com/help/deeplearning/ref/findadversarialexamples.html) | [examples,mislabels,iX] = findAdversarialExamples(net,lower,upper,labels) | Find actual bounded counterexamples | AI Verification Library for Deep Learning Toolbox |
+%[text] | [verifyNetworkRobustness](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html) | verifyNetworkRobustness(net,lower,upper,label) | Check the whole input region | AI Verification Library for Deep Learning Toolbox |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

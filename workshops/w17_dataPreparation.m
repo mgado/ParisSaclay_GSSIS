@@ -87,15 +87,17 @@ end
 %[text] [Main documentation for this area](https://www.mathworks.com/help/matlab/data-import-and-analysis.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`timetable`](https://www.mathworks.com/help/matlab/ref/timetable.html) | timetable(time,temperature,id) | Measurements tied to timestamps |
-%[text] | [`isoutlier`](https://www.mathworks.com/help/matlab/ref/isoutlier.html) | isoutlier(x,"movmedian",9) | Flag local spikes for review |
-%[text] | [`fillmissing`](https://www.mathworks.com/help/matlab/ref/fillmissing.html) | fillmissing(x,"linear",SamplePoints=t) | Repair short gaps with an explicit assumption |
-%[text] | [`retime`](https://www.mathworks.com/help/matlab/ref/timetable.retime.html) | retime(log,newTimes,"linear") | Put one acquisition on a uniform grid |
-%[text] | [`writetimetable`](https://www.mathworks.com/help/matlab/ref/writetimetable.html) | writetimetable(log,file) | Portable cleaned log |
-%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Review labels in a real app |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`timetable`](https://www.mathworks.com/help/matlab/ref/timetable.html) | timetable(time,temperature,id) | Measurements tied to timestamps | MATLAB |
+%[text] | [`isoutlier`](https://www.mathworks.com/help/matlab/ref/isoutlier.html) | isoutlier(x,"movmedian",9) | Flag local spikes for review | MATLAB |
+%[text] | [`fillmissing`](https://www.mathworks.com/help/matlab/ref/fillmissing.html) | fillmissing(x,"linear",SamplePoints=t) | Repair short gaps with an explicit assumption | MATLAB |
+%[text] | [`retime`](https://www.mathworks.com/help/matlab/ref/timetable.retime.html) | retime(log,newTimes,"linear") | Put one acquisition on a uniform grid | MATLAB |
+%[text] | [`writetimetable`](https://www.mathworks.com/help/matlab/ref/writetimetable.html) | writetimetable(log,file) | Portable cleaned log | MATLAB |
+%[text] | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | [`signalLabeler`](https://www.mathworks.com/help/signal/ref/signallabeler-app.html) | Review labels in a real app | Signal Processing Toolbox |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

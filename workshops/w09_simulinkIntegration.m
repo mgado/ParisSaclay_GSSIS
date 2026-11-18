@@ -49,14 +49,19 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`exportNetworkToSimulink`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.exportnetworktosimulink.html) | exportNetworkToSimulink(net,ModelName=...)  | Generate neural layer blocks |
-%[text] | [`SimulationInput`](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | Simulink.SimulationInput(model) | Non-destructive overrides |
-%[text] | [`setExternalInput`](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setexternalinput.html) | simulation.setExternalInput(dataset) | Supply sensor trace |
-%[text] | [`sim`](https://www.mathworks.com/help/simulink/slref/sim.html) | sim(simulation) | Execute model |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`exportNetworkToSimulink`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.exportnetworktosimulink.html) | exportNetworkToSimulink(net,ModelName=...) | Generate neural layer blocks | Deep Learning Toolbox |
+%[text] | [`SimulationInput`](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html) | Simulink.SimulationInput(model) | Non-destructive overrides | Simulink |
+%[text] | [`setExternalInput`](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setexternalinput.html) | simulation.setExternalInput(dataset) | Supply sensor trace | Simulink |
+%[text] | [`sim`](https://www.mathworks.com/help/simulink/slref/sim.html) | sim(simulation) | Execute model | Simulink |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
+%[text] | [`ensureSOCModel`](../src/ensureSOCModel.m) | `modelFile = ensureSOCModel` | Export or reuse the provided neural model | Training helper (Simulink + Deep Learning Toolbox) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

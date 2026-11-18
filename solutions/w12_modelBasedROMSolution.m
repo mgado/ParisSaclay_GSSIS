@@ -52,13 +52,14 @@ xlabel("Time (s)"); ylabel("Temperature rise (deg C)"); legend("Full model","Pro
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/reduced-order-modeling.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
 %[text:table]
-%[text] | Step | API or expression | Minimal syntax | Meaning |
+%[text] | API | Minimal syntax | Purpose | Origin |
 %[text] | --- | --- | --- | --- |
-%[text] | Project | [`currentProject`](https://www.mathworks.com/help/matlab/ref/currentproject.html) | `p = currentProject` | Resolve the opened Project |
-%[text] | Basis | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Find dominant snapshot directions |
-%[text] | Projection | [`Matrix multiplication`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `Ar = V'*A*V` | Project known equations |
-%[text] | Acceptance | [`norm`](https://www.mathworks.com/help/matlab/ref/norm.html) | `norm(error,"fro")` | Measure held-out trajectory error |
+%[text] | [`currentProject`](https://www.mathworks.com/help/matlab/ref/currentproject.html) | `p = currentProject` | Project: Resolve the opened Project | MATLAB |
+%[text] | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Basis: Find dominant snapshot directions | MATLAB |
+%[text] | [`Matrix multiplication`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `Ar = V'*A*V` | Projection: Project known equations | MATLAB |
+%[text] | [`norm`](https://www.mathworks.com/help/matlab/ref/norm.html) | `norm(error,"fro")` | Acceptance: Measure held-out trajectory error | MATLAB |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

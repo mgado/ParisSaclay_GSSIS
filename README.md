@@ -97,7 +97,7 @@ main documentation pages.
 | [Embedded Coder](https://www.mathworks.com/help/ecoder/) | Embedded library configuration and SIL/PIL | 20, 21, 25, 26 |
 | [GPU Coder](https://www.mathworks.com/help/gpucoder/) | CUDA detector generation and NVIDIA PIL | 26; optional CUDA deployment extension in 11 |
 | [Fixed-Point Designer](https://www.mathworks.com/help/fixedpoint/) | Supplied Simulink hardware model and quantized-network workflow | 20; optional quantization in 7 |
-| [Image Processing Toolbox](https://www.mathworks.com/help/images/) | Resize/display camera images; visual inspection dependency | 26; optional visual inspection branch in 15 |
+| [Image Processing Toolbox](https://www.mathworks.com/help/images/) | Image viewer; visual inspection dependency | 26; optional visual inspection branch in 15 |
 | [Computer Vision Toolbox](https://www.mathworks.com/help/vision/) | YOLOX detection and image annotations; visual inspection dependency | 26; optional visual inspection branch in 15 |
 | [Image Acquisition Toolbox](https://www.mathworks.com/help/imaq/) | Host-camera path using `videoinput` and `getsnapshot` | 26, only when `cameraMode="host"` |
 | [Visual Inspection Toolbox](https://www.mathworks.com/help/visual-inspection/) | Visual Anomaly Detector app | 15, when choosing visual inspection |
@@ -125,6 +125,7 @@ for the same MATLAB release through **Home > Add-Ons** or the linked setup guide
 | [MATLAB and Simulink agentic toolkits](docs/AGENTIC_GUIDE.md) and a configured coding-agent client | Interactive agent/tool/skill activities in 1 and 16 |
 | [Compatible Python interpreter](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html), NumPy and optional PyTorch | 6: Python interoperability; PyTorch for the exported-model branch |
 | Deep Learning Toolbox converter for the chosen model format | 6, if choosing editable PyTorch/ONNX import; the MATLAB-Python and direct exported-program routes do not use that converter |
+| MATLAB Coder Support Package for PyTorch and LiteRT Models | Direct `loadPyTorchExportedProgram`/`invoke` route discussed in 6 and 11; used by the supplied `invokeSOCModel` entry point |
 | [Supported C/C++ compiler](https://www.mathworks.com/support/requirements/supported-compilers.html) | 11 and 25 on the host; 27 for Simulink model-reference simulation; target toolchain/build dependencies for 20, 21 and 26 |
 | Compatible NVIDIA CUDA/cuDNN and configured Jetson Thor | 26 target execution; see the [Jetson guide](docs/JETSON_VISUAL_PIL.md) |
 
@@ -191,6 +192,12 @@ agent or hardware connection. Complete the selected exercise's setup before
 enabling its optional sections.
 
 ## Guides
+
+Each exercise and solution API cheat sheet now includes an **Origin** column.
+It identifies the MathWorks product/add-on and labels provided functions such
+as `simulateBatterySystem` as **Training helper**. See the
+[helper and API-origin reference](docs/TRAINING_HELPERS.md) for dependencies,
+shipped example data and generated MEX/SIL/PIL entry points.
 
 - [User guide](docs/USER_GUIDE.md): navigation, checks and troubleshooting.
 - [Agenda](docs/AGENDA.md): three-day schedule and exercise map.

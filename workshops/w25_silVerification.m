@@ -59,14 +59,18 @@ assert(secondDifference<=tolerance);
 %[text] [Main SIL/PIL workflow](https://www.mathworks.com/help/ecoder/ug/software-and-processor-in-the-loop-sil-and-pil-simulation.html), [MATLAB code verification](https://www.mathworks.com/help/ecoder/verification-testing-and-calibration.html).
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Purpose |
-%[text] | --- | --- | --- |
-%[text] | [coder.config](https://www.mathworks.com/help/coder/ref/coder.config.html) | coder.config('lib','ecoder',true) | Embedded library configuration |
-%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | codegen(...,'-args',types) | Build actual SIL interface |
-%[text] | [coder.Constant](https://www.mathworks.com/help/coder/ref/coder.constant-class.html) | coder.Constant(modelFile) | Compile-time model contract |
-%[text] | [predict](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.predict.html) | predict(net,input) | MATLAB neural reference |
-%[text] | [max](https://www.mathworks.com/help/matlab/ref/double.max.html) | max(abs(error),[],'all') | Numerical equivalence evidence |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [coder.config](https://www.mathworks.com/help/coder/ref/coder.config.html) | coder.config('lib','ecoder',true) | Embedded library configuration | MATLAB Coder + Embedded Coder |
+%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | codegen(...,'-args',types) | Build actual SIL interface | MATLAB Coder + Embedded Coder |
+%[text] | [coder.Constant](https://www.mathworks.com/help/coder/ref/coder.constant-class.html) | coder.Constant(modelFile) | Compile-time model contract | MATLAB Coder |
+%[text] | [predict](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.predict.html) | predict(net,input) | MATLAB neural reference | Deep Learning Toolbox |
+%[text] | [max](https://www.mathworks.com/help/matlab/ref/double.max.html) | max(abs(error),[],'all') | Numerical equivalence evidence | MATLAB |
+%[text] | [`predictPiSOC`](../src/predictPiSOC.m) | `predictPiSOC(networkFile,input)` | Load and run the provided neural code-generation entry point | Training helper (MATLAB Coder + Deep Learning Toolbox) |
+%[text] | [`predictPiSOC_sil`](https://www.mathworks.com/help/coder/ref/codegen.html) | `predictPiSOC_sil(modelFile,input)` | Execute the generated host neural SIL interface | Generated SIL interface (MATLAB Coder + Embedded Coder) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

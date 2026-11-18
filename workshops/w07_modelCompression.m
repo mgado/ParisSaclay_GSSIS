@@ -60,14 +60,19 @@ end
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/compression.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`dlupdate`](https://www.mathworks.com/help/deeplearning/ref/dlupdate.html) | dlupdate(fun,net) | Inspect parameter sensitivity |
-%[text] | [`dlquantizer`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.html) | dlquantizer(net,ExecutionEnvironment="MATLAB") | Configure INT8 quantization |
-%[text] | [`calibrate`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.calibrate.html) | calibrate(q,XCalibration) | Collect activation ranges |
-%[text] | [`quantize`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.quantize.html) | quantize(q) | Produce quantized network |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`dlupdate`](https://www.mathworks.com/help/deeplearning/ref/dlupdate.html) | dlupdate(fun,net) | Inspect parameter sensitivity | Deep Learning Toolbox |
+%[text] | [`dlquantizer`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.html) | dlquantizer(net,ExecutionEnvironment="MATLAB") | Configure INT8 quantization | Deep Learning Toolbox Model Compression Library |
+%[text] | [`calibrate`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.calibrate.html) | calibrate(q,XCalibration) | Collect activation ranges | Deep Learning Toolbox Model Compression Library |
+%[text] | [`quantize`](https://www.mathworks.com/help/deeplearning/ref/dlquantizer.quantize.html) | quantize(q) | Produce quantized network | Deep Learning Toolbox Model Compression Library |
+%[text] | [`makeBatteryData`](../src/makeBatteryData.m) | `data = makeBatteryData` | Create the reproducible fictive sensor dataset | Training helper (MATLAB) |
+%[text] | [`trainSOCNetwork`](../src/trainSOCNetwork.m) | `[net,metrics] = trainSOCNetwork` | Train the provided compact SOC reference | Training helper (Deep Learning Toolbox) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

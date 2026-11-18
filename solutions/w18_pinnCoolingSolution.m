@@ -72,15 +72,18 @@ save(fullfile(outputFolder,"coolingPINN.mat"),"pinn","pinnMetrics");
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/physics-informed-machine-learning.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`dlnetwork`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.html) | dlnetwork(layers) | Trained neural surrogate |
-%[text] | [`dlarray`](https://www.mathworks.com/help/deeplearning/ref/dlarray.html) | dlarray(t,"CB") | Explicit channel/batch shape |
-%[text] | [`forward`](https://www.mathworks.com/help/deeplearning/ref/pytorchmodel.forward.html) | forward(net,t) | Training-time differentiable prediction |
-%[text] | [`dlgradient`](https://www.mathworks.com/help/deeplearning/ref/dlarray.dlgradient.html) | dlgradient(loss,net.Learnables) | Physics-loss parameter gradient |
-%[text] | [`dlfeval`](https://www.mathworks.com/help/deeplearning/ref/dlfeval.html) | dlfeval(@coolingPINNLoss,net,t,w) | Automatic differentiation trace |
-%[text] | [`adamupdate`](https://www.mathworks.com/help/deeplearning/ref/adamupdate.html) | adamupdate(net,gradients,avg,avgSq,k,lr) | Actual neural training step |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`dlnetwork`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.html) | dlnetwork(layers) | Trained neural surrogate | Deep Learning Toolbox |
+%[text] | [`dlarray`](https://www.mathworks.com/help/deeplearning/ref/dlarray.html) | dlarray(t,"CB") | Explicit channel/batch shape | Deep Learning Toolbox |
+%[text] | [`forward`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.forward.html) | forward(net,t) | Training-time differentiable prediction | Deep Learning Toolbox |
+%[text] | [`dlgradient`](https://www.mathworks.com/help/deeplearning/ref/dlarray.dlgradient.html) | dlgradient(loss,net.Learnables) | Physics-loss parameter gradient | Deep Learning Toolbox |
+%[text] | [`dlfeval`](https://www.mathworks.com/help/deeplearning/ref/dlfeval.html) | dlfeval(@coolingPINNLoss,net,t,w) | Automatic differentiation trace | Deep Learning Toolbox |
+%[text] | [`adamupdate`](https://www.mathworks.com/help/deeplearning/ref/adamupdate.html) | adamupdate(net,gradients,avg,avgSq,k,lr) | Actual neural training step | Deep Learning Toolbox |
+%[text] | [`coolingPINNLoss`](../src/coolingPINNLoss.m) | `dlfeval(@coolingPINNLoss,net,t,w)` | Provide the custom cooling physics/data loss | Training helper (Deep Learning Toolbox) |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

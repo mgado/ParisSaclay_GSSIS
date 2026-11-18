@@ -59,14 +59,15 @@ axis equal; colorbar; title("AI field-prediction error (deg C)"); xlabel("x"); y
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/reduced-order-modeling.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
 %[text:table]
-%[text] | Step | API | Minimal syntax | Meaning |
+%[text] | API | Minimal syntax | Purpose | Origin |
 %[text] | --- | --- | --- | --- |
-%[text] | Encode | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Training-only POD basis |
-%[text] | Normalize inputs | [`featureInputLayer`](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.featureinputlayer.html) | `featureInputLayer(2,Normalization="zscore")` | Parameter normalization |
-%[text] | Train | [`trainnet`](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | `net = trainnet(X,T,layers,"mse",options)` | Learn latent coefficients |
-%[text] | Infer | [`minibatchpredict`](https://www.mathworks.com/help/deeplearning/ref/minibatchpredict.html) | `A = minibatchpredict(net,XTest)` | Parameter-only held-out prediction |
-%[text] | Decode | [`Matrix multiplication`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `field = meanField+basis*A'` | Recover the full spatial field |
+%[text] | [`svd`](https://www.mathworks.com/help/matlab/ref/double.svd.html) | `[U,S,V] = svd(X,"econ")` | Encode: Training-only POD basis | MATLAB |
+%[text] | [`featureInputLayer`](https://www.mathworks.com/help/deeplearning/ref/nnet.cnn.layer.featureinputlayer.html) | `featureInputLayer(2,Normalization="zscore")` | Normalize inputs: Parameter normalization | Deep Learning Toolbox |
+%[text] | [`trainnet`](https://www.mathworks.com/help/deeplearning/ref/trainnet.html) | `net = trainnet(X,T,layers,"mse",options)` | Train: Learn latent coefficients | Deep Learning Toolbox |
+%[text] | [`minibatchpredict`](https://www.mathworks.com/help/deeplearning/ref/minibatchpredict.html) | `A = minibatchpredict(net,XTest)` | Infer: Parameter-only held-out prediction | Deep Learning Toolbox |
+%[text] | [`Matrix multiplication`](https://www.mathworks.com/help/matlab/ref/double.mtimes.html) | `field = meanField+basis*A'` | Decode: Recover the full spatial field | MATLAB |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

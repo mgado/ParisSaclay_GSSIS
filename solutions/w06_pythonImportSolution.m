@@ -44,15 +44,18 @@ disp(routes)
 %[text] [Main documentation for this area](https://www.mathworks.com/help/matlab/matlab_external/ways-to-call-python-from-matlab.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`pyenv`](https://www.mathworks.com/help/matlab/ref/pyenv.html) | [`pyenv`](https://www.mathworks.com/help/matlab/ref/pyenv.html) | Inspect interpreter |
-%[text] | [`pyrun`](https://www.mathworks.com/help/matlab/ref/pyrun.html) | pyrun(code,output,...) | Exchange data |
-%[text] | [`pyrunfile`](https://www.mathworks.com/help/matlab/ref/pyrunfile.html) | pyrunfile(script,...) | Run explicit Python source |
-%[text] | [`importNetworkFromPyTorch`](https://www.mathworks.com/help/deeplearning/ref/importnetworkfrompytorch.html) | importNetworkFromPyTorch(file) | Import editable network |
-%[text] | [`loadPyTorchExportedProgram`](https://www.mathworks.com/help/coder/ref/loadpytorchexportedprogram.html) | loadPyTorchExportedProgram(file) | Load direct deployment model |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`pyenv`](https://www.mathworks.com/help/matlab/ref/pyenv.html) | [`pyenv`](https://www.mathworks.com/help/matlab/ref/pyenv.html) | Inspect interpreter | MATLAB |
+%[text] | [`pyrun`](https://www.mathworks.com/help/matlab/ref/pyrun.html) | pyrun(code,output,...) | Exchange data | MATLAB |
+%[text] | [`pyrunfile`](https://www.mathworks.com/help/matlab/ref/pyrunfile.html) | pyrunfile(script,...) | Run explicit Python source | MATLAB |
+%[text] | [`importNetworkFromPyTorch`](https://www.mathworks.com/help/deeplearning/ref/importnetworkfrompytorch.html) | importNetworkFromPyTorch(file) | Import editable network | Deep Learning Toolbox + PyTorch converter |
+%[text] | [`loadPyTorchExportedProgram`](https://www.mathworks.com/help/coder/ref/loadpytorchexportedprogram.html) | loadPyTorchExportedProgram(file) | Load direct deployment model | MATLAB Coder + PyTorch/LiteRT support package |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

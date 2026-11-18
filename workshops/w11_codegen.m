@@ -36,14 +36,19 @@ disp(targets)
 %[text] [Main documentation for this area](https://www.mathworks.com/help/coder/). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`coder.config`](https://www.mathworks.com/help/coder/ref/coder.config.html) | coder.config('mex') | Host code generation configuration |
-%[text] | [`codegen`](https://www.mathworks.com/help/coder/ref/codegen.html) | codegen(...,'-args',{0,0,0}) | Compile fixed input types |
-%[text] | [`coder.Constant`](https://www.mathworks.com/help/coder/ref/coder.type-class.html) | coder.Constant(modelFile) | Compile-time AI model path |
-%[text] | [`invoke`](https://www.mathworks.com/help/coder/ref/pytorchexportedprogram.invoke.html) | invoke(exportedProgram,X) | Direct PyTorch inference |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`coder.config`](https://www.mathworks.com/help/coder/ref/coder.config.html) | coder.config('mex') | Host code generation configuration | MATLAB Coder |
+%[text] | [`codegen`](https://www.mathworks.com/help/coder/ref/codegen.html) | codegen(...,'-args',{0,0,0}) | Compile fixed input types | MATLAB Coder |
+%[text] | [`coder.Constant`](https://www.mathworks.com/help/coder/ref/coder.type-class.html) | coder.Constant(modelFile) | Compile-time AI model path | MATLAB Coder |
+%[text] | [`invoke`](https://www.mathworks.com/help/coder/ref/pytorchexportedprogram.invoke.html) | invoke(exportedProgram,X) | Direct PyTorch inference | MATLAB Coder + PyTorch/LiteRT support package |
+%[text] | [`socEstimate`](../src/socEstimate.m) | `socEstimate(V,I,T)` | Evaluate the provided analytic SOC baseline | Training helper (MATLAB) |
+%[text] | [`socEstimate_mex`](https://www.mathworks.com/help/coder/ref/codegen.html) | `socEstimate_mex(V,I,T)` | Execute the generated analytic MEX | Generated MEX interface (MATLAB Coder) |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]

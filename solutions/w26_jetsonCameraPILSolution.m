@@ -121,21 +121,27 @@ axis image off;
 %[text] [Main documentation for this area](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: camera and target APIs
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal syntax | Where it runs |
-%[text] | --- | --- | --- |
-%[text] | [jetson](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html) | `jetson(address,user,password)` | Connect host to the board |
-%[text] | [setupCodegenContext](https://www.mathworks.com/help/coder/nvidia/ref/setupcodegencontext.html) | `setupCodegenContext(board)` | Establish supported target build context |
-%[text] | [webcam](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.html) | `webcam(board,1,'640x480')` | Open a target USB camera |
-%[text] | [snapshot](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.snapshot.html) | `snapshot(camera)` | Target acquisition, image transferred to MATLAB |
-%[text] | [imresize](https://www.mathworks.com/help/matlab/ref/imresize.html) | `imresize(frame,[640 640])` | Host preprocessing |
-%[text] | [coder.gpuConfig](https://www.mathworks.com/help/gpucoder/ref/coder.gpuconfig.html) | `coder.gpuConfig('lib','ecoder',true)` | CUDA/PIL build configuration |
-%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | Generate the fixed image entry point | Produce target code and gateway |
-%[text] | [`codebuild`](https://www.mathworks.com/help/coder/build-configuration.html) | `codebuild(buildFolder)`; consult installed help | Rebuild matched generated sources |
-%[text] | [detect: YOLOX methods](https://www.mathworks.com/help/vision/ref/yoloxobjectdetector.html) | `detect(detector,image)` inside the entry function | Neural inference on Thor through PIL |
-%[text] | [insertObjectAnnotation](https://www.mathworks.com/help/vision/ref/insertobjectannotation.html) | Draw returned boxes/classes | Host annotations |
-%[text] | [imageshow](https://www.mathworks.com/help/images/ref/imageshow.html) | Create/update the image viewer | Host display |
-%[text] | [NVIDIA PIL workflow](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html) | Read before first build | Distinguish prototype PIL from standalone deployment |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [jetson](https://www.mathworks.com/help/coder/nvidia/ref/jetson.html) | `jetson(address,user,password)` | Connect host to the board | MATLAB Coder NVIDIA support package |
+%[text] | [setupCodegenContext](https://www.mathworks.com/help/coder/nvidia/ref/setupcodegencontext.html) | `setupCodegenContext(board)` | Establish supported target build context | MATLAB Coder NVIDIA support package |
+%[text] | [webcam](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.html) | `webcam(board,1,'640x480')` | Open a target USB camera | MATLAB Coder NVIDIA support package |
+%[text] | [snapshot](https://www.mathworks.com/help/coder/nvidia/ref/nvidiaio.image.webcam.snapshot.html) | `snapshot(camera)` | Target acquisition, image transferred to MATLAB | MATLAB Coder NVIDIA support package |
+%[text] | [imresize](https://www.mathworks.com/help/matlab/ref/imresize.html) | `imresize(frame,[640 640])` | Host preprocessing | MATLAB |
+%[text] | [coder.gpuConfig](https://www.mathworks.com/help/gpucoder/ref/coder.gpuconfig.html) | `coder.gpuConfig('lib','ecoder',true)` | CUDA/PIL build configuration | GPU Coder + Embedded Coder |
+%[text] | [codegen](https://www.mathworks.com/help/coder/ref/codegen.html) | Generate the fixed image entry point | Produce target code and gateway | MATLAB Coder + GPU Coder + Embedded Coder |
+%[text] | [`codebuild`](https://www.mathworks.com/help/coder/build-configuration.html) | `codebuild(buildFolder)`; consult installed help | Rebuild matched generated sources | MATLAB Coder (GPU builds: GPU Coder) |
+%[text] | [detect: YOLOX methods](https://www.mathworks.com/help/vision/ref/yoloxobjectdetector.html) | `detect(detector,image)` inside the entry function | Neural inference on Thor through PIL | Computer Vision Toolbox |
+%[text] | [insertObjectAnnotation](https://www.mathworks.com/help/vision/ref/insertobjectannotation.html) | Draw returned boxes/classes | Host annotations | Computer Vision Toolbox |
+%[text] | [imageshow](https://www.mathworks.com/help/images/ref/imageshow.html) | Create/update the image viewer | Host display | Image Processing Toolbox |
+%[text] | [NVIDIA PIL workflow](https://www.mathworks.com/help/coder/nvidia/ug/Processor-in-the-Loop-Execution-on-NVIDIA-Targets.html) | Read before first build | Distinguish prototype PIL from standalone deployment | Workflow reference (NVIDIA support package) |
+%[text] | [`cocoSmallYOLO`](../src/cocoSmallYOLO.m) | `cocoSmallYOLO(frame)` | Provide the supplied detector compiler entry point | Training helper (MATLAB Coder + Computer Vision Toolbox + Deep Learning Toolbox) |
+%[text] | [`cocoSmallYOLO_pil`](https://www.mathworks.com/help/coder/ref/codegen.html) | `cocoSmallYOLO_pil(frame)` | Execute the generated target detector PIL interface | Generated PIL interface (GPU Coder + Embedded Coder + NVIDIA support package) |
+%[text] | [videoinput](https://www.mathworks.com/help/imaq/videoinput.html) | `videoinput("winvideo",cameraIndex)` | Create the default host-camera acquisition object | Image Acquisition Toolbox |
+%[text] | [getsnapshot](https://www.mathworks.com/help/imaq/imaqdevice.getsnapshot.html) | `frame = getsnapshot(camera)` | Acquire one frame from the host camera | Image Acquisition Toolbox |
 %[text:table]
 
 %[appendix]{"version":"1.0"}

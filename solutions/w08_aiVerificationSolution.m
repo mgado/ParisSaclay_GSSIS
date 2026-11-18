@@ -40,14 +40,17 @@ disp("A sample test checks points. A sound bound encloses every network output i
 %[text] [Main documentation for this area](https://www.mathworks.com/help/deeplearning/verification.html). Use the linked API names in the cheat sheet below to check syntax, examples and release history.
 %%
 %[text] ## Cheat sheet: APIs to remember
+%[text] **Origin:** Product and add-on names identify shipped MathWorks functionality. Training helper means code provided with this training; example data and generated interfaces are labelled separately. See the [helper reference](../docs/TRAINING_HELPERS.md).
+%[text] Project setup uses [requireTrainingProject](../src/requireTrainingProject.m), a training helper using MATLAB Project APIs.
 %[text:table]
-%[text] | API | Minimal use | Engineering purpose |
-%[text] | --- | --- | --- |
-%[text] | [`dlnetwork`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.html) | dlnetwork(layers) | Explicit verified network |
-%[text] | [`dlarray`](https://www.mathworks.com/help/deeplearning/ref/dlarray.html) | dlarray(X,'CB') | Label feature and batch dimensions |
-%[text] | [`estimateNetworkOutputBounds`](https://www.mathworks.com/help/deeplearning/ref/estimatenetworkoutputbounds.html) | estimateNetworkOutputBounds(net,lower,upper) | Formal regression bounds |
-%[text] | [`verifyNetworkRobustness`](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html) | verifyNetworkRobustness(net,lower,upper,label) | Classification robustness |
+%[text] | API | Minimal syntax | Purpose | Origin |
+%[text] | --- | --- | --- | --- |
+%[text] | [`dlnetwork`](https://www.mathworks.com/help/deeplearning/ref/dlnetwork.html) | dlnetwork(layers) | Explicit verified network | Deep Learning Toolbox |
+%[text] | [`dlarray`](https://www.mathworks.com/help/deeplearning/ref/dlarray.html) | dlarray(X,'CB') | Label feature and batch dimensions | Deep Learning Toolbox |
+%[text] | [`estimateNetworkOutputBounds`](https://www.mathworks.com/help/deeplearning/ref/estimatenetworkoutputbounds.html) | estimateNetworkOutputBounds(net,lower,upper) | Formal regression bounds | AI Verification Library for Deep Learning Toolbox |
+%[text] | [`verifyNetworkRobustness`](https://www.mathworks.com/help/deeplearning/ref/verifynetworkrobustness.html) | verifyNetworkRobustness(net,lower,upper,label) | Classification robustness | AI Verification Library for Deep Learning Toolbox |
 %[text:table]
+
 %[appendix]{"version":"1.0"}
 %---
 %[metadata:view]
