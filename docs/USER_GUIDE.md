@@ -1,5 +1,9 @@
 # Using the workshops
 
+Exercise 27 starts with an introduction for readers without battery or vehicle
+background. It explains SOC, discharge and delivered power, reserve protection,
+unmet demand after a cutoff, and what complete-system tests catch and confirm.
+
 API cheat sheets include an **Origin** column naming the MathWorks product or
 add-on. **Training helper** identifies a provided function, not a toolbox API;
 generated interfaces and shipped example data have separate labels. Read the

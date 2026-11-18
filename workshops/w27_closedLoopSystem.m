@@ -1,5 +1,40 @@
 %[text] # 27 - AI inside a closed-loop battery system
 %[text] **Goal:** Test a trained neural SOC estimator as part of a battery plant, sensors and reserve supervisor. The AI estimate changes current, which changes the plant and its future measurements.
+%%
+%[text] ## What is this exercise about?
+%[text] Imagine battery-powered equipment that must perform a task while keeping some charge in reserve. This exercise uses a simple simulated system to show how an AI prediction can affect the equipment’s behaviour.
+%[text] **State of charge (SOC)** describes how much charge remains relative to the battery’s capacity. An SOC of `0.35` means 35%. The equipment draws electrical current from the battery, reducing its SOC and affecting its voltage and temperature.
+%[text] Our system has four interacting parts:
+%[text] - **Battery plant:** simulates changes in charge, voltage and temperature.
+%[text] - **Sensors:** provide voltage, current and temperature measurements.
+%[text] - **AI estimator:** uses those measurements to estimate SOC.
+%[text] - **Reserve supervisor:** uses the estimated SOC to limit current and decide when discharge must stop. \
+%[text] The supervisor’s decisions change the battery’s behaviour, which changes the next measurements received by the AI. This interaction forms a **feedback loop**.
+%%
+%[text] ## What does discharge mean, and why does it stop?
+%[text] **Discharge** means that the battery supplies electrical energy to a load. In a vehicle, the load includes motors and other equipment; here, it is a simple power demand. Delivered power is `P = V*I`: voltage in volts multiplied by current in amperes gives power in watts. Positive current represents discharge in this model.
+%[text] We stop discharge to preserve the charge required in reserve. Otherwise, the equipment could consume more charge than the system requirement allows. The supervisor uses an estimated-SOC cutoff above the physical minimum to allow for estimation error and control delay. The 15% reserve is a teaching requirement, not a universal battery-protection threshold.
+%[text] When the reserve protection trips, the supervisor sets **actual battery current to zero** and keeps it there for the rest of the mission. Delivered power becomes zero, SOC stops falling, and no more energy is delivered by the battery. The external load may still request power, so that demand is no longer met. A larger protection margin can therefore preserve reserve while reducing the energy available to perform the task.
+%[text] This simulation models electrical supply and battery states. It does not simulate vehicle motion or braking, so a power cutoff here does not represent a car stopping instantly. A vehicle design would also need to specify what controlled operating state is required when normal power demand cannot be met.
+%%
+%[text] ## Why test the complete system?
+%[text] A standalone accuracy test tells us how closely the AI predictions match reference values. A system-level test also examines what happens when another component acts on those predictions.
+%[text] For example, an incorrect voltage measurement can make the AI overestimate the remaining charge. The supervisor may then allow discharge to continue too long, breaching the required reserve.
+%[text] Without the complete-system simulation, we could miss this physical consequence of an estimation error. We would also miss the effects of controller thresholds, timing, signal connections and changing operating conditions.
+%%
+%[text] ## What will we catch and confirm?
+%[text] In this exercise, you will test normal operation, changing loads and temperature, and a biased voltage sensor. You will check whether:
+%[text] - True SOC remains at least **15%**.
+%[text] - Battery temperature remains at most **45°C**.
+%[text] - Current respects demand and the **4 A** limit.
+%[text] - Discharge stops after the reserve protection trips. \
+%[text] You will then adjust the protection margin. This can preserve the reserve while the AI remains inaccurate, and it can reduce the energy available to perform the task.
+%[text] The simulated true SOC provides the test reference; the supervisor makes its ongoing decisions using the AI estimate.
+%%
+%[text] ## What does a passing result mean?
+%[text] Passing confirms that the stated requirements hold for the **tested scenarios and model assumptions**. The battery equations and limits are chosen for teaching. These tests provide evidence about the system’s behaviour; they do not establish performance for every fault or a real battery.
+%%
+%[text] ## Prerequisites and launch
 %[text] **Prerequisites:** Open ParisSaclay\_GSSIS.prj in MATLAB/Simulink R2026b with Deep Learning Toolbox and a supported host C/C++ compiler for model-reference simulation. No hardware, Simscape or additional testing product is needed. Allow 30-35 minutes; the first Simulink compilation takes longer than repeated runs.
 %[text] **Launch:** openExercise(27), then use Run Section. Open the model from the section below; open its BatteryPlant and ReserveSupervisor subsystems to inspect the actual equations and decision logic.
 %[text] **Your task:** Run a healthy mission, change its load and ambient temperature, inject a voltage-sensor bias, and adjust the reserve margin. Assess true reserve, temperature, actuator limits and delivered energy as well as AI prediction error.
