@@ -1,5 +1,10 @@
 # Using the workshops
 
+Exercise 27 includes a [full-resolution system diagram](../assets/system_integration/system_closed_loop.png),
+a [vector SVG view](../assets/system_integration/system_closed_loop.svg) and a
+[PDF view](../assets/system_integration/system_closed_loop.pdf). Use the vector
+view to zoom into block labels and connections.
+
 ## Quick start
 
 Open `ParisSaclay_GSSIS.prj` in MATLAB R2026b, then run:
