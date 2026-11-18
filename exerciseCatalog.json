@@ -277,6 +277,17 @@
       "Products": "GPU Coder; NVIDIA hardware support; camera",
       "Mode": "hardware PIL: passed/unavailable/failed evidence",
       "Minutes": 25
+    },
+    {
+      "Number": 27,
+      "Id": "w27_closedLoopSystem",
+      "Name": "AI inside a closed-loop battery system",
+      "Day": 3,
+      "Source": "workshops/w27_closedLoopSystem.m",
+      "Solution": "solutions/w27_closedLoopSystemSolution.m",
+      "Products": "MATLAB; Simulink; Deep Learning Toolbox; supported host C/C++ compiler",
+      "Mode": "runnable coupled-system scenarios and regression tests",
+      "Minutes": 35
     }
   ]
 }

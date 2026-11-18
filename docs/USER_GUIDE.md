@@ -16,7 +16,7 @@ requested parameter change, run it, and record your observation before opening
 
 ## Choose an exercise
 
-The catalog contains 25 pairs with stable numbers and IDs: 1-21 and 23-26.
+The catalog contains 26 pairs with stable numbers and IDs: 1-21 and 23-27.
 Select by number or exact ID:
 
 ```matlab
@@ -45,6 +45,26 @@ smaller model must retain.
 The agentic activities connect an agent to engineering tools, use builtin and
 custom skills, and require actual checks of proposed changes. A convincing
 explanation alone does not establish that the change works.
+
+### Run AI within the complete simulated system
+
+After exercise 9, open `openExercise(27)` or the worked solution with
+`openExercise(27,true)`. The included `BatterySystemClosedLoop.slx` couples
+the trained neural SOC estimator to battery charge/thermal dynamics, voltage
+measurements and a latched reserve supervisor. The estimate changes current,
+which changes the plant and its future measurements. A known starting condition
+is provided once; running control uses estimated SOC and tests observe true SOC.
+
+Allow 30-35 minutes and a longer first compilation. MATLAB, Simulink, Deep
+Learning Toolbox and a supported host C/C++ compiler are required. Compare
+healthy and changing-load/temperature missions, inject voltage bias, and adjust
+the reserve cutoff. A margin can protect reserve while the AI remains inaccurate,
+and it reduces delivered energy in healthy operation. The transparent plant
+is fictive and uncalibrated; these tests concern its stated scenarios.
+
+Run `runtests('tests/TestClosedLoopSystem.m')` for the persistent system checks.
+See [system scenarios and requirements](SYSTEM_TESTING.md#closed-loop-system-scenarios-exercise-27)
+for the criterion definitions and configuration APIs.
 
 ## Run checks
 

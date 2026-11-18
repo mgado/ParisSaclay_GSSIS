@@ -25,7 +25,7 @@ To compare your reasoning with a solution:
 openExercise(1,true)
 ```
 
-The project contains **25 exercise/solution pairs**. Each is a native plain-text
+The project contains **26 exercise/solution pairs**. Each is a native plain-text
 Live Script `.m` with an objective, prerequisites, launch instructions, an
 experiment, hints, expected observations and an API cheat sheet.
 
@@ -35,7 +35,7 @@ experiment, hints, expected observations and an API cheat sheet.
 |---|---|---|
 | 1 | Agentic tools, measurable requirements, independent data and preprocessing | 1-3, 17 |
 | 2 | ML/DL, Python, compression, AI verification and modern apps | 4-8, 15, 23-24 |
-| 3 | Simulink, tests, code generation, SIL/PIL, ROMs, physics and agentic practice | 9-14, 16, 18-21, 25-26 |
+| 3 | Simulink, closed-loop system tests, code generation, SIL/PIL, ROMs, physics and agentic practice | 9-14, 16, 18-21, 25-27 |
 
 Work through the basic path first. Exercises initialize the inputs they need
 and can be revisited independently with the project open. Hardware and optional
@@ -86,8 +86,8 @@ main documentation pages.
 | Product | Used for | Exercises |
 |---|---|---|
 | [MATLAB](https://www.mathworks.com/help/matlab/) | Live Scripts, data, numerical analysis, projects and unit tests | All |
-| [Simulink](https://www.mathworks.com/help/simulink/) | Neural model integration and simulation; prerequisite for Simulink Coder | 9, 10, 20; Coder dependency for 21, 25, 26; optional app export in 15 |
-| [Deep Learning Toolbox](https://www.mathworks.com/help/deeplearning/) | Training, inference, PINNs, neural ROMs and verification | 2, 5, 7, 8, 9, 10, 18, 19, 20, 21, 23, 24, 25, 26; optional AI branches in 6 and 15 |
+| [Simulink](https://www.mathworks.com/help/simulink/) | Neural model integration and simulation; prerequisite for Simulink Coder | 9, 10, 20, 27; Coder dependency for 21, 25, 26; optional app export in 15 |
+| [Deep Learning Toolbox](https://www.mathworks.com/help/deeplearning/) | Training, inference, PINNs, neural ROMs and verification | 2, 5, 7, 8, 9, 10, 18, 19, 20, 21, 23, 24, 25, 26, 27; optional AI branches in 6 and 15 |
 | [Statistics and Machine Learning Toolbox](https://www.mathworks.com/help/stats/) | Regression-tree virtual sensor | 4 |
 | [Requirements Toolbox](https://www.mathworks.com/help/slrequirements/) | Requirement sets, links and verification status | 2, 10 |
 | [Simulink Test](https://www.mathworks.com/help/sltest/) | Test Manager, test cases and executed model results | 10 |
@@ -125,7 +125,7 @@ for the same MATLAB release through **Home > Add-Ons** or the linked setup guide
 | [MATLAB and Simulink agentic toolkits](docs/AGENTIC_GUIDE.md) and a configured coding-agent client | Interactive agent/tool/skill activities in 1 and 16 |
 | [Compatible Python interpreter](https://www.mathworks.com/help/matlab/matlab_external/install-supported-python-implementation.html), NumPy and optional PyTorch | 6: Python interoperability; PyTorch for the exported-model branch |
 | Deep Learning Toolbox converter for the chosen model format | 6, if choosing editable PyTorch/ONNX import; the MATLAB-Python and direct exported-program routes do not use that converter |
-| [Supported C/C++ compiler](https://www.mathworks.com/support/requirements/supported-compilers.html) | 11 and 25 on the host; target toolchain/build dependencies for 20, 21 and 26 |
+| [Supported C/C++ compiler](https://www.mathworks.com/support/requirements/supported-compilers.html) | 11 and 25 on the host; 27 for Simulink model-reference simulation; target toolchain/build dependencies for 20, 21 and 26 |
 | Compatible NVIDIA CUDA/cuDNN and configured Jetson Thor | 26 target execution; see the [Jetson guide](docs/JETSON_VISUAL_PIL.md) |
 
 The pretrained projected SOC network is supplied. Running its inference in
@@ -167,6 +167,15 @@ setup. Include the Coder product prerequisites listed above where applicable.
 | [24](workshops/w24_adversarialWorkshop.m) | Adversarial search and robustness | Deep Learning Toolbox | AI Verification Library; CPU execution |
 | [25](workshops/w25_silVerification.m) | Generated neural code SIL | MATLAB Coder; Embedded Coder; Deep Learning Toolbox; Coder prerequisites above | Supported host C/C++ compiler; no board required |
 | [26](workshops/w26_jetsonCameraPIL.m) | Jetson image/camera PIL | GPU Coder; MATLAB Coder; Embedded Coder; Deep Learning Toolbox; Computer Vision Toolbox; Image Processing Toolbox; Coder prerequisites above | NVIDIA support package, configured Thor, compatible CUDA/cuDNN and camera; Image Acquisition Toolbox/adaptor for the host-camera branch |
+| [27](workshops/w27_closedLoopSystem.m) | AI in a complete closed-loop battery system | Simulink; Deep Learning Toolbox | Supported host C/C++ compiler for model-reference simulation; no hardware or additional testing toolbox |
+
+Exercise 27 places the trained SOC estimator inside a transparent electrical/
+thermal battery plant and reserve supervisor. Run healthy, changing-load/
+temperature and voltage-bias scenarios, then adjust the protection margin.
+System tests assess physical reserve, temperature and actuator behavior;
+delivered energy reveals the cost of a larger margin. Use it after exercise 9
+and connect its results to exercise 10's traceability workflow. The plant is a
+fictive teaching model with stated assumptions.
 
 Run `setup_check` for its quick capability report. To inspect the complete
 installed product and add-on lists, run:

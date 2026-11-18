@@ -66,6 +66,53 @@ A host MEX comparison checks generated-code numerics but is not automatically a 
 
 Average accuracy, a network output bound, and closed-loop stability are different properties. Requirements should state the relevant metric, operating domain, hardware and measurement method.
 
+## Closed-loop system scenarios (exercise 27)
+
+Open `openExercise(27)` after exercise 9; use `openExercise(27,true)` for the
+worked comparison. The model is
+`assets/system_integration/models/BatterySystemClosedLoop.slx`, with the trained
+neural reference `BatterySystemSOC_AI.slx`. Requested current enters a reserve
+supervisor that uses the previous AI SOC estimate. Actual current feeds the
+charge/thermal plant. Measured voltage, current and temperature feed the AI.
+The estimator therefore affects physical behavior through the feedback loop.
+
+The plant uses a one-second charge balance for a 1-Ah battery, an ohmic voltage
+law and one thermal state. Initial SOC is 0.35 and initial temperature is 25 deg C.
+True SOC is logged as a simulation test oracle and initializes the known
+commissioning condition once; the running supervisor receives the AI estimate.
+This is a transparent, fictive, uncalibrated plant for learning the workflow.
+
+| Requirement | Scenario evidence |
+|---|---|
+| SYS-001: true SOC at least 0.15 | Minimum simulated true SOC |
+| SYS-002: temperature at most 45 deg C | Peak simulated battery temperature |
+| SYS-003: current between zero and the smaller of demand and 4 A | Requested and actual current |
+| SYS-004: reserve trip stops discharge and stays latched | Trip signal, controller estimate and current |
+| AI-001: healthy-sensor SOC RMSE at most 0.03 | Estimate compared with simulated true SOC |
+
+`SystemPassed` combines SYS-001 through SYS-004. `AccuracyPassed` reports the
+AI criterion separately. At the original cutoff of 0.20, a +0.12-V sensor bias
+at 60 seconds produces a physical reserve violation. The worked cutoff of 0.28
+restores reserve in this scenario while biased-sensor accuracy still fails.
+A larger cutoff also reduces delivered energy in the healthy mission. A
+protection margin does not correct the sensor or establish a guarantee over
+all faults or real batteries.
+
+`simulateBatterySystem` constructs three time series in a Dataset and uses
+`Simulink.SimulationInput`, `setExternalInput`, a model-workspace `setVariable`
+override and `sim`. It returns ten output traces and a requirements table.
+Saved model and network files remain unchanged between runs.
+`TestClosedLoopSystem` checks healthy missions, an actual fault consequence,
+margin recovery, healthy energy cost and charge conservation using MATLAB's
+unit-test framework. Simulink Test and Requirements Toolbox provide the separate
+traceability workflow in exercise 10.
+
+Useful references: [SimulationInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.html),
+[setExternalInput](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setexternalinput.html),
+[setVariable](https://www.mathworks.com/help/simulink/slref/simulink.simulationinput.setvariable.html),
+[sim](https://www.mathworks.com/help/simulink/slref/sim.html), and
+[MATLAB unit testing](https://www.mathworks.com/help/matlab/matlab-unit-test-framework.html).
+
 ## APIs and documentation
 
 - [Requirements verification](https://www.mathworks.com/help/slrequirements/verify-requirements.html)

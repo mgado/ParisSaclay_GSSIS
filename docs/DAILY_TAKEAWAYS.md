@@ -23,6 +23,8 @@
 ## Day 3 - Compare implementations and modeling methods
 
 - Integrate in Simulink and run requirement-driven tests.
+- Test AI inside the plant/sensor/controller feedback loop under changing missions and sensor faults.
+- Keep prediction accuracy, physical protection and delivered-energy tradeoffs separate; exercise 27 shows all three.
 - Keep model, generated-host-code, SIL and target-PIL comparisons distinct.
 - Separate numerical accuracy, timing, memory and target configuration.
 - Choose a ROM from the output required and the physics/data available.

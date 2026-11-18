@@ -27,6 +27,27 @@ with the requirement, not with an assumed universal performance value.
 | 19 | Separate POD-only error from parameter-to-field prediction error; the worked solution requires prediction error below 10% |
 | 20 | Actual Simulink PIL returns 32 finite samples and maximum MIL/PIL difference at most 1e-4 |
 | 21 | Actual MATLAB neural PIL returns 32 finite samples and maximum host/PIL difference at most 1e-4 in matching network units |
+| 27 | Healthy missions preserve reserve, temperature and current limits; voltage bias breaches the true-SOC reserve; a revised cutoff restores reserve while prediction error remains elevated and healthy delivered energy decreases |
+
+### Exercise 27: worked scenario comparison
+
+These example values use the supplied 600-second plant and the solution's
+revised cutoff of **0.28**. The student file starts with 0.30, so its revised
+cutoff values differ. Compare requirements and measured traces rather than
+matching rounded numbers exactly.
+
+| Scenario | Reserve cutoff | Minimum true SOC | SOC RMSE | Delivered energy (Wh) | System outcome |
+|---|---:|---:|---:|---:|---|
+| Healthy nominal | 0.20 | 0.19722 | 0.00149 | 0.49242 | Pass |
+| Changing demand and ambient | 0.20 | 0.19667 | 0.00161 | 0.48550 | Pass |
+| +0.12-V sensor bias from 60 s | 0.20 | 0.09611 | 0.09560 | 0.80357 | Reserve failure |
+| Same sensor bias, revised margin | 0.28 | 0.17778 | 0.09462 | 0.55320 | Protection passes; AI remains inaccurate |
+| Healthy nominal, revised margin | 0.28 | 0.27611 | 0.00137 | 0.24116 | Pass; lower energy service |
+
+The physical reserve requirement is true SOC at least 0.15. The extra energy
+delivered by the failed biased mission comes from discharging past that reserve.
+The larger margin improves protection; it does not repair the measurements or
+prove behavior outside this fictive plant and its tested scenarios.
 
 SOC thresholds use fractions: 0.03 is three percentage points, not 3% relative
 error. Thermal and field examples are illustrative models, not calibrated plant

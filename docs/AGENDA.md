@@ -44,7 +44,7 @@ with `openExercise(number,true)` after recording your own observations.
 
 | Time | Topic | Exercises |
 |---|---|---|
-| 09:00-10:00 | Neural Simulink model and requirement-driven Test Manager checks | 9, 10 |
+| 09:00-10:00 | Neural integration, closed-loop system scenarios and requirement-driven checks | 9, 27, 10 |
 | 10:00-10:15 | Break | |
 | 10:15-11:15 | Host code generation and actual SIL comparison | 11, 25 |
 | 11:15-12:30 | Target-dependent PIL paths: choose the available board/activity | 20, 21, 26 |
@@ -83,6 +83,12 @@ with `openExercise(number,true)` after recording your own observations.
 | 24 | `w24_adversarialWorkshop` | Find adversarial examples and evaluate formal robustness |
 | 25 | `w25_silVerification` | Compare neural generated-code SIL outputs with MATLAB |
 | 26 | `w26_jetsonCameraPIL` | Explore Jetson Thor image/camera PIL |
+| 27 | `w27_closedLoopSystem` | Test the AI estimator inside a coupled battery/supervisor system |
+
+For the one-hour integration block, use about 20 minutes for exercise 9,
+30 minutes for exercise 27 and 10 minutes to connect the results to the
+traceability workflow in exercise 10. Complete exercise 10's detailed API
+practice during independent work if additional time is needed.
 
 ## Choose a feasible path
 
