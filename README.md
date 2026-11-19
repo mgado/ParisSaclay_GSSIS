@@ -1,5 +1,7 @@
 # ParisSaclay GSSIS - AI for engineered systems
 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=mgado/ParisSaclay_GSSIS)
+
 **17-19 November 2026 - MATLAB and Simulink R2026b**
 
 Learn how to define, train, verify and implement AI components for engineered
